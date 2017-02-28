@@ -10,5 +10,9 @@ package POJOS;
 // @author Migu
 
 public class C_Veterinario {
+    
+    private String NumLicencia;
+    
+    
 
 }

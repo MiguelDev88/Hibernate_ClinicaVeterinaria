@@ -7,8 +7,13 @@
 package POJOS;
 
 
-// @author Migu
+// @author Miguel
 
 public class C_Diagnostico {
+    
+    private String tratamiento;
+    private C_Medicamento medicamento;
+    private C_Veterinario veterinario;
+    private String comentario;
 
 }
