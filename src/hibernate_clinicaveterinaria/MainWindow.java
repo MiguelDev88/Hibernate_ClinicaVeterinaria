@@ -54,7 +54,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         
         /////FIN EJEMPLOS
-        
+        cargarArray();
     }
     
     public void cargarArray(){
