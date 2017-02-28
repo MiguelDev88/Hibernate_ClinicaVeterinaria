@@ -1,7 +1,13 @@
 package hibernate_clinicaveterinaria;
 import POJOS.C_Animal;
+import funciones.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.Timer;
@@ -36,11 +42,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
         
         timer.start();
-        
+        CrearTablas.crearTablas();
         
         //////
         
-        String[] columnasClientes={"Nombre","Tipo","Raza"};
+        String[] columnasClientes={"Nombre","Tipo","Raza","Familiar"};
         modeloClientes=new DefaultTableModel(columnasClientes,0);
         tablaClientes.setModel(modeloClientes);
         
@@ -49,14 +55,28 @@ public class MainWindow extends javax.swing.JFrame {
         ejemplos = new ArrayList<>();
         boolean[] vacunas=new boolean[7];
         ejemplos.add(new C_Animal("kora","perro","pesado",'H',new Date(),9.2f,null,vacunas));
-            //public C_Animal (String nombre, String tipo, String raza, char sexo, Date fecha_nac, float peso, C_Familiar familiar, boolean[] vacunas) {
-
-        
+            
         
         /////FIN EJEMPLOS
         cargarArray();
     }
     
+    
+    public void llenar ()  {
+        
+        try{
+        Connection conexion=DriverManager.getConnection("jdbc:mysql://localhost:3307/CLINICA_VETERINARIA?user=root&password=usbw");
+            Statement sentencia=conexion.createStatement();
+            
+            ResultSet consulta=sentencia.executeQuery("SELECT a.nombre, a.tipo, a.raza, f.nombre, precio "
+                                                    + "FROM animales as a INNER JOIN familiares as f ON animales.familiar=personas.id ;");
+            
+            
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
     public void cargarArray(){
         
         for(int i=0;i<ejemplos.size();i++){
@@ -458,6 +478,7 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindow().setVisible(true);
+                
             }
         });
     }

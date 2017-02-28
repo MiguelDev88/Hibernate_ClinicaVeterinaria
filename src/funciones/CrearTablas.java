@@ -24,6 +24,26 @@ public class CrearTablas {
             sentencia.execute("CREATE DATABASE IF NOT EXISTS CLINICA_VETERINARIA");
             sentencia.execute("USE CLINICA_VETERINARIA");
             
+            
+            sentencia.execute("CREATE TABLE IF NOT EXISTS personas ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "dni CHAR(9) NOT NULL, "
+                    + "nombre VARCHAR(30) NOT NULL, "
+                    + "telefono VARCHAR(30) NOT NULL, "
+                    + "email VARCHAR(30) NULL, "
+                    + "PRIMARY KEY (id))"
+                    + "ENGINE INNODB;");
+            
+            sentencia.execute("CREATE TABLE IF NOT EXISTS familiares ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "direccion VARCHAR(30) NOT NULL, "
+                    + "CONSTRAINT fk_familiarid "
+                    + " FOREIGN KEY(id) REFERENCES personas(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE, "
+                    + "PRIMARY KEY (id))"
+                    + "ENGINE INNODB;");
+            
             sentencia.execute("CREATE TABLE IF NOT EXISTS animales ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
                     + "id_chip CHAR(9) NULL, "
@@ -41,30 +61,6 @@ public class CrearTablas {
                     + "  ON UPDATE CASCADE)"
                     + "ENGINE INNODB;");
             
-            
-            
-            sentencia.execute("CREATE TABLE IF NOT EXISTS personas ( "
-                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
-                    + "dni CHAR(9) NOT NULL, "
-                    + "nombre VARCHAR(30) NOT NULL, "
-                    + "telefono VARCHAR(30) NOT NULL, "
-                    + "email VARCHAR(30) NULL, "
-                    + "PRIMARY KEY (id))"
-                    + "ENGINE INNODB;");
-            
-            sentencia.execute("CREATE TABLE IF NOT EXISTS familiares ( "
-                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL, "
-                    + "id_chip CHAR(9) NULL, "
-                    + "nombre VARCHAR(30) NOT NULL, "
-                    + "tipo VARCHAR(30) NOT NULL, "
-                    + "raza VARCHAR(30) NOT NULL, "
-                    + "sexo CHAR NOT NULL, "
-                    + "fecha_nac DATE NULL, "
-                    + "peso VARCHAR(30) NOT NULL, "
-                    + "familiar VARCHAR(30) NOT NULL, "
-                    + "PRIMARY KEY (id))"
-                    + "ENGINE INNODB;");
-            
             System.out.println("\n - BASE DE DATOS LISTA - \n");
                     
 
@@ -72,6 +68,7 @@ public class CrearTablas {
             
             
         }catch(Exception e) {
+            System.out.println(e.getMessage());
             System.out.println("\n - ERROR DE CONEXION CON LA BASE DE DATOS - \n");
             System.exit(0);
         }

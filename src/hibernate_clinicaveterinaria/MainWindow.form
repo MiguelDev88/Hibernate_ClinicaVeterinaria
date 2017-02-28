@@ -556,9 +556,6 @@
           <Image iconType="3" name="/resources/drawable/vet-logo.gif"/>
         </Property>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
-      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JProgressBar" name="pbLoading">
     </Component>
