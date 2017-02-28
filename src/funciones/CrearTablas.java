@@ -33,12 +33,25 @@ public class CrearTablas {
                     + "sexo CHAR NOT NULL, "
                     + "fecha_nac DATE NULL, "
                     + "peso VARCHAR(30) NOT NULL, "
-                    + "familiar VARCHAR(30) NOT NULL, "
+                    + "familiar INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "PRIMARY KEY (id), "
+                    + "CONSTRAINT fk_familiar "
+                    + " FOREIGN KEY(familiar) REFERENCES familiares(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE)"
+                    + "ENGINE INNODB;");
+            
+            sentencia.execute("CREATE TABLE IF NOT EXISTS personas ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "dni CHAR(9) NOT NULL, "
+                    + "nombre VARCHAR(30) NOT NULL, "
+                    + "telefono VARCHAR(30) NOT NULL, "
+                    + "email VARCHAR(30) NULL, "
                     + "PRIMARY KEY (id))"
                     + "ENGINE INNODB;");
             
             sentencia.execute("CREATE TABLE IF NOT EXISTS familiares ( "
-                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL, "
                     + "id_chip CHAR(9) NULL, "
                     + "nombre VARCHAR(30) NOT NULL, "
                     + "tipo VARCHAR(30) NOT NULL, "
