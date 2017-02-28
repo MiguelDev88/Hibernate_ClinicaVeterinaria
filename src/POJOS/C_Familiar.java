@@ -8,6 +8,8 @@ import java.util.List;
 public class C_Familiar extends C_Persona {
     
     private List mascotas;
+    private String direccion;
+    
     
 
 }
