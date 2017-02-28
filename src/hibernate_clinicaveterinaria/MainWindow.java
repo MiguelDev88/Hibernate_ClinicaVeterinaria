@@ -1,6 +1,4 @@
 package hibernate_clinicaveterinaria;
-
-import funciones.TimerTick;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -11,34 +9,30 @@ import javax.swing.Timer;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-
+    Timer timer;
+    
     public MainWindow() {
+        
         initComponents();
         
-        Timer timer = new Timer(50, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                pbLoading.setValue(pbLoading.getValue()+1);
-                System.out.println("FUERA!");
-                
-                //To change body of generated methods, choose Tools | Templates.
+        timer = new Timer(50, new ActionListener() {
+            int counter = 10;
+            public void actionPerformed(ActionEvent ae) {
+                counter++;
+                pbLoading.setValue(counter);
+                if (pbLoading.getValue()==100) {
+                    timer.stop();
+                    System.out.println("PARO EL RELOJ!!!");
+                } 
             }
         });
+        
         timer.start();
-        while(pbLoading.getValue()!=100){
-            System.out.println("estoy esperando!!!");
-        }
-        timer.stop();
-        System.out.println("estoy fuera!!");
-        
-        
                 
                 
                 
                 
-                
-        //timer.schedule(new TimerTick(pbLoading), 5);
+        //timer.schedule(new TimerTick(pbLoading), 555);
         
         
        
@@ -53,6 +47,7 @@ public class MainWindow extends javax.swing.JFrame {
         lbStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/vet-logo.gif"))); // NOI18N
 
