@@ -118,6 +118,12 @@ public class MainWindow extends javax.swing.JFrame {
         lbId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         lbSexo = new javax.swing.JLabel();
+        frameEditClientes = new javax.swing.JFrame();
+        panelDatosAnimal = new javax.swing.JPanel();
+        panelDatosFamiliar = new javax.swing.JPanel();
+        PanelDatosMed = new javax.swing.JPanel();
+        btnAceptar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -154,6 +160,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnEditarCli.setText("Editar");
 
         btnNuevoCli.setText("Nuevo");
+        btnNuevoCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoCliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelDatosClientesLayout = new javax.swing.GroupLayout(panelDatosClientes);
         panelDatosClientes.setLayout(panelDatosClientesLayout);
@@ -388,6 +399,85 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        frameEditClientes.setModalExclusionType(null);
+
+        panelDatosAnimal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Animal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+
+        javax.swing.GroupLayout panelDatosAnimalLayout = new javax.swing.GroupLayout(panelDatosAnimal);
+        panelDatosAnimal.setLayout(panelDatosAnimalLayout);
+        panelDatosAnimalLayout.setHorizontalGroup(
+            panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelDatosAnimalLayout.setVerticalGroup(
+            panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 174, Short.MAX_VALUE)
+        );
+
+        panelDatosFamiliar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Familiar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+
+        javax.swing.GroupLayout panelDatosFamiliarLayout = new javax.swing.GroupLayout(panelDatosFamiliar);
+        panelDatosFamiliar.setLayout(panelDatosFamiliarLayout);
+        panelDatosFamiliarLayout.setHorizontalGroup(
+            panelDatosFamiliarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelDatosFamiliarLayout.setVerticalGroup(
+            panelDatosFamiliarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 163, Short.MAX_VALUE)
+        );
+
+        PanelDatosMed.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+
+        javax.swing.GroupLayout PanelDatosMedLayout = new javax.swing.GroupLayout(PanelDatosMed);
+        PanelDatosMed.setLayout(PanelDatosMedLayout);
+        PanelDatosMedLayout.setHorizontalGroup(
+            PanelDatosMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        PanelDatosMedLayout.setVerticalGroup(
+            PanelDatosMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        btnAceptar.setText("Aceptar");
+
+        btnCancelar.setText("Cancelar");
+
+        javax.swing.GroupLayout frameEditClientesLayout = new javax.swing.GroupLayout(frameEditClientes.getContentPane());
+        frameEditClientes.getContentPane().setLayout(frameEditClientesLayout);
+        frameEditClientesLayout.setHorizontalGroup(
+            frameEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frameEditClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(frameEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDatosAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelDatosFamiliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelDatosMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(frameEditClientesLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                        .addComponent(btnCancelar)
+                        .addGap(15, 15, 15)))
+                .addContainerGap())
+        );
+        frameEditClientesLayout.setVerticalGroup(
+            frameEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frameEditClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDatosAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelDatosMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelDatosFamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(frameEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -430,6 +520,14 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCliActionPerformed
+        
+        frameEditClientes.setVisible(true);
+        frameClientes.disable();
+        
+        
+    }//GEN-LAST:event_btnNuevoCliActionPerformed
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -466,6 +564,9 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelDatosMed;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCitaCli;
     private javax.swing.JButton btnCitas;
     private javax.swing.JButton btnClientes;
@@ -482,6 +583,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbRaza;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JFrame frameClientes;
+    private javax.swing.JFrame frameEditClientes;
     private javax.swing.JLabel lbFamiliar;
     private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbLogo;
@@ -492,7 +594,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbTipo;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelContactoClientes;
+    private javax.swing.JPanel panelDatosAnimal;
     private javax.swing.JPanel panelDatosClientes;
+    private javax.swing.JPanel panelDatosFamiliar;
     private javax.swing.JPanel panelVerClientes;
     private javax.swing.JProgressBar pbLoading;
     private javax.swing.JRadioButton rbHembra;
