@@ -10,6 +10,7 @@ public class C_Animal {
     private String nombre;
     private String tipo;
     private String raza;
+    private String id_chip;
     private char sexo;
     private Date fecha_nac;
     private float peso;
@@ -57,6 +58,14 @@ public class C_Animal {
         this.raza = raza;
     }
 
+    public String getId_chip() {
+        return id_chip;
+    }
+
+    public void setId_chip(String id_chip) {
+        this.id_chip = id_chip;
+    }
+    
     public char getSexo() {
         return sexo;
     }

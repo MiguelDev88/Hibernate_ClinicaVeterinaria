@@ -6,11 +6,60 @@
 
 package funciones;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 
 // @author Miguel
 
 public class CrearTablas {
     
-    
+    public static void crearTablas(){
+        
+        try{
+            Connection conexion=DriverManager.getConnection("jdbc:mysql://localhost:3307/?user=root&password=usbw");
+            Statement sentencia=conexion.createStatement();
+            
+            sentencia.execute("CREATE DATABASE IF NOT EXISTS CLINICA_VETERINARIA");
+            sentencia.execute("USE CLINICA_VETERINARIA");
+            
+            sentencia.execute("CREATE TABLE IF NOT EXISTS animales ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "id_chip CHAR(9) NULL, "
+                    + "nombre VARCHAR(30) NOT NULL, "
+                    + "tipo VARCHAR(30) NOT NULL, "
+                    + "raza VARCHAR(30) NOT NULL, "
+                    + "sexo CHAR NOT NULL, "
+                    + "fecha_nac DATE NULL, "
+                    + "peso VARCHAR(30) NOT NULL, "
+                    + "familiar VARCHAR(30) NOT NULL, "
+                    + "PRIMARY KEY (id))"
+                    + "ENGINE INNODB;");
+            
+            sentencia.execute("CREATE TABLE IF NOT EXISTS familiares ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "id_chip CHAR(9) NULL, "
+                    + "nombre VARCHAR(30) NOT NULL, "
+                    + "tipo VARCHAR(30) NOT NULL, "
+                    + "raza VARCHAR(30) NOT NULL, "
+                    + "sexo CHAR NOT NULL, "
+                    + "fecha_nac DATE NULL, "
+                    + "peso VARCHAR(30) NOT NULL, "
+                    + "familiar VARCHAR(30) NOT NULL, "
+                    + "PRIMARY KEY (id))"
+                    + "ENGINE INNODB;");
+            
+            System.out.println("\n - BASE DE DATOS LISTA - \n");
+                    
+
+            conexion.close();
+            
+            
+        }catch(Exception e) {
+            System.out.println("\n - ERROR DE CONEXION CON LA BASE DE DATOS - \n");
+            System.exit(0);
+        }
+    }
 
 }
