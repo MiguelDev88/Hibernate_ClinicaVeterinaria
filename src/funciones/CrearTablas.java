@@ -41,6 +41,8 @@ public class CrearTablas {
                     + "  ON UPDATE CASCADE)"
                     + "ENGINE INNODB;");
             
+            
+            
             sentencia.execute("CREATE TABLE IF NOT EXISTS personas ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
                     + "dni CHAR(9) NOT NULL, "
