@@ -7,6 +7,7 @@ import java.util.List;
 
 public class C_Animal {
     
+    private String id;
     private String nombre;
     private String tipo;
     private String raza;
@@ -32,6 +33,14 @@ public class C_Animal {
         this.familiar=familiar;
         this.vacunas=vacunas;
         
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
