@@ -122,7 +122,5 @@ public class C_Animal {
     public void setVacunas(boolean[] vacunas) {
         this.vacunas = vacunas;
     }
-    
-    
 
 }
