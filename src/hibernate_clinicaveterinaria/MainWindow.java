@@ -118,12 +118,21 @@ public class MainWindow extends javax.swing.JFrame {
         lbId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         lbSexo = new javax.swing.JLabel();
-        frameEditClientes = new javax.swing.JFrame();
-        panelDatosAnimal = new javax.swing.JPanel();
-        panelDatosFamiliar = new javax.swing.JPanel();
-        PanelDatosMed = new javax.swing.JPanel();
+        dialogEditClientes = new javax.swing.JDialog();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        panelDatosFamiliar = new javax.swing.JPanel();
+        PanelDatosMed = new javax.swing.JPanel();
+        panelDatosAnimal = new javax.swing.JPanel();
+        lbNombreAni = new javax.swing.JLabel();
+        lbFecha_nacAni = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        cbTipoAni = new javax.swing.JComboBox<>();
+        cbRazaAni = new javax.swing.JComboBox<>();
+        lbTipoAni = new javax.swing.JLabel();
+        lbRazaAni = new javax.swing.JLabel();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -399,20 +408,16 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        frameEditClientes.setModalExclusionType(null);
+        dialogEditClientes.setModal(true);
 
-        panelDatosAnimal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Animal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout panelDatosAnimalLayout = new javax.swing.GroupLayout(panelDatosAnimal);
-        panelDatosAnimal.setLayout(panelDatosAnimalLayout);
-        panelDatosAnimalLayout.setHorizontalGroup(
-            panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelDatosAnimalLayout.setVerticalGroup(
-            panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 174, Short.MAX_VALUE)
-        );
+        btnCancelar.setText("Cancelar");
 
         panelDatosFamiliar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Familiar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -440,36 +445,95 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
+        panelDatosAnimal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Animal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        btnCancelar.setText("Cancelar");
+        lbNombreAni.setText("Nombre");
 
-        javax.swing.GroupLayout frameEditClientesLayout = new javax.swing.GroupLayout(frameEditClientes.getContentPane());
-        frameEditClientes.getContentPane().setLayout(frameEditClientesLayout);
-        frameEditClientesLayout.setHorizontalGroup(
-            frameEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(frameEditClientesLayout.createSequentialGroup()
+        lbFecha_nacAni.setText("Fecha Nacimiento:");
+
+        jLabel3.setText("Sexo:");
+
+        jLabel4.setText("jLabel4");
+
+        jTextField1.setText("jTextField1");
+
+        cbTipoAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbRazaAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lbTipoAni.setText("Tipo:");
+
+        lbRazaAni.setText("Raza:");
+
+        javax.swing.GroupLayout panelDatosAnimalLayout = new javax.swing.GroupLayout(panelDatosAnimal);
+        panelDatosAnimal.setLayout(panelDatosAnimalLayout);
+        panelDatosAnimalLayout.setHorizontalGroup(
+            panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosAnimalLayout.createSequentialGroup()
+                .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosAnimalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbFecha_nacAni)
+                            .addComponent(jLabel3)
+                            .addGroup(panelDatosAnimalLayout.createSequentialGroup()
+                                .addComponent(lbNombreAni)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(lbTipoAni)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbTipoAni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(lbRazaAni)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbRazaAni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelDatosAnimalLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel4)))
+                .addGap(36, 36, 36))
+        );
+        panelDatosAnimalLayout.setVerticalGroup(
+            panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosAnimalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(frameEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNombreAni)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoAni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRazaAni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTipoAni)
+                    .addComponent(lbRazaAni))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbFecha_nacAni)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dialogEditClientesLayout = new javax.swing.GroupLayout(dialogEditClientes.getContentPane());
+        dialogEditClientes.getContentPane().setLayout(dialogEditClientesLayout);
+        dialogEditClientesLayout.setHorizontalGroup(
+            dialogEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogEditClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelDatosAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelDatosFamiliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelDatosMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(frameEditClientesLayout.createSequentialGroup()
+                    .addGroup(dialogEditClientesLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(btnAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
                         .addComponent(btnCancelar)
                         .addGap(15, 15, 15)))
                 .addContainerGap())
         );
-        frameEditClientesLayout.setVerticalGroup(
-            frameEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(frameEditClientesLayout.createSequentialGroup()
+        dialogEditClientesLayout.setVerticalGroup(
+            dialogEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogEditClientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelDatosAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -477,10 +541,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDatosFamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(frameEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(dialogEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -527,8 +591,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCliActionPerformed
         
-        frameEditClientes.setVisible(true);
-        frameClientes.disable();
+        dialogEditClientes.setVisible(true);
+        
+        //frameClientes.disable();
         
         
     }//GEN-LAST:event_btnNuevoCliActionPerformed
@@ -590,17 +655,26 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnVerCli;
     private javax.swing.JButton btnVeterinarios;
     private javax.swing.JComboBox<String> cbRaza;
+    private javax.swing.JComboBox<String> cbRazaAni;
     private javax.swing.JComboBox<String> cbTipo;
+    private javax.swing.JComboBox<String> cbTipoAni;
+    private javax.swing.JDialog dialogEditClientes;
     private javax.swing.JFrame frameClientes;
-    private javax.swing.JFrame frameEditClientes;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbFamiliar;
+    private javax.swing.JLabel lbFecha_nacAni;
     private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbLogo;
     private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbNombreAni;
     private javax.swing.JLabel lbRaza;
+    private javax.swing.JLabel lbRazaAni;
     private javax.swing.JLabel lbSexo;
     private javax.swing.JLabel lbStatus;
     private javax.swing.JLabel lbTipo;
+    private javax.swing.JLabel lbTipoAni;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelContactoClientes;
     private javax.swing.JPanel panelDatosAnimal;
