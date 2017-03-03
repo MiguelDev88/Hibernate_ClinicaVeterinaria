@@ -5,6 +5,7 @@ package POJOS;
 
 public class C_Medicamento {
     
+    private int id;
     private String nombre;
     private String tipo;
     private String principioActivo;
@@ -20,6 +21,14 @@ public class C_Medicamento {
         this.principioActivo=principioActivo;
         this.dosis=dosis;
         this.precio=precio;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

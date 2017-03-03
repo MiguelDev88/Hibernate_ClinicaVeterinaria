@@ -18,11 +18,11 @@
         <property name="fecha_nac" />
         <property name="peso" />
         <property name="comentario" />
-        <many-to-one class="POJOS.C_Familiar" name="familiar" column="familiar" />
-        <list name="vacunas" table="vacunas" cascade="save-update" >
+        <many-to-one class="POJOS.C_Familiar" name="familiar" column="familiar" cascade="save-update" />
+        <set name="vacunas" table="vacunas" cascade="save-update" >
             <key column="id_animal"/>
             <many-to-many class="POJOS.C_Medicamento" column="id_medicamento"/>
-        </list>
+        </set>
     </class>
     
 </hibernate-mapping>

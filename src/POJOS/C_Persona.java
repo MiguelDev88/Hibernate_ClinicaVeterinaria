@@ -5,7 +5,7 @@ package POJOS;
 
 public abstract class C_Persona {
     
-    private String id;
+    private int id;
     private String dni;
     private String nombre;
     private String telefono;
@@ -22,11 +22,11 @@ public abstract class C_Persona {
         this.email=email;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
