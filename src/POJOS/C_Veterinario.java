@@ -9,7 +9,7 @@ package POJOS;
 
 // @author Migu
 
-public class C_Veterinario {
+public class C_Veterinario extends C_Persona{
     
     private String NumLicencia;
     
