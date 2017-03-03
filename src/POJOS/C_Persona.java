@@ -3,7 +3,7 @@ package POJOS;
 
 // @author Miguel
 
-public class C_Persona {
+public abstract class C_Persona {
     
     private String id;
     private String dni;

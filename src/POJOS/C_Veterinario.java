@@ -7,11 +7,19 @@
 package POJOS;
 
 
-// @author Migu
+// @author Miguel
 
-public class C_Veterinario {
+public class C_Veterinario extends C_Persona{
     
     private String NumLicencia;
+    
+    public C_Veterinario () {}
+    
+    public C_Veterinario (String dni, String nombre, String telefono, String email, String NumLicencia) {
+        
+        super(dni, nombre, telefono, email);
+        this.NumLicencia=NumLicencia;
+    }
     
     
 
