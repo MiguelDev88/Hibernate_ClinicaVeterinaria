@@ -1,14 +1,16 @@
 package POJOS;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 
 // @author Miguel
 
 public class C_Animal {
     
-    private String id;
+    private int id;
     private String nombre;
     private String tipo;
     private String raza;
@@ -17,14 +19,14 @@ public class C_Animal {
     private Date fecha_nac;
     private float peso;
     private String comentario;
-    private C_Familiar familiar;
+    private C_Persona familiar;
     private List historial;
-    private List vacunas;
+    private Set vacunas;
     
     
     public C_Animal () {}
     
-    public C_Animal (String nombre, String tipo, String raza, char sexo, Date fecha_nac, float peso, String comentario, C_Familiar familiar) {
+    public C_Animal (String nombre, String tipo, String raza, char sexo, Date fecha_nac, float peso, String comentario, C_Persona familiar) {
         
         this.nombre=nombre;
         this.tipo=tipo;
@@ -35,15 +37,15 @@ public class C_Animal {
         this.comentario=comentario;
         this.familiar=familiar;
         this.historial=new LinkedList<>();
-        this.vacunas=new LinkedList<>();
+        this.vacunas=new HashSet();
         
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -111,11 +113,11 @@ public class C_Animal {
         this.comentario = comentario;
     }
 
-    public C_Familiar getFamiliar() {
+    public C_Persona getFamiliar() {
         return familiar;
     }
 
-    public void setFamiliar(C_Familiar familiar) {
+    public void setFamiliar(C_Persona familiar) {
         this.familiar = familiar;
     }
 
@@ -127,11 +129,11 @@ public class C_Animal {
         this.historial = historial;
     }
 
-    public List getVacunas() {
+    public Set getVacunas() {
         return vacunas;
     }
 
-    public void setVacunas(List vacunas) {
+    public void setVacunas(Set vacunas) {
         this.vacunas = vacunas;
     }
 
