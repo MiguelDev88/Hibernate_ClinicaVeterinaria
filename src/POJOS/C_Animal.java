@@ -1,5 +1,6 @@
 package POJOS;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -32,6 +33,7 @@ public class C_Animal {
         this.peso=peso;
         this.familiar=familiar;
         this.vacunas=vacunas;
+        this.historial=new LinkedList<>();
         
     }
 
