@@ -5,8 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -183,13 +186,17 @@ public class MainWindow extends javax.swing.JFrame {
         btnEliminarCli2 = new javax.swing.JButton();
         btnEditarCli2 = new javax.swing.JButton();
         btnNuevoCli2 = new javax.swing.JButton();
-        scrollTabla2 = new javax.swing.JScrollPane();
-        tablaCitas = new javax.swing.JTable();
         txtNombreVet1 = new javax.swing.JTextField();
         panelVerClientes2 = new javax.swing.JPanel();
         btnVerCli2 = new javax.swing.JButton();
         btnCitaCli2 = new javax.swing.JButton();
         lbNombreVet1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -1027,19 +1034,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tablaCitas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        scrollTabla2.setViewportView(tablaCitas);
-
         panelVerClientes2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnVerCli2.setText("Últimos Diagnosticos");
@@ -1069,27 +1063,45 @@ public class MainWindow extends javax.swing.JFrame {
 
         lbNombreVet1.setText("Nombre:");
 
+        jPanel1.setLayout(new java.awt.GridLayout(6, 8));
+
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2);
+
+        jButton1.setText("jButton1");
+        jPanel1.add(jButton1);
+
+        jLabel4.setText("jLabel4");
+        jPanel1.add(jLabel4);
+
+        jLabel6.setText("jLabel6");
+        jPanel1.add(jLabel6);
+
+        jLabel5.setText("jLabel5");
+        jPanel1.add(jLabel5);
+
         javax.swing.GroupLayout panelCitasLayout = new javax.swing.GroupLayout(panelCitas);
         panelCitas.setLayout(panelCitasLayout);
         panelCitasLayout.setHorizontalGroup(
             panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCitasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCitasLayout.createSequentialGroup()
-                        .addComponent(panelDatosClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelVerClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelContactoClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCitasLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelCitasLayout.createSequentialGroup()
                         .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scrollTabla2, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelCitasLayout.createSequentialGroup()
+                                .addComponent(panelDatosClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelVerClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelContactoClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelCitasLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addComponent(lbNombreVet1)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtNombreVet1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtNombreVet1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelCitasLayout.setVerticalGroup(
@@ -1104,9 +1116,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNombreVet1)
                     .addComponent(txtNombreVet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(scrollTabla2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1248,6 +1260,33 @@ public class MainWindow extends javax.swing.JFrame {
         tablaCitas.setModel(modeloCitas);
         modeloCitas.addRow(columnasCitas);
         
+        Date today=new Date();
+        Session sesion=HibernateUtil.getSession();
+        Iterator citas=sesion.createQuery("FROM POJOS.C_Cita c WHERE c.fecha > '"+today+"'").list().iterator();
+        List citasDiaActual= new LinkedList<C_Cita>();
+        while(citas.hasNext()){
+            System.out.println("tengo citas");
+            C_Cita cita =(C_Cita) citas.next();
+            if(cita.getFecha()>)
+            citasDiaActual.add(cit)
+        }
+        
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        
+        /*
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        try{
+        Date date = new Date();
+        //date=parser.format(date);
+        
+        }catch (ParseException e){ 
+            System.out.println("NO!!!!");
+        }
+        */
+        
+        sesion.close();
         ///***
     }//GEN-LAST:event_btnCitasActionPerformed
 
@@ -1329,8 +1368,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbVacuna6;
     public javax.swing.JDialog dialogEditClientes;
     private javax.swing.JFrame frameClientes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1378,8 +1423,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.ButtonGroup rbgSexo;
     private javax.swing.JScrollPane scrollTabla;
     private javax.swing.JScrollPane scrollTabla1;
-    private javax.swing.JScrollPane scrollTabla2;
-    private javax.swing.JTable tablaCitas;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
     private javax.swing.JTextField txtChipidCli;
