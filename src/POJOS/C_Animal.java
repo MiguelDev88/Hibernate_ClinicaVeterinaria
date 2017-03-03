@@ -16,14 +16,15 @@ public class C_Animal {
     private char sexo;
     private Date fecha_nac;
     private float peso;
+    private String comentario;
     private C_Familiar familiar;
     private List historial;
-    private boolean[] vacunas;
+    private List vacunas;
     
     
     public C_Animal () {}
     
-    public C_Animal (String nombre, String tipo, String raza, char sexo, Date fecha_nac, float peso, C_Familiar familiar, boolean[] vacunas) {
+    public C_Animal (String nombre, String tipo, String raza, char sexo, Date fecha_nac, float peso, String comentario, C_Familiar familiar) {
         
         this.nombre=nombre;
         this.tipo=tipo;
@@ -31,9 +32,10 @@ public class C_Animal {
         this.sexo=sexo;
         this.fecha_nac=fecha_nac;
         this.peso=peso;
+        this.comentario=comentario;
         this.familiar=familiar;
-        this.vacunas=vacunas;
         this.historial=new LinkedList<>();
+        this.vacunas=new LinkedList<>();
         
     }
 
@@ -101,6 +103,14 @@ public class C_Animal {
         this.peso = peso;
     }
 
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
     public C_Familiar getFamiliar() {
         return familiar;
     }
@@ -117,11 +127,11 @@ public class C_Animal {
         this.historial = historial;
     }
 
-    public boolean[] getVacunas() {
+    public List getVacunas() {
         return vacunas;
     }
 
-    public void setVacunas(boolean[] vacunas) {
+    public void setVacunas(List vacunas) {
         this.vacunas = vacunas;
     }
 

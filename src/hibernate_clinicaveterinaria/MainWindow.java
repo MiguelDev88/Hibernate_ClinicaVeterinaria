@@ -3,16 +3,11 @@ import POJOS.*;
 import funciones.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import javax.swing.JCheckBox;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
@@ -135,8 +130,8 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         lbDniCli = new javax.swing.JLabel();
         lbNombreFami = new javax.swing.JLabel();
-        txtDniCli = new javax.swing.JTextField();
         txtNombreFami = new javax.swing.JTextField();
+        cbDniFami = new javax.swing.JComboBox<>();
         PanelDatosMed = new javax.swing.JPanel();
         lbPesoCli = new javax.swing.JLabel();
         txtPesoCli = new javax.swing.JTextField();
@@ -162,8 +157,9 @@ public class MainWindow extends javax.swing.JFrame {
         lbRazaAni = new javax.swing.JLabel();
         txtChipidCli = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        newRbHembra = new javax.swing.JRadioButton();
+        newRbMacho = new javax.swing.JRadioButton();
+        rbgSexo = new javax.swing.ButtonGroup();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -501,9 +497,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         lbNombreFami.setText("Nombre:");
 
-        txtDniCli.setText(" ");
-
         txtNombreFami.setText(" ");
+
+        cbDniFami.setEditable(true);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -517,17 +513,17 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtNombreFami, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                    .addComponent(txtDniCli))
+                    .addComponent(cbDniFami, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbDniCli)
-                    .addComponent(txtDniCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cbDniFami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNombreFami)
                     .addComponent(txtNombreFami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -698,9 +694,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setText("id_chip:");
 
-        jRadioButton1.setText("Hembra");
+        rbgSexo.add(newRbHembra);
+        newRbHembra.setSelected(true);
+        newRbHembra.setText("Hembra");
 
-        jRadioButton2.setText("Macho");
+        rbgSexo.add(newRbMacho);
+        newRbMacho.setText("Macho");
 
         javax.swing.GroupLayout panelDatosAnimalLayout = new javax.swing.GroupLayout(panelDatosAnimal);
         panelDatosAnimal.setLayout(panelDatosAnimalLayout);
@@ -720,9 +719,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(panelDatosAnimalLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(24, 24, 24)
-                        .addComponent(jRadioButton1)
+                        .addComponent(newRbHembra)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2))
+                        .addComponent(newRbMacho))
                     .addGroup(panelDatosAnimalLayout.createSequentialGroup()
                         .addComponent(lbTipoAni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -743,8 +742,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtChipidCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)
+                            .addComponent(newRbHembra)
+                            .addComponent(newRbMacho)
                             .addComponent(jLabel3)))
                     .addGroup(panelDatosAnimalLayout.createSequentialGroup()
                         .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -843,15 +842,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
-        C_Animal animal;
-        C_Familiar familiar;
-        String nombre, tipo,raza;
+        String nombreAni, tipo, raza, comentario;
         Date fecha_nac;
         float peso;
         char sexo;
         boolean[] vacunas = new boolean[6];
         
-        nombre=txtNombreCli.getText();
+        nombreAni=txtNombreCli.getText();
         tipo=cbTipoAni.getSelectedItem().toString();
         raza=cbRazaAni.getSelectedItem().toString();
         fecha_nac=new Date();
@@ -865,33 +862,36 @@ public class MainWindow extends javax.swing.JFrame {
             System.out.println("NO!!!!");
         }
         peso=Float.parseFloat( txtPesoCli.getText() );
+        comentario=txtComentarioCli.getText();
+        
+        if (newRbHembra.isSelected())
+            sexo='H';
+        else
+            sexo='M';
+        
+        
+        String dni= cbDniFami.getSelectedItem().toString();
+        
+        String Nombre = txtNombreFami.getText();
+        
+        String Telefono = txtTlfFami.getText();
+        
+        String mail = txtMailFami.getText();
+        
+        C_Familiar familiar= new C_Familiar (dni, Nombre, Telefono, mail, Telefono);
+        
+        C_Animal animal=new C_Animal(nombreAni, tipo, raza, sexo, fecha_nac, peso, comentario, familiar);
 
-        if(cbVacuna1.isSelected())
-            vacunas[0]=true;
-        if(cbVacuna2.isSelected())
-            vacunas[1]=true;
-        if(cbVacuna3.isSelected())
-            vacunas[2]=true;
-        if(cbVacuna4.isSelected())
-            vacunas[3]=true;
-        if(cbVacuna5.isSelected())
-            vacunas[4]=true;
-        if(cbVacuna6.isSelected())
-            vacunas[5]=true;
         
         
         
-            
-            
-        
-        //animal=new C_Animal(nombre, tipo, raza, 0, fecha_nac, peso, familiar, vacunas);
-        
-        
-        
-        
-        
-        
-        
+        /*
+        /////
+        for(int i=0;i<panelVacunas.getComponentCount();i++){
+            if ( ((JCheckBox)panelVacunas.getComponent(i)).isSelected() )
+                animal.getVacunas().add(i);//OJO!!!
+        }
+        */
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 
@@ -946,6 +946,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoCli;
     private javax.swing.JButton btnVerCli;
     private javax.swing.JButton btnVeterinarios;
+    private javax.swing.JComboBox<String> cbDniFami;
     private javax.swing.JComboBox<String> cbRaza;
     private javax.swing.JComboBox<String> cbRazaAni;
     private javax.swing.JComboBox<String> cbTipo;
@@ -962,8 +963,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbComentarioCli;
     private javax.swing.JLabel lbDireFami;
@@ -984,6 +983,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbTipo;
     private javax.swing.JLabel lbTipoAni;
     private javax.swing.JLabel lbTlfFami;
+    private javax.swing.JRadioButton newRbHembra;
+    private javax.swing.JRadioButton newRbMacho;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelContactoClientes;
     private javax.swing.JPanel panelDatosAnimal;
@@ -994,12 +995,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JProgressBar pbLoading;
     private javax.swing.JRadioButton rbHembra;
     private javax.swing.JRadioButton rbMacho;
+    private javax.swing.ButtonGroup rbgSexo;
     private javax.swing.JScrollPane scrollTabla;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField txtChipidCli;
     private javax.swing.JTextArea txtComentarioCli;
     private javax.swing.JTextField txtDireFami;
-    private javax.swing.JTextField txtDniCli;
     private javax.swing.JTextField txtFamiliar;
     private javax.swing.JTextField txtFechaCli;
     private javax.swing.JTextField txtId;

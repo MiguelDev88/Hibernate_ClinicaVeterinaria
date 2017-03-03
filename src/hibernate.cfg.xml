@@ -9,5 +9,6 @@
     <property name="hibernate.connection.password">usbw</property>
     <mapping resource="Mapeos/Animal.hbm.xml"/>
     <mapping resource="Mapeos/Persona.hbm.xml"/>
+    <mapping resource="Mapeos/Medicamento.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
