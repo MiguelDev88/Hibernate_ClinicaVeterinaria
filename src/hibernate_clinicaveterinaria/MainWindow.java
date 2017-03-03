@@ -1,5 +1,5 @@
 package hibernate_clinicaveterinaria;
-import POJOS.C_Animal;
+import POJOS.*;
 import funciones.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -52,6 +54,7 @@ public class MainWindow extends javax.swing.JFrame {
         tablaClientes.setModel(modeloClientes);
         
         cargarArray();
+        
     }
 
     public static void cargarArray(){
@@ -137,7 +140,7 @@ public class MainWindow extends javax.swing.JFrame {
         PanelDatosMed = new javax.swing.JPanel();
         lbPesoCli = new javax.swing.JLabel();
         txtPesoCli = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        panelVacunas = new javax.swing.JPanel();
         cbVacuna1 = new javax.swing.JCheckBox();
         cbVacuna2 = new javax.swing.JCheckBox();
         cbVacuna3 = new javax.swing.JCheckBox();
@@ -570,7 +573,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         lbPesoCli.setText("Peso:");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Vacunas"));
+        panelVacunas.setBorder(javax.swing.BorderFactory.createTitledBorder("Vacunas"));
 
         cbVacuna1.setText("vac1");
 
@@ -584,20 +587,20 @@ public class MainWindow extends javax.swing.JFrame {
 
         cbVacuna6.setText("vac6");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelVacunasLayout = new javax.swing.GroupLayout(panelVacunas);
+        panelVacunas.setLayout(panelVacunasLayout);
+        panelVacunasLayout.setHorizontalGroup(
+            panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVacunasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelVacunasLayout.createSequentialGroup()
                         .addComponent(cbVacuna1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbVacuna3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbVacuna5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelVacunasLayout.createSequentialGroup()
                         .addComponent(cbVacuna2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbVacuna4)
@@ -605,15 +608,15 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(cbVacuna6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        panelVacunasLayout.setVerticalGroup(
+            panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVacunasLayout.createSequentialGroup()
+                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbVacuna1)
                     .addComponent(cbVacuna3)
                     .addComponent(cbVacuna5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbVacuna2)
                     .addComponent(cbVacuna4)
                     .addComponent(cbVacuna6))
@@ -652,7 +655,7 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addComponent(txtPesoCli)
                                     .addComponent(txtFechaCli))))
                         .addGap(10, 10, 10)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         PanelDatosMedLayout.setVerticalGroup(
@@ -660,7 +663,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(PanelDatosMedLayout.createSequentialGroup()
                 .addGroup(PanelDatosMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PanelDatosMedLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDatosMedLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -839,7 +842,56 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoCliActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+
+        C_Animal animal;
+        C_Familiar familiar;
+        String nombre, tipo,raza;
+        Date fecha_nac;
+        float peso;
+        char sexo;
+        boolean[] vacunas = new boolean[6];
+        
+        nombre=txtNombreCli.getText();
+        tipo=cbTipoAni.getSelectedItem().toString();
+        raza=cbRazaAni.getSelectedItem().toString();
+        fecha_nac=new Date();
+        
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        try{
+        Date date = parser.parse(txtFechaCli.getText());
+        
+        }catch (ParseException e){ 
+            System.out.println("NO!!!!");
+        }
+        peso=Float.parseFloat( txtPesoCli.getText() );
+
+        if(cbVacuna1.isSelected())
+            vacunas[0]=true;
+        if(cbVacuna2.isSelected())
+            vacunas[1]=true;
+        if(cbVacuna3.isSelected())
+            vacunas[2]=true;
+        if(cbVacuna4.isSelected())
+            vacunas[3]=true;
+        if(cbVacuna5.isSelected())
+            vacunas[4]=true;
+        if(cbVacuna6.isSelected())
+            vacunas[5]=true;
+        
+        
+        
+            
+            
+        
+        //animal=new C_Animal(nombre, tipo, raza, 0, fecha_nac, peso, familiar, vacunas);
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 
@@ -908,7 +960,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JFrame frameClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRadioButton1;
@@ -938,6 +989,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelDatosAnimal;
     private javax.swing.JPanel panelDatosClientes;
     private javax.swing.JPanel panelDatosFamiliar;
+    private javax.swing.JPanel panelVacunas;
     private javax.swing.JPanel panelVerClientes;
     private javax.swing.JProgressBar pbLoading;
     private javax.swing.JRadioButton rbHembra;
