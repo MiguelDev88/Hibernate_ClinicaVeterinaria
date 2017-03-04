@@ -1,10 +1,11 @@
 package POJOS;
+import java.io.Serializable;
 import java.util.List;
 
 
 // @author Miguel
 
-public class C_Diagnostico {
+public class C_Diagnostico implements Serializable {
     
     private String tratamiento;
     private List<C_Medicamento> medicamento;

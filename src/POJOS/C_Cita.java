@@ -1,24 +1,23 @@
 package POJOS;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
 
 // @author Miguel
 
-public class C_Cita {
+public class C_Cita implements Serializable {
     
     private int id;
     private Date fecha;
-    private Time hora;
     private C_Persona familiar;
     private String asunto;
     
     public C_Cita () {}
     
-    public C_Cita (Date fecha, Time hora, C_Persona familiar, String asunto){
+    public C_Cita (Date fecha, C_Persona familiar, String asunto){
         
         this.fecha=fecha;
-        this.hora=hora;
         this.familiar=familiar;
         this.asunto=asunto;
     }
@@ -39,14 +38,6 @@ public class C_Cita {
         this.fecha = fecha;
     }
 
-    public Time getHora() {
-        return hora;
-    }
-
-    public void setHora(Time hora) {
-        this.hora = hora;
-    }
-
     public C_Persona getFamiliar() {
         return familiar;
     }
@@ -61,6 +52,12 @@ public class C_Cita {
 
     public void setAsunto(String asunto) {
         this.asunto = asunto;
+    }
+
+    @Override
+    public String toString () {
+        
+        return familiar.getNombre();
     }
     
 }

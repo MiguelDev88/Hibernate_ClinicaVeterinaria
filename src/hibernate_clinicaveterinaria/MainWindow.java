@@ -1,11 +1,14 @@
 package hibernate_clinicaveterinaria;
 import POJOS.*;
 import funciones.*;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -13,7 +16,9 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 
@@ -25,6 +30,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     Timer timer;
     static DefaultTableModel modeloClientes;
+    static Object[][] citas = new Object[38][8];
+    static String[] horas = {"9:00","9:15","9:30","9:45","10:00","10:15","10:30","10:45",
+                              "11:00","11:15","11:30","11:45","12:00","12:15","12:30","12:45",
+                              "13:00","13:15","13:30","13:45","     ",
+                              "17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45",
+                              "19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"};
     
     public MainWindow() {
         
@@ -53,11 +64,57 @@ public class MainWindow extends javax.swing.JFrame {
         modeloClientes=new DefaultTableModel(columnasClientes,0);
         tablaClientes.setModel(modeloClientes);
         
-        cargarArray();
+        cargarAnimales();
+        
+        ////prueba
+        
+        
+        
+        ///fin prueba
+       
         
     }
+    
+    public static void cargarCitas() {
+        
+        try{
+            Session sesion=HibernateUtil.getSession();
+            Iterator citass = sesion.createCriteria(C_Cita.class).list().iterator();
+            
+            while(citass.hasNext())
+            {
+                C_Cita cita=(C_Cita)citass.next();
+                
+                Date fecha = cita.getFecha();
+                
+                if(fecha.compareTo(new Date())>0)
+                   
+                {
+                    System.out.println("LA FECHA ES MAYOR QUE HOY!!");
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(fecha);
+                    
+                    int dia=c.get(Calendar.DAY_OF_WEEK)-1;
+                    String hora=c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE);
+                    System.out.println("la cita es en un:"+dia+"para las "+hora);
+                    
+                    for (int i=0;i<horas.length;i++)
+                        if(horas[i].compareToIgnoreCase(hora)==0){
+                            citas[i][dia]=cita;
+                            break;
+                        }  
+                }
+                
+            }
+            sesion.close();
+         
+        }catch (Exception e) {
+            
+            System.out.println(e.getMessage());
+        }
+    }
 
-    public static void cargarArray(){
+    public static void cargarAnimales(){
         
         try{
             Session sesion=HibernateUtil.getSession();
@@ -72,6 +129,23 @@ public class MainWindow extends javax.swing.JFrame {
                 String raza=animal.getRaza();
                 String familiar= animal.getFamiliar().getNombre();
                 
+                //prueba
+        /*
+                try{
+                SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+                Date fecha = parser.parse("2017-03-05 17:30:00");
+                System.out.println("Creando cita para famliar:"+animal.getFamiliar().getNombre());
+                C_Cita pruebacita=new C_Cita(fecha, animal.getFamiliar(), "el perro está enfermo");
+                        System.out.println("tengo la cita para el dia"+pruebacita.getFecha());
+                sesion.beginTransaction();
+                sesion.save(pruebacita);
+                sesion.getTransaction().commit();
+
+                }catch(ParseException e){
+                    System.out.println("MAL PARSE!");
+                }
+                //fin prueba
+               */ 
                 Object[] fila= {nombre,tipo,raza,familiar};
                 modeloClientes.addRow(fila);
             }
@@ -1072,6 +1146,9 @@ public class MainWindow extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaCitas.setSelectionBackground(new java.awt.Color(255, 255, 204));
+        tablaCitas.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tablaCitas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         panelCitasList.setViewportView(tablaCitas);
 
         javax.swing.GroupLayout panelCitasLayout = new javax.swing.GroupLayout(panelCitas);
@@ -1256,41 +1333,44 @@ public class MainWindow extends javax.swing.JFrame {
         }*/
         
         String[] columnasCitas={"   ", "Lunes ","Martes"," Miercoles", "Jueves" , "Viernes" , "Sabado"};
-        Object[][] citas = new Object[38][8];
         
-        String[] filaCitas = {"9:00","9:15","9:30","9:45","10:00","10:15","10:30","10:45",
-                              "11:00","11:15","11:30","11:45","12:00","12:15","12:30","12:45",
-                              "13:00","13:15","13:30","13:45","     ",
-                              "17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45",
-                              "19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"};
         
-        for (int i=0;i<filaCitas.length;i++){
-            citas[i][0]=filaCitas[i];
+//        String[] filaCitas = {"9:00","9:15","9:30","9:45","10:00","10:15","10:30","10:45",
+//                              "11:00","11:15","11:30","11:45","12:00","12:15","12:30","12:45",
+//                              "13:00","13:15","13:30","13:45","     ",
+//                              "17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45",
+//                              "19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"};
+        
+        for (int i=0;i<horas.length;i++){
+            citas[i][0]=horas[i];
         }
+        cargarCitas();
+        DefaultTableModel modeloCitas=new DefaultTableModel(citas, columnasCitas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //no quiero que se edite nada!!! 
+                return false;
+            }
+        };
         
-        DefaultTableModel modeloCitas=new DefaultTableModel(citas, columnasCitas);
+        //configuracion del renderer
+        DefaultTableCellRenderer myRenderer = new DefaultTableCellRenderer();
+        myRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+        //myRenderer.setFont(getFont().deriveFont(Font.BOLD, 18));
+        myRenderer.setFont(new Font("Tahoma", Font.BOLD, 18));////<<<<ESTO NO VA!!! ARREGLAAAAAAAAAAR!!!!!!!!!!!!!!!!!!!
+        //tablaCitas.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        
+        
+        
+        //fin renderer
+        tablaCitas.setCellSelectionEnabled(true);
         tablaCitas.setModel(modeloCitas);
+        tablaCitas.setRowHeight(40);
         
+        //tablaCitas.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 13));
+        tablaCitas.getTableHeader().setDefaultRenderer(myRenderer);
+        tablaCitas.getColumnModel().getColumn(0).setCellRenderer( myRenderer );
         
-        
-        
-        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-        
-        
-        /*
-        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-        
-        try{
-        Date date = new Date();
-        //date=parser.format(date);
-        
-        }catch (ParseException e){ 
-            System.out.println("NO!!!!");
-        }
-        */
-        
-        //sesion.close();
-        ///***
     }//GEN-LAST:event_btnCitasActionPerformed
 
     public static void main(String args[]) {

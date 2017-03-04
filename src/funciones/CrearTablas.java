@@ -93,10 +93,9 @@ public class CrearTablas {
             
             sentencia.execute("CREATE TABLE IF NOT EXISTS citas ( "
                     + "familiar INT(5) UNSIGNED ZEROFILL NOT NULL, "
-                    + "fecha DATE NOT NULL, "
-                    + "hora TIME NOT NULL, "
+                    + "fecha DATETIME NOT NULL, "
                     + "asunto TEXT NULL, "
-                    + "PRIMARY KEY(socio,fecha,hora), "
+                    + "PRIMARY KEY(familiar,fecha), "
                     + "CONSTRAINT fk5_familiar "
                     + " FOREIGN KEY(familiar) REFERENCES familiares(id) "
                     + "  ON DELETE CASCADE "
