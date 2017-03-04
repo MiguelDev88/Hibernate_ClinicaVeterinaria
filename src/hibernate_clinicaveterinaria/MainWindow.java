@@ -1,6 +1,7 @@
 package hibernate_clinicaveterinaria;
 import POJOS.*;
 import funciones.*;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -11,6 +12,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
@@ -191,12 +193,8 @@ public class MainWindow extends javax.swing.JFrame {
         btnVerCli2 = new javax.swing.JButton();
         btnCitaCli2 = new javax.swing.JButton();
         lbNombreVet1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        panelCitasList = new javax.swing.JScrollPane();
+        tablaCitas = new javax.swing.JTable();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -1063,22 +1061,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         lbNombreVet1.setText("Nombre:");
 
-        jPanel1.setLayout(new java.awt.GridLayout(6, 8));
-
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2);
-
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1);
-
-        jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4);
-
-        jLabel6.setText("jLabel6");
-        jPanel1.add(jLabel6);
-
-        jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5);
+        tablaCitas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        panelCitasList.setViewportView(tablaCitas);
 
         javax.swing.GroupLayout panelCitasLayout = new javax.swing.GroupLayout(panelCitas);
         panelCitas.setLayout(panelCitasLayout);
@@ -1087,22 +1081,19 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelCitasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelCitasLayout.createSequentialGroup()
-                        .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCitasLayout.createSequentialGroup()
-                                .addComponent(panelDatosClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panelVerClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panelContactoClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelCitasLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lbNombreVet1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNombreVet1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(panelDatosClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelVerClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelContactoClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelCitasLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lbNombreVet1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombreVet1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelCitasList, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCitasLayout.setVerticalGroup(
             panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1112,13 +1103,13 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(panelContactoClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelDatosClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelVerClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNombreVet1)
                     .addComponent(txtNombreVet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCitasList, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1253,13 +1244,7 @@ public class MainWindow extends javax.swing.JFrame {
         panelClientes.getParent().add(panelCitas);
         panelCitas.setSize(panelClientes.getSize());
         panelCitas.setLocation(panelClientes.getLocation());
-        
-        String[] columnasCitas={"Lunes","Martes","Miercoles","Jueves", "Viernes", "Sábado", "Domingo"};
-        DefaultTableModel modeloCitas=new DefaultTableModel(columnasCitas,0);
-        tablaCitas.setRowHeight(50);
-        tablaCitas.setModel(modeloCitas);
-        modeloCitas.addRow(columnasCitas);
-        
+        /*
         Date today=new Date();
         Session sesion=HibernateUtil.getSession();
         Iterator citas=sesion.createQuery("FROM POJOS.C_Cita c WHERE c.fecha > '"+today+"'").list().iterator();
@@ -1267,9 +1252,27 @@ public class MainWindow extends javax.swing.JFrame {
         while(citas.hasNext()){
             System.out.println("tengo citas");
             C_Cita cita =(C_Cita) citas.next();
-            if(cita.getFecha()>)
-            citasDiaActual.add(cit)
+            
+        }*/
+        
+        String[] columnasCitas={"   ", "Lunes ","Martes"," Miercoles", "Jueves" , "Viernes" , "Sabado"};
+        Object[][] citas = new Object[38][8];
+        
+        String[] filaCitas = {"9:00","9:15","9:30","9:45","10:00","10:15","10:30","10:45",
+                              "11:00","11:15","11:30","11:45","12:00","12:15","12:30","12:45",
+                              "13:00","13:15","13:30","13:45","     ",
+                              "17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45",
+                              "19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"};
+        
+        for (int i=0;i<filaCitas.length;i++){
+            citas[i][0]=filaCitas[i];
         }
+        
+        DefaultTableModel modeloCitas=new DefaultTableModel(citas, columnasCitas);
+        tablaCitas.setModel(modeloCitas);
+        
+        
+        
         
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
         
@@ -1286,7 +1289,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         */
         
-        sesion.close();
+        //sesion.close();
         ///***
     }//GEN-LAST:event_btnCitasActionPerformed
 
@@ -1368,14 +1371,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbVacuna6;
     public javax.swing.JDialog dialogEditClientes;
     private javax.swing.JFrame frameClientes;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1403,6 +1400,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JRadioButton newRbHembra;
     private javax.swing.JRadioButton newRbMacho;
     private javax.swing.JPanel panelCitas;
+    private javax.swing.JScrollPane panelCitasList;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelContactoClientes;
     private javax.swing.JPanel panelContactoClientes1;
@@ -1423,6 +1421,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.ButtonGroup rbgSexo;
     private javax.swing.JScrollPane scrollTabla;
     private javax.swing.JScrollPane scrollTabla1;
+    private javax.swing.JTable tablaCitas;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
     private javax.swing.JTextField txtChipidCli;
