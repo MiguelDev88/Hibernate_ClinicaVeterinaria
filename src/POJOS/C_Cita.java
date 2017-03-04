@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package POJOS;
-
 import java.sql.Time;
 import java.util.Date;
 
 
-// @author Migu
+// @author Miguel
 
 public class C_Cita {
     
@@ -18,14 +11,16 @@ public class C_Cita {
     private Date fecha;
     private Time hora;
     private C_Persona familiar;
+    private String asunto;
     
     public C_Cita () {}
     
-    public C_Cita (Date fecha, Time hora, C_Persona familiar){
+    public C_Cita (Date fecha, Time hora, C_Persona familiar, String asunto){
         
         this.fecha=fecha;
         this.hora=hora;
         this.familiar=familiar;
+        this.asunto=asunto;
     }
 
     public int getId() {
@@ -59,7 +54,13 @@ public class C_Cita {
     public void setFamiliar(C_Persona familiar) {
         this.familiar = familiar;
     }
-    
-    
 
+    public String getAsunto() {
+        return asunto;
+    }
+
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
+    
 }

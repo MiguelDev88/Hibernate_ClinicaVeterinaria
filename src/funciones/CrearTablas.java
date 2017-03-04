@@ -5,7 +5,6 @@
  */
 
 package funciones;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -34,6 +33,7 @@ public class CrearTablas {
                     + "PRIMARY KEY (id))"
                     + "ENGINE INNODB;");
             
+            
             sentencia.execute("CREATE TABLE IF NOT EXISTS familiares ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL, "
                     + "direccion VARCHAR(30) NOT NULL, "
@@ -43,6 +43,7 @@ public class CrearTablas {
                     + "  ON UPDATE CASCADE, "
                     + "PRIMARY KEY (id))"
                     + "ENGINE INNODB;");
+            
             
             sentencia.execute("CREATE TABLE IF NOT EXISTS animales ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
@@ -62,6 +63,7 @@ public class CrearTablas {
                     + "  ON UPDATE CASCADE)"
                     + "ENGINE INNODB;");
             
+            
             sentencia.execute("CREATE TABLE IF NOT EXISTS medicamentos ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
                     + "nombre VARCHAR(30) NOT NULL, "
@@ -71,6 +73,7 @@ public class CrearTablas {
                     + "precio FLOAT NOT NULL, "
                     + "PRIMARY KEY (id))"
                     + "ENGINE INNODB;");
+            
             
             sentencia.execute ("CREATE TABLE IF NOT EXISTS vacunas ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
@@ -86,6 +89,20 @@ public class CrearTablas {
                     + "  ON DELETE CASCADE "
                     + "  ON UPDATE CASCADE)"
                     + "ENGINE INNODB;");
+            
+            
+            sentencia.execute("CREATE TABLE IF NOT EXISTS citas ( "
+                    + "familiar INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "fecha DATE NOT NULL, "
+                    + "hora TIME NOT NULL, "
+                    + "asunto TEXT NULL, "
+                    + "PRIMARY KEY(socio,fecha,hora), "
+                    + "CONSTRAINT fk5_familiar "
+                    + " FOREIGN KEY(familiar) REFERENCES familiares(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE)"
+                    + "ENGINE INNODB;");
+
             
             System.out.println("\n - BASE DE DATOS LISTA - \n");
                     
