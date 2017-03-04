@@ -11,5 +11,6 @@
     <mapping resource="Mapeos/Animal.hbm.xml"/>
     <mapping resource="Mapeos/Persona.hbm.xml"/>
     <mapping resource="Mapeos/Medicamento.hbm.xml"/>
+    <mapping resource="Mapeos/Cita.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

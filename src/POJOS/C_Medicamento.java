@@ -1,9 +1,11 @@
 package POJOS;
 
+import java.io.Serializable;
+
 
 // @author Miguel
 
-public class C_Medicamento {
+public class C_Medicamento implements Serializable {
     
     private int id;
     private String nombre;

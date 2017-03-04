@@ -5,9 +5,8 @@
 <hibernate-mapping>
   <class name="POJOS.C_Cita" table="citas">
     <composite-id>
-      <key-many-to-one class="POJOS.C_Familiar"  name="familiar" column="familiar"/>
+      <key-many-to-one class="POJOS.C_Familiar"  name="familiar" column="familiar" lazy="false"/>
       <key-property name="fecha"/>
-      <key-property name="hora"/>
     </composite-id>
     <property name="asunto"/>
   </class>

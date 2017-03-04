@@ -1,4 +1,5 @@
 package POJOS;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -8,7 +9,7 @@ import java.util.Set;
 
 // @author Miguel
 
-public class C_Animal {
+public class C_Animal implements Serializable {
     
     private int id;
     private String nombre;
