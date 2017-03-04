@@ -11,16 +11,22 @@ package POJOS;
 
 public class C_Veterinario extends C_Persona{
     
-    private String NumLicencia;
+    private String numLicencia;
     
     public C_Veterinario () {}
     
     public C_Veterinario (String dni, String nombre, String telefono, String email, String NumLicencia) {
         
         super(dni, nombre, telefono, email);
-        this.NumLicencia=NumLicencia;
+        this.numLicencia=NumLicencia;
     }
-    
-    
+
+    public String getNumLicencia() {
+        return numLicencia;
+    }
+
+    public void setNumLicencia(String numLicencia) {
+        this.numLicencia = numLicencia;
+    }
 
 }

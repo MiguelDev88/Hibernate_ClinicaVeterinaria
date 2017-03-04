@@ -44,6 +44,16 @@ public class CrearTablas {
                     + "PRIMARY KEY (id))"
                     + "ENGINE INNODB;");
             
+            sentencia.execute("CREATE TABLE IF NOT EXISTS veterinarios ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "numLicencia VARCHAR(20) NOT NULL, "
+                    + "CONSTRAINT fk7_veterinario "
+                    + " FOREIGN KEY(id) REFERENCES personas(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE, "
+                    + "PRIMARY KEY (id))"
+                    + "ENGINE INNODB;");
+            
             
             sentencia.execute("CREATE TABLE IF NOT EXISTS animales ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
@@ -63,14 +73,23 @@ public class CrearTablas {
                     + "  ON UPDATE CASCADE)"
                     + "ENGINE INNODB;");
             
-            
-            sentencia.execute("CREATE TABLE IF NOT EXISTS medicamentos ( "
+            sentencia.execute("CREATE TABLE IF NOT EXISTS productos ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
                     + "nombre VARCHAR(30) NOT NULL, "
                     + "tipo VARCHAR(30) NOT NULL, "
+                    + "precio FLOAT NOT NULL, "
+                    + "PRIMARY KEY (id))"
+                    + "ENGINE INNODB;");
+            
+            sentencia.execute("CREATE TABLE IF NOT EXISTS medicamentos ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "clasificacion VARCHAR(30) NOT NULL, "
                     + "principioActivo VARCHAR(30) NULL, "
                     + "dosis VARCHAR(30) NULL, "
-                    + "precio FLOAT NOT NULL, "
+                    + "CONSTRAINT fk8_medicamento "
+                    + " FOREIGN KEY(id) REFERENCES productos(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE, "
                     + "PRIMARY KEY (id))"
                     + "ENGINE INNODB;");
             
@@ -95,9 +114,14 @@ public class CrearTablas {
                     + "familiar INT(5) UNSIGNED ZEROFILL NOT NULL, "
                     + "fecha DATETIME NOT NULL, "
                     + "asunto TEXT NULL, "
+                    + "veterinario INT(5) UNSIGNED ZEROFILL NULL, "
                     + "PRIMARY KEY(familiar,fecha), "
                     + "CONSTRAINT fk5_familiar "
                     + " FOREIGN KEY(familiar) REFERENCES familiares(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE,"
+                    + "CONSTRAINT fk6_veterinario "
+                    + " FOREIGN KEY(veterinario) REFERENCES veterinarios(id) "
                     + "  ON DELETE CASCADE "
                     + "  ON UPDATE CASCADE)"
                     + "ENGINE INNODB;");
