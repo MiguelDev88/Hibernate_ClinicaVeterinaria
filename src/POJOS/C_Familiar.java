@@ -34,8 +34,4 @@ public class C_Familiar extends C_Persona {
         this.direccion = direccion;
     }
     
-    
-    
-    
-
 }

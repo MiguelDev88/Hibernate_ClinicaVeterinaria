@@ -6,15 +6,21 @@
 
 <hibernate-mapping>
     
-    <class name="POJOS.C_Medicamento" table="medicamentos" >
+    <class name="POJOS.C_Producto" table="productos" >
         <id name="id" column="id" >
             <generator class="increment"/>
         </id>
         <property name="nombre" />
         <property name="tipo" />
-        <property name="principioActivo" />
-        <property name="dosis" />
         <property name="precio" />
+    
+    <joined-subclass name="POJOS.C_Medicamento" table="medicamentos" >
+            <key column="id" />
+            <property name="clasificacion" />
+            <property name="principioActivo" />
+            <property name="dosis" />
+    </joined-subclass>
+    
     </class>
     
 </hibernate-mapping>

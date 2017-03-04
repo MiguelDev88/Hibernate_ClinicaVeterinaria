@@ -20,6 +20,11 @@
             <property name="direccion" />
         </joined-subclass>
         
+        <joined-subclass name="POJOS.C_Veterinario" table="veterinarios" >
+            <key column="id" />
+            <property name="numLicencia" />
+        </joined-subclass>
+        
     </class>
     
 </hibernate-mapping>

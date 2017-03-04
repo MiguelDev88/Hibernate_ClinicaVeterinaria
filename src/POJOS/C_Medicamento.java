@@ -1,52 +1,30 @@
 package POJOS;
 
-import java.io.Serializable;
-
 
 // @author Miguel
 
-public class C_Medicamento implements Serializable {
-    
-    private int id;
-    private String nombre;
-    private String tipo;
+public class C_Medicamento extends C_Producto {
+
+    private String clasificacion;
     private String principioActivo;
     private String dosis;
-    private String precio;
     
     public C_Medicamento () {}
     
-    public C_Medicamento (String nombre, String tipo, String principioActivo, String dosis, String precio) {
+    public C_Medicamento (String nombre, String tipo, String principioActivo, String dosis, String precio, String clasificacion) {
         
-        this.nombre=nombre;
-        this.tipo=tipo;
+        super(nombre,tipo,precio);
+        this.clasificacion=clasificacion;
         this.principioActivo=principioActivo;
         this.dosis=dosis;
-        this.precio=precio;
     }
 
-    public int getId() {
-        return id;
+    public String getClasificacion() {
+        return clasificacion;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setClasificacion(String clasificacion) {
+        this.clasificacion = clasificacion;
     }
 
     public String getPrincipioActivo() {
@@ -63,14 +41,6 @@ public class C_Medicamento implements Serializable {
 
     public void setDosis(String dosis) {
         this.dosis = dosis;
-    }
-
-    public String getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(String precio) {
-        this.precio = precio;
     }
     
 }

@@ -10,7 +10,7 @@
     <property name="hibernate.show_sql">true</property>
     <mapping resource="Mapeos/Animal.hbm.xml"/>
     <mapping resource="Mapeos/Persona.hbm.xml"/>
-    <mapping resource="Mapeos/Medicamento.hbm.xml"/>
+    <mapping resource="Mapeos/Producto.hbm.xml"/>
     <mapping resource="Mapeos/Cita.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

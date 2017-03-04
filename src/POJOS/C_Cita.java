@@ -12,6 +12,8 @@ public class C_Cita implements Serializable {
     private Date fecha;
     private C_Persona familiar;
     private String asunto;
+    private C_Veterinario veterinario;
+    
     
     public C_Cita () {}
     
