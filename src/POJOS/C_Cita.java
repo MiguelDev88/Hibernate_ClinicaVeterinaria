@@ -1,6 +1,5 @@
 package POJOS;
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 
 
@@ -56,9 +55,16 @@ public class C_Cita implements Serializable {
         this.asunto = asunto;
     }
 
+    public C_Veterinario getVeterinario() {
+        return veterinario;
+    }
+
+    public void setVeterinario(C_Veterinario veterinario) {
+        this.veterinario = veterinario;
+    }
+    
     @Override
-    public String toString () {
-        
+    public String toString () {       
         return familiar.getNombre();
     }
     
