@@ -33,7 +33,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="panelClientes" min="-2" max="-2" attributes="0"/>
+                      <Component id="panelClientes" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="btnClientes" min="-2" pref="89" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -46,9 +46,10 @@
                           <Component id="btnInventario" min="-2" pref="89" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="btnConfiguracion" min="-2" pref="89" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="80" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -172,7 +173,7 @@
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="scrollTabla" pref="414" max="32767" attributes="0"/>
+                      <Component id="scrollTabla" pref="0" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1238,7 +1239,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="scrollTabla1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="scrollTabla1" alignment="0" pref="715" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="lbNombreVet" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1262,8 +1263,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="panelContactoClientes1" alignment="2" max="32767" attributes="0"/>
-                      <Component id="panelVerClientes1" alignment="2" max="32767" attributes="0"/>
+                      <Component id="panelContactoClientes1" alignment="2" pref="83" max="32767" attributes="0"/>
+                      <Component id="panelVerClientes1" alignment="2" pref="83" max="32767" attributes="0"/>
                       <Component id="panelDatosClientes1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -1272,7 +1273,7 @@
                       <Component id="txtNombreVet" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="scrollTabla1" pref="547" max="32767" attributes="0"/>
+                  <Component id="scrollTabla1" pref="531" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -1314,7 +1315,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnMailCli1" alignment="0" pref="43" max="32767" attributes="0"/>
+                          <Component id="btnMailCli1" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnContactoCli1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1325,7 +1326,11 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnMailCli1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/mensaje.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Enviar Mail"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[93, 23]"/>
                 </Property>
@@ -1335,6 +1340,7 @@
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[93, 23]"/>
                 </Property>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMailCli1ActionPerformed"/>
@@ -1342,7 +1348,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnContactoCli1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/phone.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Contacto"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -1400,17 +1411,32 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnEliminarCli1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/archivo.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnEditarCli1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/archivo-nuevo.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnNuevoCli1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/anadir-pagina-nueva.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoCli1ActionPerformed"/>
@@ -1443,7 +1469,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnVerCli1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCitaCli1" pref="121" max="32767" attributes="0"/>
+                      <Component id="btnCitaCli1" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1464,12 +1490,22 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnVerCli1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/reanudar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#xda;ltimos Diagnosticos"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnCitaCli1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/calendario green.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Crear Cita"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -1537,7 +1573,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="panelCitasList" max="32767" attributes="0"/>
+                      <Component id="panelCitasList" pref="715" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="lbNombreVet1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1549,7 +1585,7 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="panelVerClientes2" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="panelContactoClientes2" pref="198" max="32767" attributes="0"/>
+                          <Component id="panelContactoClientes2" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -1563,7 +1599,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="panelDatosClientes2" alignment="0" max="32767" attributes="0"/>
                       <Component id="panelVerClientes2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="panelContactoClientes2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="panelContactoClientes2" alignment="0" pref="83" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1571,7 +1607,7 @@
                       <Component id="txtNombreVet1" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="panelCitasList" pref="547" max="32767" attributes="0"/>
+                  <Component id="panelCitasList" pref="531" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -1621,7 +1657,11 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnMailCli2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/mensaje.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Enviar Mail"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[93, 23]"/>
                 </Property>
@@ -1631,11 +1671,17 @@
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[93, 23]"/>
                 </Property>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnContactoCli2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/phone.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Contacto"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnContactoCli2ActionPerformed"/>
@@ -1677,7 +1723,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnNuevoCli2" pref="43" max="32767" attributes="0"/>
+                          <Component id="btnNuevoCli2" max="32767" attributes="0"/>
                           <Component id="btnEditarCli2" max="32767" attributes="0"/>
                           <Component id="btnEliminarCli2" max="32767" attributes="0"/>
                       </Group>
@@ -1689,17 +1735,32 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnEliminarCli2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/archivo.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnEditarCli2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/archivo-nuevo.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnNuevoCli2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/anadir-pagina-nueva.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoCli2ActionPerformed"/>
@@ -1731,7 +1792,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnVerCli2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCitaCli2" pref="121" max="32767" attributes="0"/>
+                      <Component id="btnCitaCli2" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1752,12 +1813,22 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnVerCli2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/reanudar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#xda;ltimos Diagnosticos"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnCitaCli2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/drawable/calendario green.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Crear Cita"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -1995,7 +2066,7 @@
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="44" max="32767" attributes="0"/>
+                      <EmptySpace pref="50" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
