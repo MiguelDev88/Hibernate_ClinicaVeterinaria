@@ -67,7 +67,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         //////
         
-        String[] columnasClientes={"Nombre","Tipo","Raza","Familiar"};
+        String[] columnasClientes={"id", "Nombre", "Tipo", "Raza", "Familiar"};
         modeloClientes=new DefaultTableModel(columnasClientes,0);
         tablaClientes.setModel(modeloClientes);
         
@@ -81,6 +81,33 @@ public class MainWindow extends javax.swing.JFrame {
        
         
     }
+    public static void cargarFamiliares() {
+        
+        cbDniFami.removeAllItems();
+        cbDniFami.addItem(" ");
+        try{
+            Session sesion=HibernateUtil.getSession();
+            Iterator familiares = sesion.createCriteria(C_Familiar.class).list().iterator();
+            
+            while(familiares.hasNext())
+            {
+                System.out.println("tengo un familiar");
+                C_Persona familiar=(C_Familiar)familiares.next();
+                
+                cbDniFami.addItem(familiar.getDni());
+                
+                
+                
+            }
+            sesion.close();
+         
+        }catch (Exception e) {
+            
+            System.out.println(e.getMessage());
+        }  
+    }
+    
+    
     
     public static void cargarCitas() {
         
@@ -131,6 +158,7 @@ public class MainWindow extends javax.swing.JFrame {
             {
                 C_Animal animal=(C_Animal)animales.next();
                 
+                int id=animal.getId();
                 String nombre=animal.getNombre();
                 String tipo=animal.getTipo();
                 String raza=animal.getRaza();
@@ -153,7 +181,7 @@ public class MainWindow extends javax.swing.JFrame {
                 }
                 //fin prueba
                */ 
-                Object[] fila= {nombre,tipo,raza,familiar};
+                Object[] fila= {id, nombre,tipo,raza,familiar};
                 modeloClientes.addRow(fila);
             }
             sesion.close();
@@ -177,6 +205,7 @@ public class MainWindow extends javax.swing.JFrame {
             if (paneles.get(i).isVisible()){
                 System.out.println("tengo un panel visible q es"+paneles.get(i));
                 paneles.get(i).getParent().add(panel);
+                //OJOO!! REVISAR exceso de paneles
                 paneles.get(i).setVisible(false);
                 panel.setSize(paneles.get(i).getSize());
                 panel.setLocation(paneles.get(i).getLocation());
@@ -388,6 +417,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnEditarCli.setText("Editar");
         btnEditarCli.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditarCli.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarCliActionPerformed(evt);
+            }
+        });
 
         btnEliminarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/archivo.png"))); // NOI18N
         btnEliminarCli.setText("Eliminar");
@@ -687,6 +721,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         panelDatosFamiliar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Familiar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -742,6 +781,11 @@ public class MainWindow extends javax.swing.JFrame {
         txtNombreFami.setText(" ");
 
         cbDniFami.setEditable(true);
+        cbDniFami.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDniFamiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1678,6 +1722,8 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCliActionPerformed
         
         dialogEditClientes.setVisible(true);
+        dialogEditClientes.setModal(true);
+        cargarFamiliares();
         
         //frameClientes.disable();
         
@@ -1690,7 +1736,7 @@ public class MainWindow extends javax.swing.JFrame {
         Date fecha_nac;
         float peso;
         char sexo;
-        boolean[] vacunas = new boolean[6];
+        //boolean[] vacunas = new boolean[6];
         
         nombreAni=txtNombreCli.getText();
         tipo=cbTipoAni.getSelectedItem().toString();
@@ -1725,7 +1771,8 @@ public class MainWindow extends javax.swing.JFrame {
         C_Familiar familiar= new C_Familiar (dni, Nombre, Telefono, mail, Telefono);
         String vacuna="";
         C_Animal animal=new C_Animal(nombreAni, tipo, raza, sexo, fecha_nac, peso, comentario, familiar);
-        Session sesion=HibernateUtil.getSession();
+        
+        /*
         for(int i=0;i<panelVacunas.getComponentCount();i++){
             if ( ((JCheckBox)panelVacunas.getComponent(i)).isSelected() ){
                 vacuna=((JCheckBox)panelVacunas.getComponent(i)).getText();
@@ -1733,14 +1780,9 @@ public class MainWindow extends javax.swing.JFrame {
                 animal.getVacunas().add(medicamento);//OJO!!!
             }
         }
-        
+        */
 
-        System.out.println("voy a guardar");
-        System.out.println("save");
-        sesion.beginTransaction();
-        sesion.save(animal);
-        sesion.getTransaction().commit();
-        sesion.close();
+        Guardar.guardarAnimal(animal);
         
         
         /*
@@ -1799,7 +1841,6 @@ public class MainWindow extends javax.swing.JFrame {
         //tablaCitas.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
         
         
-        
         //fin renderer
         tablaCitas.setCellSelectionEnabled(true);
         tablaCitas.setModel(modeloCitas);
@@ -1827,6 +1868,68 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         cambiarPanel(panelInventario);
     }//GEN-LAST:event_btnInventarioActionPerformed
+
+    private void btnEditarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCliActionPerformed
+        
+        if(tablaClientes.getSelectedRowCount()>0)
+        {
+            System.out.println("TENGO SELECTED");
+            int id=(int)modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
+            System.out.println("tengo el ID ---> "+id);
+            Session sesion=HibernateUtil.getSession();
+            
+            
+            C_Animal animal=(C_Animal)sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id='"+id+"'").uniqueResult();
+            
+            dialogEditClientes.setVisible(true);
+            dialogEditClientes.setModal(true);
+            cargarFamiliares();
+            
+            txtNombreCli.setText(animal.getNombre());
+            txtChipidCli.setText(animal.getId_chip());
+            cbTipoAni.setSelectedItem(animal.getTipo());
+            cbRazaAni.setSelectedItem(animal.getRaza());
+            
+            txtFechaCli.setText(animal.getFecha_nac().toString());
+            txtPesoCli.setText(""+animal.getPeso());
+            txtComentarioCli.setText(animal.getComentario());
+            
+            //--familiar--
+            
+            cbDniFami.setSelectedItem(animal.getFamiliar().getDni());
+            txtNombreFami.setText(animal.getFamiliar().getNombre());
+            txtTlfFami.setText(animal.getFamiliar().getTelefono());
+            txtMailFami.setText(animal.getFamiliar().getEmail());
+            txtDireFami.setText( ((C_Familiar)animal.getFamiliar()).getDireccion());
+        
+        }
+        else
+            System.out.println("NO TENGO SELECTED    ---"+tablaClientes.getSelectedRowCount());
+        
+    }//GEN-LAST:event_btnEditarCliActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        
+        dialogEditClientes.dispose();
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbDniFamiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDniFamiActionPerformed
+      
+        String dni= cbDniFami.getSelectedItem().toString();
+        
+        Session sesion=HibernateUtil.getSession();
+        C_Persona familiar = (C_Familiar)sesion.createQuery("FROM POJOS.C_Persona f WHERE f.dni='"+dni+"'").uniqueResult();
+        
+        if(familiar != null){
+            txtTlfFami.setText(familiar.getTelefono());
+            txtDireFami.setText(((C_Familiar)familiar).getDireccion());
+            txtMailFami.setText(familiar.getEmail());
+            txtNombreFami.setText(familiar.getNombre());
+            
+        }
+        
+    }//GEN-LAST:event_cbDniFamiActionPerformed
 
     private void btnNuevoCli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCli1ActionPerformed
         // TODO add your handling code here:
@@ -1905,7 +2008,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnVerCli1;
     private javax.swing.JButton btnVerCli2;
     private javax.swing.JButton btnVeterinarios;
-    private javax.swing.JComboBox<String> cbDniFami;
+    private static javax.swing.JComboBox<String> cbDniFami;
     private javax.swing.JComboBox<String> cbRaza;
     private javax.swing.JComboBox<String> cbRazaAni;
     private javax.swing.JComboBox<String> cbTipo;
