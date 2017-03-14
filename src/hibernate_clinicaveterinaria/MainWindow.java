@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -427,6 +428,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnEliminarCli.setText("Eliminar");
         btnEliminarCli.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminarCli.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCliActionPerformed(evt);
+            }
+        });
 
         btnNuevoCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/anadir-pagina-nueva.png"))); // NOI18N
         btnNuevoCli.setText("Nuevo");
@@ -1769,7 +1775,7 @@ public class MainWindow extends javax.swing.JFrame {
         String mail = txtMailFami.getText();
         
         C_Familiar familiar= new C_Familiar (dni, Nombre, Telefono, mail, Telefono);
-        String vacuna="";
+        
         C_Animal animal=new C_Animal(nombreAni, tipo, raza, sexo, fecha_nac, peso, comentario, familiar);
         
         /*
@@ -1783,6 +1789,8 @@ public class MainWindow extends javax.swing.JFrame {
         */
 
         Guardar.guardarAnimal(animal);
+        
+        dialogEditClientes.dispose();
         
         
         /*
@@ -1942,6 +1950,34 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnContactoCli2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactoCli2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnContactoCli2ActionPerformed
+
+    private void btnEliminarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCliActionPerformed
+        
+        if(tablaClientes.getSelectedRowCount()>0)
+        {
+            System.out.println("TENGO SELECTED");
+            int id=(int)modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
+            System.out.println("tengo el ID ---> "+id);
+            //Session sesion=HibernateUtil.getSession();
+            
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "¿Está Seguro que desea eliminar este registro?","Warning",dialogButton);
+            
+            if(dialogResult == JOptionPane.YES_OPTION){
+            
+                Eliminar.EliminarAnimal(id);
+                System.out.println("Eliminado de la BD");
+                
+                modeloClientes.removeRow(tablaClientes.getSelectedRow());
+                System.out.println("eliminado de la tabla");
+                
+            }
+            
+        
+        }
+        else
+            System.out.println("NO TENGO SELECTED    ---"+tablaClientes.getSelectedRowCount());
+    }//GEN-LAST:event_btnEliminarCliActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
