@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import javafx.scene.control.CheckBox;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,11 +38,28 @@ public class MainWindow extends javax.swing.JFrame {
                               "13:00","13:15","13:30","13:45","     ",
                               "17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45",
                               "19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"};
+    static String[] tipos = {"Gato","Perro","Pájaro","Pez","Roedor","Vaca","Cerdo","Caballo"};
     
-    public MainWindow() {
-        
+    static String[] razasPerro = {"Carlino","Akita","Beagle"};
+    static String[] vacunasPerro = {"Parvo","Moquillo","Parainfluenza","Rabia"};
+    static String[] razasGato = {"Siamés","Persa","Bengala"};
+    static String[] vacunasGato = {"Panleucopenia","Rinotraqueitis","Calcivirosis","Leucemia felina"};
+    static String[] razasPajaro = {"Periquito","Agaporni","Loro"};
+    static String[] vacunasPajaro = {"Viruela","Profilaxis","Bronipra","Coripravac"};
+    static String[] razasPez= {"Ángel","Gato","Arcoíris"};
+    static String[] vacunasPez = {"Intra-peritoneal","Anemia","Viremia","Septicemia"};
+    static String[] razasRoedor = {"Cobaya","Hámster","Jerbo"};
+    static String[] vacunasRoedor = {"Mixomatosis","Hemorragia vírica","Nobivac","Rabia"};
+    static String[] razasVaca = {"Holstein","Shorthorn","Hereford"};
+    static String[] vacunasVaca = {"Fiebre aftosa","Rabia","Edema maligno","Septicemia"};
+    static String[] razasCerdo = {"Vietnamita","Duroc","Berkshire"};
+    static String[] vacunasCerdo = {"Pasyeurela","Salmonela","Actinobacillus","Écoli"};
+    static String[] razasCaballo = {"Pura Sangre","Cuarto de Milla","Mustang"};
+    static String[] vacunasCaballo = {"Influenza","Tétanos","Rinoneumonitis","Papera equina"};
+       
+    public MainWindow() {       
         initComponents();
-//
+
         timer = new Timer(50, new ActionListener() {
             int counter = 10;
             public void actionPerformed(ActionEvent ae) {
@@ -55,6 +73,7 @@ public class MainWindow extends javax.swing.JFrame {
                 } 
             }
         });
+
         
         panelClientes.setVisible(true);
         panelCitas.setVisible(false);
@@ -249,8 +268,6 @@ public class MainWindow extends javax.swing.JFrame {
         cbVacuna2 = new javax.swing.JCheckBox();
         cbVacuna3 = new javax.swing.JCheckBox();
         cbVacuna4 = new javax.swing.JCheckBox();
-        cbVacuna5 = new javax.swing.JCheckBox();
-        cbVacuna6 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtComentarioCli = new javax.swing.JTextArea();
         lbComentarioCli = new javax.swing.JLabel();
@@ -777,8 +794,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDatosFamiliarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosFamiliarLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addComponent(lbDireFami)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDireFami, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDatosFamiliarLayout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -806,17 +824,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         panelVacunas.setBorder(javax.swing.BorderFactory.createTitledBorder("Vacunas"));
 
-        cbVacuna1.setText("vac1");
+        cbVacuna1.setText("Panleucopenia");
+        cbVacuna1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVacuna1ActionPerformed(evt);
+            }
+        });
 
-        cbVacuna2.setText("vac2");
+        cbVacuna2.setText("Rinotraqueitis");
 
-        cbVacuna3.setText("vac3");
+        cbVacuna3.setText("Calcivirosis");
 
-        cbVacuna4.setText("vac4");
-
-        cbVacuna5.setText("vac5");
-
-        cbVacuna6.setText("vac6");
+        cbVacuna4.setText("Leucemia felina");
 
         javax.swing.GroupLayout panelVacunasLayout = new javax.swing.GroupLayout(panelVacunas);
         panelVacunas.setLayout(panelVacunasLayout);
@@ -825,18 +844,12 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelVacunasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelVacunasLayout.createSequentialGroup()
-                        .addComponent(cbVacuna1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbVacuna3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbVacuna5))
-                    .addGroup(panelVacunasLayout.createSequentialGroup()
-                        .addComponent(cbVacuna2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbVacuna4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbVacuna6)))
+                    .addComponent(cbVacuna1)
+                    .addComponent(cbVacuna2))
+                .addGap(18, 18, 18)
+                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbVacuna3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbVacuna4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelVacunasLayout.setVerticalGroup(
@@ -844,13 +857,11 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelVacunasLayout.createSequentialGroup()
                 .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbVacuna1)
-                    .addComponent(cbVacuna3)
-                    .addComponent(cbVacuna5))
+                    .addComponent(cbVacuna3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbVacuna2)
-                    .addComponent(cbVacuna4)
-                    .addComponent(cbVacuna6))
+                    .addComponent(cbVacuna4))
                 .addContainerGap())
         );
 
@@ -871,7 +882,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(PanelDatosMedLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelDatosMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
                     .addGroup(PanelDatosMedLayout.createSequentialGroup()
                         .addGroup(PanelDatosMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbComentarioCli)
@@ -883,8 +894,8 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(PanelDatosMedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtFechaCli, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                                     .addComponent(txtPesoCli))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelVacunas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PanelDatosMedLayout.setVerticalGroup(
@@ -916,9 +927,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel3.setText("Sexo:");
 
-        cbTipoAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gato", "Perro", "Ave", "Roedor", "Conejo", "Pez", "Cerdo Vietnamita", "Animal de Granja", "Otro" }));
+        cbTipoAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gato", "Perro", "Pájaro", "Roedor", "Pez", "Cerdo", "Vaca", "Caballo" }));
+        cbTipoAni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoAniActionPerformed(evt);
+            }
+        });
 
-        cbRazaAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbRazaAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Siamés", "Persa", "Bengala" }));
 
         lbTipoAni.setText("Tipo:");
 
@@ -1000,7 +1016,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(dialogEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dialogEditClientesLayout.createSequentialGroup()
                         .addGroup(dialogEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(panelDatosFamiliar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 438, Short.MAX_VALUE)
+                            .addComponent(panelDatosFamiliar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelDatosAnimal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PanelDatosMed, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -1794,6 +1810,83 @@ public class MainWindow extends javax.swing.JFrame {
         cambiarPanel(panelInventario);
     }//GEN-LAST:event_btnInventarioActionPerformed
 
+    private void cbTipoAniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAniActionPerformed
+        cbRazaAni.removeAllItems();
+        byte i;
+        JCheckBox[] listaCB = {cbVacuna1,cbVacuna2,cbVacuna3,cbVacuna4};
+        
+        switch(cbTipoAni.getSelectedItem().toString()){
+            case "Gato":
+                for(i=0;i<razasGato.length;i++){
+                    cbRazaAni.addItem(razasGato[i]);                    
+                }      
+                for(i=0;i<listaCB.length;i++){
+                    listaCB[i].setText(vacunasGato[i]);
+                }
+                break;
+            case "Perro":
+                for(i=0;i<razasPerro.length;i++){
+                    cbRazaAni.addItem(razasPerro[i]);                   
+                }
+                for (i=0;i<listaCB.length;i++){
+                    listaCB[i].setText(vacunasPerro[i]);
+                }
+                break;
+            case "Pájaro":
+                for(i=0;i<razasPajaro.length;i++){
+                    cbRazaAni.addItem(razasPajaro[i]);
+                }
+                for(i=0;i<listaCB.length;i++){
+                    listaCB[i].setText(vacunasPajaro[i]);
+                }
+                break;
+            case "Pez":
+                for(i=0;i<razasPez.length;i++){
+                    cbRazaAni.addItem(razasPez[i]);
+                }
+                for(i=0;i<listaCB.length;i++){
+                    listaCB[i].setText(vacunasPez[i]);
+                }
+                break;
+            case "Roedor":
+                for(i=0;i<razasPerro.length;i++){
+                    cbRazaAni.addItem(razasRoedor[i]);
+                }
+                for(i=0;i<listaCB.length;i++){
+                    listaCB[i].setText(vacunasRoedor[i]);
+                }
+                break;
+            case "Cerdo":
+                for(i=0;i<razasCerdo.length;i++){
+                    cbRazaAni.addItem(razasCerdo[i]);
+                }
+                for(i=0;i<listaCB.length;i++){
+                    listaCB[i].setText(vacunasCerdo[i]);
+                }
+                break;
+            case "Vaca":
+                for(i=0;i<razasVaca.length;i++){
+                    cbRazaAni.addItem(razasVaca[i]);
+                }
+                for(i=0;i<listaCB.length;i++){
+                    listaCB[i].setText(vacunasVaca[i]);
+                }
+                break;
+            case "Caballo":
+                for(i=0;i<razasCaballo.length;i++){
+                    cbRazaAni.addItem(razasCaballo[i]);
+                }
+                for(i=0;i<listaCB.length;i++){
+                    listaCB[i].setText(vacunasCaballo[i]);
+                }
+                break;                       
+        }
+    }//GEN-LAST:event_cbTipoAniActionPerformed
+
+    private void cbVacuna1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVacuna1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbVacuna1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1868,8 +1961,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbVacuna2;
     private javax.swing.JCheckBox cbVacuna3;
     private javax.swing.JCheckBox cbVacuna4;
-    private javax.swing.JCheckBox cbVacuna5;
-    private javax.swing.JCheckBox cbVacuna6;
     public javax.swing.JDialog dialogEditClientes;
     private javax.swing.JFrame frameClientes;
     private javax.swing.JButton jButton1;

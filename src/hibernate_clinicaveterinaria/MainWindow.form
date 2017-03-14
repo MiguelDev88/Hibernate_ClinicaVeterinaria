@@ -598,7 +598,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="panelDatosFamiliar" alignment="0" pref="438" max="32767" attributes="0"/>
+                              <Component id="panelDatosFamiliar" alignment="0" max="32767" attributes="0"/>
                               <Component id="panelDatosAnimal" alignment="0" max="32767" attributes="0"/>
                               <Component id="PanelDatosMed" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -665,8 +665,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="lbDireFami" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="txtDireFami" min="-2" pref="303" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -869,7 +870,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="435" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbComentarioCli" min="-2" max="-2" attributes="0"/>
@@ -885,8 +886,8 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="panelVacunas" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="panelVacunas" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -946,20 +947,13 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cbVacuna1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="cbVacuna3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="cbVacuna5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cbVacuna2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="cbVacuna4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="cbVacuna6" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="cbVacuna1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbVacuna2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbVacuna3" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="cbVacuna4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -971,13 +965,11 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbVacuna1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbVacuna3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbVacuna5" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbVacuna2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbVacuna4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbVacuna6" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -987,32 +979,25 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbVacuna1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="vac1"/>
+                    <Property name="text" type="java.lang.String" value="Panleucopenia"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbVacuna1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbVacuna2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="vac2"/>
+                    <Property name="text" type="java.lang.String" value="Rinotraqueitis"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbVacuna3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="vac3"/>
+                    <Property name="text" type="java.lang.String" value="Calcivirosis"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbVacuna4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="vac4"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="cbVacuna5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="vac5"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="cbVacuna6">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="vac6"/>
+                    <Property name="text" type="java.lang.String" value="Leucemia felina"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1148,19 +1133,21 @@
             <Component class="javax.swing.JComboBox" name="cbTipoAni">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="8">
                     <StringItem index="0" value="Gato"/>
                     <StringItem index="1" value="Perro"/>
-                    <StringItem index="2" value="Ave"/>
+                    <StringItem index="2" value="P&#xe1;jaro"/>
                     <StringItem index="3" value="Roedor"/>
-                    <StringItem index="4" value="Conejo"/>
-                    <StringItem index="5" value="Pez"/>
-                    <StringItem index="6" value="Cerdo Vietnamita"/>
-                    <StringItem index="7" value="Animal de Granja"/>
-                    <StringItem index="8" value="Otro"/>
+                    <StringItem index="4" value="Pez"/>
+                    <StringItem index="5" value="Cerdo"/>
+                    <StringItem index="6" value="Vaca"/>
+                    <StringItem index="7" value="Caballo"/>
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTipoAniActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -1168,11 +1155,10 @@
             <Component class="javax.swing.JComboBox" name="cbRazaAni">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="Siam&#xe9;s"/>
+                    <StringItem index="1" value="Persa"/>
+                    <StringItem index="2" value="Bengala"/>
                   </StringArray>
                 </Property>
               </Properties>
