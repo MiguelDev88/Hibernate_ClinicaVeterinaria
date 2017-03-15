@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package POJOS;
+import java.util.List;
 
 
 // @author Miguel
@@ -14,6 +9,7 @@ public class C_Factura {
     private int id;
     private float importe;
     private C_Familiar cliente;
+    private List productos;
     
     public C_Factura () {}
     

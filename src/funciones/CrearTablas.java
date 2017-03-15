@@ -77,6 +77,7 @@ public class CrearTablas {
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
                     + "nombre VARCHAR(30) NOT NULL, "
                     + "tipo VARCHAR(30) NOT NULL, "
+                    + "descripcion TEXT NOT NULL, "
                     + "precio FLOAT NOT NULL, "
                     + "PRIMARY KEY (id))"
                     + "ENGINE INNODB;");
