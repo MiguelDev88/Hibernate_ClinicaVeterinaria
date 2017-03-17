@@ -20,14 +20,14 @@ public class C_Animal implements Serializable {
     private Date fecha_nac;
     private float peso;
     private String comentario;
-    private C_Persona familiar;
+    private C_Familiar familiar;
     private List historial;
     private Set vacunas;
     
     
     public C_Animal () {}
     
-    public C_Animal (String nombre, String tipo, String raza, char sexo, Date fecha_nac, float peso, String comentario, C_Persona familiar) {
+    public C_Animal (String nombre, String tipo, String raza, char sexo, Date fecha_nac, float peso, String comentario, C_Familiar familiar) {
         
         this.nombre=nombre;
         this.tipo=tipo;
@@ -118,7 +118,7 @@ public class C_Animal implements Serializable {
         return familiar;
     }
 
-    public void setFamiliar(C_Persona familiar) {
+    public void setFamiliar(C_Familiar familiar) {
         this.familiar = familiar;
     }
 

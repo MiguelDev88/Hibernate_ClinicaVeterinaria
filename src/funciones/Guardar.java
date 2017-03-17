@@ -14,7 +14,7 @@ public class Guardar {
         
         Session sesion=HibernateUtil.getSession();
         
-        C_Persona familiar = (C_Familiar)sesion.createQuery("FROM POJOS.C_Persona f WHERE f.dni='"+animal.getFamiliar().getDni()+"'").uniqueResult();
+        C_Familiar familiar = (C_Familiar)sesion.createQuery("FROM POJOS.C_Persona f WHERE f.dni='"+animal.getFamiliar().getDni()+"'").uniqueResult();
 
         if(familiar != null)
             animal.setFamiliar(familiar);

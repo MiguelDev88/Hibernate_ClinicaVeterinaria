@@ -25,13 +25,13 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author Miguel
- */
+
 public class MainWindow extends javax.swing.JFrame {
 
     Timer timer;
@@ -42,6 +42,24 @@ public class MainWindow extends javax.swing.JFrame {
                               "13:00","13:15","13:30","13:45","     ",
                               "17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45",
                               "19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"};
+    static String[] tipos = {"Gato","Perro","Pájaro","Pez","Roedor","Vaca","Cerdo","Caballo"};
+    static String[] razasPerro = {"Carlino","Akita","Beagle"};
+    static String[] vacunasPerro = {"Parvo","Moquillo","Parainfluenza","Rabia"};
+    static String[] razasGato = {"Siamés","Persa","Bengala"};
+    static String[] vacunasGato = {"Panleucopenia","Rinotraqueitis","Calcivirosis","Leucemia felina"};
+    static String[] razasPajaro = {"Periquito","Agaporni","Loro"};
+    static String[] vacunasPajaro = {"Viruela","Profilaxis","Bronipra","Coripravac"};
+    static String[] razasPez= {"Ángel","Gato","Arcoíris"};
+    static String[] vacunasPez = {"Intra-peritoneal","Anemia","Viremia","Septicemia"};
+    static String[] razasRoedor = {"Cobaya","Hámster","Jerbo"};
+    static String[] vacunasRoedor = {"Mixomatosis","Hemorragia vírica","Nobivac","Rabia"};
+    static String[] razasVaca = {"Holstein","Shorthorn","Hereford"};
+    static String[] vacunasVaca = {"Fiebre aftosa","Rabia","Edema maligno","Septicemia"};
+    static String[] razasCerdo = {"Vietnamita","Duroc","Berkshire"};
+    static String[] vacunasCerdo = {"Pasyeurela","Salmonela","Actinobacillus","Écoli"};
+    static String[] razasCaballo = {"Pura Sangre","Cuarto de Milla","Mustang"};
+    static String[] vacunasCaballo = {"Influenza","Tétanos","Rinoneumonitis","Papera equina"};
+    
     
     public MainWindow() {
         
@@ -222,7 +240,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     public static void cargarAnimales(){
-        
+        System.out.println("cargo todo");
         try{
             Session sesion=HibernateUtil.getSession();
             Iterator animales = sesion.createCriteria(C_Animal.class).list().iterator();
@@ -237,28 +255,11 @@ public class MainWindow extends javax.swing.JFrame {
                 String raza=animal.getRaza();
                 String familiar= animal.getFamiliar().getNombre();
                 
-                //prueba
-        /*
-                try{
-                SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
-                Date fecha = parser.parse("2017-03-05 17:30:00");
-                System.out.println("Creando cita para famliar:"+animal.getFamiliar().getNombre());
-                C_Cita pruebacita=new C_Cita(fecha, animal.getFamiliar(), "el perro está enfermo");
-                        System.out.println("tengo la cita para el dia"+pruebacita.getFecha());
-                sesion.beginTransaction();
-                sesion.save(pruebacita);
-                sesion.getTransaction().commit();
-
-                }catch(ParseException e){
-                    System.out.println("MAL PARSE!");
-                }
-                //fin prueba
-               */ 
                 Object[] fila= {id, nombre,tipo,raza,familiar};
                 modeloClientes.addRow(fila);
             }
             sesion.close();
-         
+
         }catch (Exception e) {
             
             System.out.println(e.getMessage());
@@ -314,19 +315,8 @@ public class MainWindow extends javax.swing.JFrame {
         btnMailCli = new javax.swing.JButton();
         btnContactoCli = new javax.swing.JButton();
         panelFiltrosClientes = new javax.swing.JPanel();
-        lbNombre = new javax.swing.JLabel();
-        rbHembra = new javax.swing.JRadioButton();
-        lbTipo = new javax.swing.JLabel();
-        rbMacho = new javax.swing.JRadioButton();
-        cbTipo = new javax.swing.JComboBox<>();
-        lbId = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        lbSexo = new javax.swing.JLabel();
-        lbFamiliar = new javax.swing.JLabel();
-        txtFamiliar = new javax.swing.JTextField();
-        lbRaza = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        cbRaza = new javax.swing.JComboBox<>();
+        txtFiltro = new javax.swing.JTextField();
+        cbFiltro = new javax.swing.JComboBox<>();
         btnDiagnosticos = new javax.swing.JButton();
         rbgSexo = new javax.swing.ButtonGroup();
         panelVeterinarios = new javax.swing.JPanel();
@@ -707,101 +697,37 @@ public class MainWindow extends javax.swing.JFrame {
 
         panelFiltrosClientes.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar Por"));
 
-        lbNombre.setText("Nombre:");
-
-        rbHembra.setText("Hembra");
-
-        lbTipo.setText("Tipo");
-
-        rbMacho.setText("Macho");
-
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lbId.setText("Num Ficha:");
-
-        lbSexo.setText("Sexo:");
-
-        lbFamiliar.setText("Familiar:");
-
-        txtFamiliar.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtFamiliarKeyReleased(evt);
+                txtFiltroKeyReleased(evt);
             }
         });
 
-        lbRaza.setText("Raza");
-
-        cbRaza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Familiar", "Nombre", "Id" }));
+        cbFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelFiltrosClientesLayout = new javax.swing.GroupLayout(panelFiltrosClientes);
         panelFiltrosClientes.setLayout(panelFiltrosClientesLayout);
         panelFiltrosClientesLayout.setHorizontalGroup(
             panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFiltrosClientesLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFiltrosClientesLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbId)
-                    .addComponent(lbNombre)
-                    .addComponent(lbFamiliar))
+                .addComponent(cbFiltro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNombre)
-                    .addComponent(txtFamiliar)
-                    .addComponent(txtId))
-                .addGap(18, 18, 18)
-                .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelFiltrosClientesLayout.createSequentialGroup()
-                        .addComponent(lbTipo)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelFiltrosClientesLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lbRaza)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbSexo)
-                    .addGroup(panelFiltrosClientesLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(rbHembra)
-                        .addGap(8, 8, 8)
-                        .addComponent(rbMacho)))
-                .addGap(7, 7, 7))
+                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panelFiltrosClientesLayout.setVerticalGroup(
             panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFiltrosClientesLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelFiltrosClientesLayout.createSequentialGroup()
-                        .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbFamiliar)
-                            .addComponent(txtFamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbNombre)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(panelFiltrosClientesLayout.createSequentialGroup()
-                            .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbTipo)
-                                .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbRaza)
-                                .addComponent(cbRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(3, 3, 3))
-                        .addGroup(panelFiltrosClientesLayout.createSequentialGroup()
-                            .addComponent(lbSexo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(rbHembra)
-                                .addComponent(rbMacho)))))
-                .addGap(4, 4, 4)
+                .addGap(0, 11, Short.MAX_VALUE)
                 .addGroup(panelFiltrosClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbId)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -834,7 +760,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(panelFiltrosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(scrollTabla)
                 .addContainerGap())
         );
 
@@ -2913,36 +2839,93 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDiagnosticosActionPerformed
 
-    private void txtFamiliarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFamiliarKeyReleased
+    private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
         
         modeloClientes.setRowCount(0);
-         if(txtFamiliar.getText().length()>0)
-         {
-             System.out.println("leng mayor q 0 -->.");
-             String nom=txtFamiliar.getText();
-             System.out.println("voy a buscar num:"+nom);
-             Session sesion=HibernateUtil.getSession();
-             Query qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
-             qry.setString(0, nom+"%");
-             Iterator animales =qry.list().iterator();
-
-
-             System.out.println("ya hice la consulta");
-             while(animales.hasNext())
+        Session sesion=HibernateUtil.getSession();
+        String filtro=txtFiltro.getText();
+        Query qry=null;
+        
+        switch(cbFiltro.getSelectedIndex()){
+            case 0:
+                qry = sesion.createQuery("FROM POJOS.C_Animal a JOIN a.familiar f WHERE f.nombre like ?");
+                
+                qry.setString(0, filtro+"%");
+                break;
+            case 1:
+                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
+                qry.setString(0, filtro+"%");
+                
+                break;
+            case 2:
+                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id like ?");
+                qry.setString(0, filtro);
+                break;
+        }
+        if(qry==null || filtro.length()==0)
+            cargarAnimales();
+        else{
+        
+        Iterator animales =qry.list().iterator();
+        while(animales.hasNext())
              {
-                 System.out.println("tengo un familiar con el dni parecido");
                  C_Animal animal=(C_Animal)animales.next();
                  Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
                  modeloClientes.addRow(fila);
 
              }
-             sesion.close();
-         }
-         else{
-             System.out.println("leng corta");
-             cargarAnimales();
-         }
-    }//GEN-LAST:event_txtFamiliarKeyReleased
+        }
+        
+        
+        sesion.close();
+        
+        
+        
+    }//GEN-LAST:event_cbFiltroActionPerformed
+
+    private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
+        
+        modeloClientes.setRowCount(0);
+        Session sesion=HibernateUtil.getSession();
+        String filtro=txtFiltro.getText();
+        Query qry=null;
+        
+        switch(cbFiltro.getSelectedIndex()){
+            case 0:
+                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar.nombre like 'Miguel'");
+                
+                //qry.setString(0, filtro+"%");
+                break;
+            case 1:
+                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
+                qry.setString(0, filtro+"%");
+                
+                break;
+            case 2:
+                if (filtro.length() < 5)
+                    filtro=String.format("%05d", Integer.parseInt(filtro));
+                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id like ?");
+                qry.setString(0, filtro);
+                break;
+        }
+        if(qry==null || txtFiltro.getText().length()==0)
+            cargarAnimales();
+        else{
+        
+        Iterator animales =qry.list().iterator();
+        while(animales.hasNext())
+             {
+                 C_Animal animal=(C_Animal)animales.next();
+                 Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
+                 modeloClientes.addRow(fila);
+
+             }
+        }
+        
+        
+        sesion.close();
+        
+    }//GEN-LAST:event_txtFiltroKeyReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -3023,9 +3006,8 @@ public class MainWindow extends javax.swing.JFrame {
     private static javax.swing.JComboBox<String> cbCitaMes;
     private javax.swing.JComboBox<String> cbCitaNombreAni;
     private static javax.swing.JComboBox<String> cbDniFami;
-    private javax.swing.JComboBox<String> cbRaza;
+    private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JComboBox<String> cbRazaAni;
-    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JComboBox<String> cbTipoAni;
     private javax.swing.JCheckBox cbVacuna1;
     private javax.swing.JCheckBox cbVacuna2;
@@ -3098,15 +3080,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbDireFami;
     private javax.swing.JLabel lbDniCli;
     private javax.swing.JLabel lbDniCli2;
-    private javax.swing.JLabel lbFamiliar;
     private javax.swing.JLabel lbFechaFactura;
     private javax.swing.JLabel lbFecha_nacAni;
     private javax.swing.JLabel lbIDInv;
-    private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbLogo;
     private javax.swing.JLabel lbMailFami;
     private javax.swing.JLabel lbMailFami5;
-    private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbNombreAni;
     private javax.swing.JLabel lbNombreFami;
     private javax.swing.JLabel lbNombreFami2;
@@ -3115,12 +3094,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbNumFactura;
     private javax.swing.JLabel lbPesoCli;
     private javax.swing.JLabel lbPrecioInv;
-    private javax.swing.JLabel lbRaza;
     private javax.swing.JLabel lbRazaAni;
     private javax.swing.JLabel lbResumenCita;
-    private javax.swing.JLabel lbSexo;
     private javax.swing.JLabel lbStatus;
-    private javax.swing.JLabel lbTipo;
     private javax.swing.JLabel lbTipoAni;
     private javax.swing.JLabel lbTlfFami;
     private javax.swing.JLabel lbTlfFami5;
@@ -3151,8 +3127,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelVerClientes2;
     private javax.swing.JPanel panelVeterinarios;
     private javax.swing.JProgressBar pbLoading;
-    private javax.swing.JRadioButton rbHembra;
-    private javax.swing.JRadioButton rbMacho;
     private javax.swing.ButtonGroup rbgSexo;
     private javax.swing.JScrollPane scrollTabla;
     private javax.swing.JScrollPane scrollTabla1;
@@ -3171,14 +3145,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField txtDireFami;
     private javax.swing.JTextField txtDniFact;
     private javax.swing.JTextField txtFactTlf;
-    private javax.swing.JTextField txtFamiliar;
     private javax.swing.JTextField txtFechaCli;
     private javax.swing.JTextField txtFechaFactura;
+    private static javax.swing.JTextField txtFiltro;
     private javax.swing.JTextField txtIDInv;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtMailFact;
     private javax.swing.JTextField txtMailFami;
-    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreCli;
     private javax.swing.JTextField txtNombreFact;
     private javax.swing.JTextField txtNombreFami;
