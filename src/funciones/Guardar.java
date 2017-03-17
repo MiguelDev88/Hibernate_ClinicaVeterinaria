@@ -1,6 +1,7 @@
 package funciones;
 import POJOS.*;
 import hibernate_clinicaveterinaria.HibernateUtil;
+import java.util.Date;
 import org.hibernate.Session;
 
 /**
@@ -19,10 +20,25 @@ public class Guardar {
         if(familiar != null)
             animal.setFamiliar(familiar);
         
-        System.out.println("voy a guardar");
-        System.out.println("save");
         sesion.beginTransaction();
         sesion.save(animal);
+        sesion.getTransaction().commit();
+        sesion.close();
+        
+    }
+    
+    public static void guardarCita (String nombVeterinario, String idAnimal, Date fecha, String asunto) {
+        
+        Session sesion=HibernateUtil.getSession();
+        
+        C_Veterinario veterinario = (C_Veterinario)sesion.createQuery("FROM POJOS.C_Persona v WHERE v.nombre='"+nombVeterinario+"'").uniqueResult();
+        C_Animal animal = (C_Animal)sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id='"+idAnimal+"'").uniqueResult();
+        
+        
+        C_Cita cita = new C_Cita (fecha, animal, veterinario, asunto);
+        
+        sesion.beginTransaction();
+        sesion.save(cita);
         sesion.getTransaction().commit();
         sesion.close();
         

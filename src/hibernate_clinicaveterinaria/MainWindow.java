@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -134,11 +135,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
          });
         
-        ////prueba
-        
-        
-        
-        ///fin prueba
        
         
     }
@@ -171,22 +167,16 @@ public class MainWindow extends javax.swing.JFrame {
     
     public static void cargarCitasLibres(){
         
-        //Date today=new Date();
         Calendar cal=Calendar.getInstance();
         
         cbCitaDia.removeAllItems();
         cbCitaHora.removeAllItems();
         cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
-
         Date ultimodia=cal.getTime();
         Date today=new Date();
-        
-        System.out.println("hoy->"+today);
-        System.out.println("last->"+ultimodia);
         while(today.before(ultimodia))
         {
             cal.setTime(today);
-            System.out.println("sumo dia"+String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
             cbCitaDia.addItem(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
             cal.add(Calendar.DATE, 1);
             today=cal.getTime();
@@ -454,18 +444,18 @@ public class MainWindow extends javax.swing.JFrame {
         txtCitaNombreFami = new javax.swing.JTextField();
         cbCitaDni = new javax.swing.JComboBox<>();
         panelDatosCita = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
+        panelDatosAniCita = new javax.swing.JPanel();
         lbCitaNom = new javax.swing.JLabel();
         lbCitaTipo = new javax.swing.JLabel();
         lbCitaRaza = new javax.swing.JLabel();
-        lbCitaSexo = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         txtCitaAsunto = new javax.swing.JTextArea();
         lbCitaAsunto = new javax.swing.JLabel();
         txtCitaTipo = new javax.swing.JTextField();
         txtCitaRaza = new javax.swing.JTextField();
-        txtCitaSexo = new javax.swing.JTextField();
         cbCitaNombreAni = new javax.swing.JComboBox<>();
+        lbCitaId = new javax.swing.JLabel();
+        txtCitaId = new javax.swing.JTextField();
         jPanel17 = new javax.swing.JPanel();
         cbCitaDia = new javax.swing.JComboBox<>();
         cbCitaHora = new javax.swing.JComboBox<>();
@@ -475,6 +465,8 @@ public class MainWindow extends javax.swing.JFrame {
         txtResumenCita = new javax.swing.JTextArea();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        cbVetCita = new javax.swing.JComboBox<>();
+        lbVetCita = new javax.swing.JLabel();
         btnCitaAceptar = new javax.swing.JButton();
         btnCitaCancel = new javax.swing.JButton();
         panelDiagnosticos = new javax.swing.JPanel();
@@ -505,7 +497,7 @@ public class MainWindow extends javax.swing.JFrame {
         txEspecie = new javax.swing.JLabel();
         txRaza = new javax.swing.JLabel();
         txSexo = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
+        txFechaNac = new javax.swing.JLabel();
         panelDatosClinicos = new javax.swing.JPanel();
         lbPeso = new javax.swing.JLabel();
         txPeso = new javax.swing.JLabel();
@@ -513,7 +505,7 @@ public class MainWindow extends javax.swing.JFrame {
         txVacunas = new javax.swing.JLabel();
         lbComentarios = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        txComentario = new javax.swing.JTextArea();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -654,6 +646,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnVerCli.setText("Ver Ficha");
         btnVerCli.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnVerCli.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVerCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerCliActionPerformed(evt);
+            }
+        });
 
         btnCitaCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/calendario green.png"))); // NOI18N
         btnCitaCli.setText("Nueva Cita");
@@ -1426,7 +1423,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelFacturasLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 237, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturasLayout.createSequentialGroup()
                                 .addGap(123, 123, 123)
                                 .addComponent(chkConsulta)))))
@@ -2125,15 +2122,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         panelDatosCita.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Cita", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelDatosAniCita.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lbCitaNom.setText("Nombre:");
 
         lbCitaTipo.setText("Tipo:");
 
         lbCitaRaza.setText("Raza:");
-
-        lbCitaSexo.setText("Sexo:");
 
         txtCitaAsunto.setColumns(20);
         txtCitaAsunto.setRows(5);
@@ -2143,49 +2138,53 @@ public class MainWindow extends javax.swing.JFrame {
 
         cbCitaNombreAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
+        lbCitaId.setText("ID:");
+
+        javax.swing.GroupLayout panelDatosAniCitaLayout = new javax.swing.GroupLayout(panelDatosAniCita);
+        panelDatosAniCita.setLayout(panelDatosAniCitaLayout);
+        panelDatosAniCitaLayout.setHorizontalGroup(
+            panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosAniCitaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosAniCitaLayout.createSequentialGroup()
+                        .addComponent(lbCitaAsunto)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelDatosAniCitaLayout.createSequentialGroup()
+                        .addGroup(panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbCitaNom)
-                            .addComponent(lbCitaSexo))
+                            .addComponent(lbCitaId))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCitaSexo)
-                            .addComponent(cbCitaNombreAni, 0, 83, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCitaId)
+                            .addComponent(cbCitaNombreAni, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addGroup(panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbCitaTipo)
                             .addComponent(lbCitaRaza))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCitaRaza)
-                            .addComponent(txtCitaTipo)))
-                    .addComponent(lbCitaAsunto))
+                            .addComponent(txtCitaTipo))))
                 .addContainerGap())
         );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        panelDatosAniCitaLayout.setVerticalGroup(
+            panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosAniCitaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCitaNom)
                     .addComponent(lbCitaTipo)
                     .addComponent(txtCitaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCitaNombreAni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(panelDatosAniCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCitaRaza)
-                    .addComponent(lbCitaSexo)
                     .addComponent(txtCitaRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCitaSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbCitaId)
+                    .addComponent(txtCitaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(lbCitaAsunto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2202,10 +2201,20 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         cbCitaHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCitaHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCitaHoraActionPerformed(evt);
+            }
+        });
 
         lbResumenCita.setText("Resumen Cita:");
 
         cbCitaMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        cbCitaMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCitaMesActionPerformed(evt);
+            }
+        });
 
         txtResumenCita.setEditable(false);
         txtResumenCita.setColumns(20);
@@ -2215,6 +2224,10 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel12.setText("Día:");
 
         jLabel13.setText("Hora:");
+
+        cbVetCita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lbVetCita.setText("Veterinario:");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -2227,32 +2240,38 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addComponent(cbCitaDia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
-                                .addGap(87, 87, 87)))
+                                .addGap(87, 87, 87))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbCitaDia, 0, 232, Short.MAX_VALUE)
+                                    .addGroup(jPanel17Layout.createSequentialGroup()
+                                        .addComponent(lbVetCita)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbVetCita, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)))
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(cbCitaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(lbResumenCita)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cbCitaMes, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbCitaMes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbCitaMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbCitaMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbVetCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVetCita))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCitaDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCitaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2271,19 +2290,24 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelDatosAniCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelDatosCitaLayout.setVerticalGroup(
             panelDatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosCitaLayout.createSequentialGroup()
                 .addGroup(panelDatosCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelDatosAniCita, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         btnCitaAceptar.setText("Aceptar");
+        btnCitaAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCitaAceptarActionPerformed(evt);
+            }
+        });
 
         btnCitaCancel.setText("Cancelar");
 
@@ -2493,7 +2517,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
                         .addComponent(lbFechaNac)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel29)))
+                        .addComponent(txFechaNac)))
                 .addContainerGap(173, Short.MAX_VALUE))
         );
         panelDatosFichaCliLayout.setVerticalGroup(
@@ -2522,7 +2546,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbFechaNac)
-                    .addComponent(jLabel29))
+                    .addComponent(txFechaNac))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2543,10 +2567,10 @@ public class MainWindow extends javax.swing.JFrame {
         lbComentarios.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbComentarios.setText("Comentarios:");
 
-        jTextArea4.setEditable(false);
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane10.setViewportView(jTextArea4);
+        txComentario.setEditable(false);
+        txComentario.setColumns(20);
+        txComentario.setRows(5);
+        jScrollPane10.setViewportView(txComentario);
 
         javax.swing.GroupLayout panelDatosClinicosLayout = new javax.swing.GroupLayout(panelDatosClinicos);
         panelDatosClinicos.setLayout(panelDatosClinicosLayout);
@@ -2924,43 +2948,31 @@ public class MainWindow extends javax.swing.JFrame {
         //PANEL CLIENTES BOTON NUEVA CITA
         if(tablaClientes.getSelectedRowCount()>0)
         {
-            System.out.println("TENGO SELECTED");
             
             int id=(int)modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
-            System.out.println("tengo el ID ---> "+id);
-            Session sesion=HibernateUtil.getSession();
             
-            
-            C_Animal animal=(C_Animal)sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id='"+id+"'").uniqueResult();
+            C_Animal animal = Consultas.recuperarAnimalPorId(id);
             
             dialogEditCitas.setVisible(true);
             dialogEditCitas.setModal(true);
+            dialogEditCitas.setSize(800, 650);
             
-            txtCitaNombreFami.setText(animal.getFamiliar().getNombre());
-            txtCitaTlfFami.setText(animal.getFamiliar().getTelefono());
-            cbCitaDni.setSelectedItem(animal.getFamiliar().getDni());
-            cbCitaNombreAni.removeAllItems();
-            cbCitaNombreAni.addItem(animal.getNombre()); 
+            txtCitaNombreFami.setText(animal.getFamiliar().getNombre()); txtCitaNombreFami.setEditable(false);
+            txtCitaTlfFami.setText(animal.getFamiliar().getTelefono()); txtCitaTlfFami.setEditable(false);
+            cbCitaDni.setSelectedItem(animal.getFamiliar().getDni()); cbCitaDni.setEditable(false);
+            cbCitaNombreAni.removeAllItems(); cbCitaNombreAni.setEditable(false);
+            cbCitaNombreAni.addItem(animal.getNombre()); cbCitaNombreAni.setEditable(false);
+            txtCitaId.setText(String.valueOf(animal.getId())); txtCitaId.setEditable(false);
+
+            txtCitaMailFami.setText(animal.getFamiliar().getEmail()); txtCitaMailFami.setEditable(false);
+            txtCitaTipo.setText(animal.getTipo()); txtCitaTipo.setEditable(false);
             
-            //cbCitaNombreAni.setSelectedItem(animal.getNombre());
-            txtCitaMailFami.setText(animal.getFamiliar().getEmail());
-            txtCitaTipo.setText(animal.getTipo());
-            
-            switch(animal.getSexo()){
-                case 'M':
-                    txtCitaSexo.setText("Macho");
-                    break;
-                case 'H':
-                    txtCitaSexo.setText("Hembra");
-                    break;
-            }
-            txtCitaRaza.setText(animal.getRaza());
+            txtCitaRaza.setText(animal.getRaza()); txtCitaRaza.setEditable(false);
             
             cargarCitasLibres();
+            Consultas.cargarVetCombo(cbVetCita);
         
         }
-        else
-            System.out.println("NO TENGO SELECTED    ---"+tablaClientes.getSelectedRowCount());
     }//GEN-LAST:event_btnCitaCliActionPerformed
 
     private void cbCitaDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCitaDiaActionPerformed
@@ -3265,6 +3277,174 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbTipoAniActionPerformed
 
+    private void btnVerCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerCliActionPerformed
+       
+        
+        if(tablaClientes.getSelectedRowCount()>0)
+        {
+            int id=(int)modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
+            
+            C_Animal animal = Consultas.recuperarAnimalPorId(id);
+            
+            txID.setText(String.valueOf(animal.getId()));
+            txNomb.setText(animal.getNombre());
+            txEspecie.setText(animal.getTipo());
+            txRaza.setText(animal.getRaza());
+            
+            if(animal.getSexo()=='M')
+                txSexo.setText("Macho");
+            else
+                txSexo.setText("Hembra");
+            
+            txFechaNac.setText(String.valueOf(animal.getFecha_nac()));
+            txPeso.setText(String.valueOf(animal.getPeso()));
+            
+            String listaVacunas="";
+            Iterator vacunas=animal.getVacunas().iterator();
+            while(vacunas.hasNext())
+            {
+                C_Medicamento vacuna=(C_Medicamento)vacunas.next();
+                listaVacunas+="  "+vacuna.getNombre();
+            }
+            
+                        
+            txVacunas.setText(listaVacunas);
+            txComentario.setText(animal.getComentario());
+            
+            dialogFichaAnimal.setVisible(true);
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnVerCliActionPerformed
+
+    private void btnCitaAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaAceptarActionPerformed
+        
+        String idAnimal=txtCitaId.getText();
+        String asunto=txtCitaAsunto.getText();
+        String veterinario=cbVetCita.getSelectedItem().toString();
+        
+        
+        Date fecha;
+        Date today=new Date();
+        Calendar calendar = Calendar.getInstance();
+        Time time=Time.valueOf(cbCitaHora.getSelectedItem().toString()+":00");
+
+        
+        calendar.setTime(today);
+        int mes=cbCitaMes.getSelectedIndex();
+        int dia = Integer.parseInt(cbCitaDia.getSelectedItem().toString());
+        int hora=time.getHours();
+        int mins=time.getMinutes();
+
+        
+        
+        calendar.set(Calendar.MONTH, mes);
+        calendar.set(Calendar.DAY_OF_MONTH, dia);
+        calendar.set(Calendar.HOUR_OF_DAY, hora);
+        calendar.set(Calendar.MINUTE, mins);
+        
+        fecha=calendar.getTime();
+        
+        Guardar.guardarCita(veterinario, idAnimal, fecha, asunto);
+        
+        /*
+        if(today.after(calendar.getTime()))
+            System.out.println("today after date!!");
+        else
+            System.out.println("today before the date!!");
+*/
+        
+        
+        
+    }//GEN-LAST:event_btnCitaAceptarActionPerformed
+
+    private void cbCitaMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCitaMesActionPerformed
+        
+        
+        Calendar calendar = Calendar.getInstance();
+        cbCitaDia.removeAllItems();
+        
+        switch(cbCitaMes.getSelectedIndex()){
+            case Calendar.JANUARY:
+                calendar.set(Calendar.MONTH, Calendar.JANUARY);
+                break;
+            case Calendar.FEBRUARY:
+                calendar.set(Calendar.MONTH, Calendar.FEBRUARY);
+                break;
+            case Calendar.MARCH:
+                calendar.set(Calendar.MONTH, Calendar.MARCH);
+                break;
+            case Calendar.APRIL:
+                calendar.set(Calendar.MONTH, Calendar.APRIL);
+                break;
+            case Calendar.MAY:
+                calendar.set(Calendar.MONTH, Calendar.MAY);
+                break;
+            case Calendar.JUNE:
+                calendar.set(Calendar.MONTH, Calendar.JUNE);
+                break;
+            case Calendar.JULY:
+                calendar.set(Calendar.MONTH, Calendar.JULY);
+                break;
+            case Calendar.AUGUST:
+                calendar.set(Calendar.MONTH, Calendar.AUGUST);
+                break;
+            case Calendar.SEPTEMBER:
+                calendar.set(Calendar.MONTH, Calendar.SEPTEMBER);
+                break;
+            case Calendar.OCTOBER:
+                calendar.set(Calendar.MONTH, Calendar.OCTOBER);
+                break;
+            case Calendar.NOVEMBER:
+                calendar.set(Calendar.MONTH, Calendar.NOVEMBER);
+                break;
+            case Calendar.DECEMBER:
+                calendar.set(Calendar.MONTH, Calendar.DECEMBER);
+                break;
+
+        }
+        
+        for(int i=0;i<calendar.getActualMaximum(Calendar.DATE);i++)
+                    cbCitaDia.addItem(""+(i+1));
+        
+        
+    }//GEN-LAST:event_cbCitaMesActionPerformed
+
+    private void cbCitaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCitaHoraActionPerformed
+        
+        try{
+            String idAnimal=txtCitaId.getText();
+            String asunto=txtCitaAsunto.getText();
+            String veterinario=cbVetCita.getSelectedItem().toString();
+
+
+            Date fecha;
+            Date today=new Date();
+            Calendar calendar = Calendar.getInstance();
+            Time time=Time.valueOf(cbCitaHora.getSelectedItem().toString()+":00");
+
+
+            calendar.setTime(today);
+            int mes=cbCitaMes.getSelectedIndex();
+            int dia = Integer.parseInt(cbCitaDia.getSelectedItem().toString());
+            int hora=time.getHours();
+            int mins=time.getMinutes();
+
+
+
+            calendar.set(Calendar.MONTH, mes);
+            calendar.set(Calendar.DAY_OF_MONTH, dia);
+            calendar.set(Calendar.HOUR_OF_DAY, hora);
+            calendar.set(Calendar.MINUTE, mins);
+
+            fecha=calendar.getTime();
+
+            txtResumenCita.setText("cita para el:    "+fecha.toString());
+        }catch(Exception e){}
+        
+    }//GEN-LAST:event_cbCitaHoraActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -3353,6 +3533,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbVacuna4;
     private javax.swing.JCheckBox cbVacuna5;
     private javax.swing.JCheckBox cbVacuna6;
+    private javax.swing.JComboBox<String> cbVetCita;
     private javax.swing.JCheckBox chkConsulta;
     private javax.swing.JDialog dialogEditCitas;
     public javax.swing.JDialog dialogEditClientes;
@@ -3375,7 +3556,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3388,7 +3568,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -3411,12 +3590,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTree jTree1;
     private javax.swing.JLabel lbCitaAsunto;
+    private javax.swing.JLabel lbCitaId;
     private javax.swing.JLabel lbCitaNom;
     private javax.swing.JLabel lbCitaRaza;
-    private javax.swing.JLabel lbCitaSexo;
     private javax.swing.JLabel lbCitaTipo;
     private javax.swing.JLabel lbComentarioCli;
     private javax.swing.JLabel lbComentarios;
@@ -3452,6 +3630,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbTlfFami;
     private javax.swing.JLabel lbTlfFami5;
     private javax.swing.JLabel lbVacunas;
+    private javax.swing.JLabel lbVetCita;
     private javax.swing.JRadioButton newRbHembra;
     private javax.swing.JRadioButton newRbMacho;
     private javax.swing.JPanel panelCitas;
@@ -3460,6 +3639,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelContactoClientes;
     private javax.swing.JPanel panelContactoClientes1;
     private javax.swing.JPanel panelContactoClientes2;
+    private javax.swing.JPanel panelDatosAniCita;
     private javax.swing.JPanel panelDatosAnimal;
     private javax.swing.JPanel panelDatosCita;
     private javax.swing.JPanel panelDatosClientes;
@@ -3487,7 +3667,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable tablaCitas;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
+    private javax.swing.JTextArea txComentario;
     private javax.swing.JLabel txEspecie;
+    private javax.swing.JLabel txFechaNac;
     private javax.swing.JLabel txID;
     private javax.swing.JLabel txNomb;
     private javax.swing.JLabel txPeso;
@@ -3496,10 +3678,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel txVacunas;
     private javax.swing.JTextField txtChipidCli;
     private javax.swing.JTextArea txtCitaAsunto;
+    private javax.swing.JTextField txtCitaId;
     private javax.swing.JTextField txtCitaMailFami;
     private javax.swing.JTextField txtCitaNombreFami;
     private javax.swing.JTextField txtCitaRaza;
-    private javax.swing.JTextField txtCitaSexo;
     private javax.swing.JTextField txtCitaTipo;
     private javax.swing.JTextField txtCitaTlfFami;
     private javax.swing.JTextArea txtComentarioCli;

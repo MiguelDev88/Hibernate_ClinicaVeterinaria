@@ -1,6 +1,5 @@
 package POJOS;
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 
 
@@ -10,17 +9,18 @@ public class C_Cita implements Serializable {
     
     private int id;
     private Date fecha;
-    private C_Persona familiar;
+    private C_Animal animal;
     private String asunto;
     private C_Veterinario veterinario;
     
     
     public C_Cita () {}
     
-    public C_Cita (Date fecha, C_Persona familiar, String asunto){
+    public C_Cita (Date fecha, C_Animal animal,C_Veterinario veterinario, String asunto){
         
         this.fecha=fecha;
-        this.familiar=familiar;
+        this.animal=animal;
+        this.veterinario=veterinario;
         this.asunto=asunto;
     }
 
@@ -40,12 +40,12 @@ public class C_Cita implements Serializable {
         this.fecha = fecha;
     }
 
-    public C_Persona getFamiliar() {
-        return familiar;
+    public C_Animal getAnimal() {
+        return animal;
     }
 
-    public void setFamiliar(C_Persona familiar) {
-        this.familiar = familiar;
+    public void setanimal(C_Animal animal) {
+        this.animal=animal;
     }
 
     public String getAsunto() {
@@ -59,7 +59,15 @@ public class C_Cita implements Serializable {
     @Override
     public String toString () {
         
-        return familiar.getNombre();
+        return animal.getNombre();
+    }
+
+    public C_Veterinario getVeterinario() {
+        return veterinario;
+    }
+
+    public void setVeterinario(C_Veterinario veterinario) {
+        this.veterinario = veterinario;
     }
     
 }
