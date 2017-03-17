@@ -491,6 +491,29 @@ public class MainWindow extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
+        dialogFichaAnimal = new javax.swing.JDialog();
+        lbFotoPerfil = new javax.swing.JLabel();
+        panelDatosFichaCli = new javax.swing.JPanel();
+        lbID = new javax.swing.JLabel();
+        lbNomb = new javax.swing.JLabel();
+        lbEspecie = new javax.swing.JLabel();
+        lbRaza = new javax.swing.JLabel();
+        lbSexo = new javax.swing.JLabel();
+        lbFechaNac = new javax.swing.JLabel();
+        txID = new javax.swing.JLabel();
+        txNomb = new javax.swing.JLabel();
+        txEspecie = new javax.swing.JLabel();
+        txRaza = new javax.swing.JLabel();
+        txSexo = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        panelDatosClinicos = new javax.swing.JPanel();
+        lbPeso = new javax.swing.JLabel();
+        txPeso = new javax.swing.JLabel();
+        lbVacunas = new javax.swing.JLabel();
+        txVacunas = new javax.swing.JLabel();
+        lbComentarios = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -2411,6 +2434,186 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        dialogFichaAnimal.setMaximumSize(new java.awt.Dimension(532, 475));
+        dialogFichaAnimal.setMinimumSize(new java.awt.Dimension(532, 475));
+        dialogFichaAnimal.setModal(true);
+        dialogFichaAnimal.setPreferredSize(new java.awt.Dimension(532, 475));
+
+        lbFotoPerfil.setBackground(new java.awt.Color(255, 255, 255));
+        lbFotoPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/placeHolder.png"))); // NOI18N
+        lbFotoPerfil.setOpaque(true);
+
+        panelDatosFichaCli.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos básicos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+
+        lbID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbID.setText("ID:");
+
+        lbNomb.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbNomb.setText("Nombre:");
+
+        lbEspecie.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbEspecie.setText("Especie:");
+
+        lbRaza.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbRaza.setText("Raza:");
+
+        lbSexo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbSexo.setText("Sexo:");
+
+        lbFechaNac.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbFechaNac.setText("Fecha de nacimiento:");
+
+        javax.swing.GroupLayout panelDatosFichaCliLayout = new javax.swing.GroupLayout(panelDatosFichaCli);
+        panelDatosFichaCli.setLayout(panelDatosFichaCliLayout);
+        panelDatosFichaCliLayout.setHorizontalGroup(
+            panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
+                        .addComponent(lbID)
+                        .addGap(18, 18, 18)
+                        .addComponent(txID))
+                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
+                        .addComponent(lbNomb)
+                        .addGap(18, 18, 18)
+                        .addComponent(txNomb))
+                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
+                        .addComponent(lbEspecie)
+                        .addGap(18, 18, 18)
+                        .addComponent(txEspecie))
+                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
+                        .addComponent(lbRaza)
+                        .addGap(18, 18, 18)
+                        .addComponent(txRaza))
+                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
+                        .addComponent(lbSexo)
+                        .addGap(18, 18, 18)
+                        .addComponent(txSexo))
+                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
+                        .addComponent(lbFechaNac)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel29)))
+                .addContainerGap(173, Short.MAX_VALUE))
+        );
+        panelDatosFichaCliLayout.setVerticalGroup(
+            panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbID)
+                    .addComponent(txID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNomb)
+                    .addComponent(txNomb))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbEspecie)
+                    .addComponent(txEspecie))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbRaza)
+                    .addComponent(txRaza))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbSexo)
+                    .addComponent(txSexo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbFechaNac)
+                    .addComponent(jLabel29))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lbID.getAccessibleContext().setAccessibleName("lbID");
+        lbID.getAccessibleContext().setAccessibleDescription("");
+        lbNomb.getAccessibleContext().setAccessibleName("lbNom");
+        lbEspecie.getAccessibleContext().setAccessibleName("lbEspecie");
+        lbRaza.getAccessibleContext().setAccessibleName("lbRaza");
+
+        panelDatosClinicos.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos clínicos"));
+
+        lbPeso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbPeso.setText("Ultimo peso:");
+
+        lbVacunas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbVacunas.setText("Vacunas:");
+
+        lbComentarios.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbComentarios.setText("Comentarios:");
+
+        jTextArea4.setEditable(false);
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jScrollPane10.setViewportView(jTextArea4);
+
+        javax.swing.GroupLayout panelDatosClinicosLayout = new javax.swing.GroupLayout(panelDatosClinicos);
+        panelDatosClinicos.setLayout(panelDatosClinicosLayout);
+        panelDatosClinicosLayout.setHorizontalGroup(
+            panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosClinicosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10)
+                    .addGroup(panelDatosClinicosLayout.createSequentialGroup()
+                        .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDatosClinicosLayout.createSequentialGroup()
+                                .addComponent(lbPeso)
+                                .addGap(18, 18, 18)
+                                .addComponent(txPeso))
+                            .addGroup(panelDatosClinicosLayout.createSequentialGroup()
+                                .addComponent(lbVacunas)
+                                .addGap(18, 18, 18)
+                                .addComponent(txVacunas))
+                            .addComponent(lbComentarios))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelDatosClinicosLayout.setVerticalGroup(
+            panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosClinicosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPeso)
+                    .addComponent(txPeso))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbVacunas)
+                    .addComponent(txVacunas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbComentarios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout dialogFichaAnimalLayout = new javax.swing.GroupLayout(dialogFichaAnimal.getContentPane());
+        dialogFichaAnimal.getContentPane().setLayout(dialogFichaAnimalLayout);
+        dialogFichaAnimalLayout.setHorizontalGroup(
+            dialogFichaAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogFichaAnimalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogFichaAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDatosClinicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(dialogFichaAnimalLayout.createSequentialGroup()
+                        .addComponent(lbFotoPerfil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelDatosFichaCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        dialogFichaAnimalLayout.setVerticalGroup(
+            dialogFichaAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogFichaAnimalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogFichaAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelDatosFichaCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbFotoPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelDatosClinicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -3153,6 +3356,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkConsulta;
     private javax.swing.JDialog dialogEditCitas;
     public javax.swing.JDialog dialogEditClientes;
+    private javax.swing.JDialog dialogFichaAnimal;
     private javax.swing.JFrame frameClientes;
     private javax.swing.JLabel imgProducto;
     private javax.swing.JButton jButton1;
@@ -3171,6 +3375,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3194,6 +3399,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -3205,6 +3411,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTree jTree1;
     private javax.swing.JLabel lbCitaAsunto;
     private javax.swing.JLabel lbCitaNom;
@@ -3212,29 +3419,39 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbCitaSexo;
     private javax.swing.JLabel lbCitaTipo;
     private javax.swing.JLabel lbComentarioCli;
+    private javax.swing.JLabel lbComentarios;
     private javax.swing.JLabel lbDireFami;
     private javax.swing.JLabel lbDniCli;
     private javax.swing.JLabel lbDniCli2;
+    private javax.swing.JLabel lbEspecie;
     private javax.swing.JLabel lbFechaFactura;
+    private javax.swing.JLabel lbFechaNac;
     private javax.swing.JLabel lbFecha_nacAni;
+    private javax.swing.JLabel lbFotoPerfil;
+    private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbIDInv;
     private javax.swing.JLabel lbLogo;
     private javax.swing.JLabel lbMailFami;
     private javax.swing.JLabel lbMailFami5;
+    private javax.swing.JLabel lbNomb;
     private javax.swing.JLabel lbNombreAni;
     private javax.swing.JLabel lbNombreFami;
     private javax.swing.JLabel lbNombreFami2;
     private javax.swing.JLabel lbNombreVet;
     private javax.swing.JLabel lbNombreVet1;
     private javax.swing.JLabel lbNumFactura;
+    private javax.swing.JLabel lbPeso;
     private javax.swing.JLabel lbPesoCli;
     private javax.swing.JLabel lbPrecioInv;
+    private javax.swing.JLabel lbRaza;
     private javax.swing.JLabel lbRazaAni;
     private javax.swing.JLabel lbResumenCita;
+    private javax.swing.JLabel lbSexo;
     private javax.swing.JLabel lbStatus;
     private javax.swing.JLabel lbTipoAni;
     private javax.swing.JLabel lbTlfFami;
     private javax.swing.JLabel lbTlfFami5;
+    private javax.swing.JLabel lbVacunas;
     private javax.swing.JRadioButton newRbHembra;
     private javax.swing.JRadioButton newRbMacho;
     private javax.swing.JPanel panelCitas;
@@ -3249,9 +3466,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelDatosClientes1;
     private javax.swing.JPanel panelDatosClientes2;
     private javax.swing.JPanel panelDatosClientes3;
+    private javax.swing.JPanel panelDatosClinicos;
     private javax.swing.JPanel panelDatosFacturas;
     private javax.swing.JPanel panelDatosFamiliar;
     private javax.swing.JPanel panelDatosFamiliar5;
+    private javax.swing.JPanel panelDatosFichaCli;
     private javax.swing.JPanel panelDiagnosticos;
     private javax.swing.JPanel panelFacturas;
     private javax.swing.JPanel panelFiltrosClientes;
@@ -3268,6 +3487,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable tablaCitas;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
+    private javax.swing.JLabel txEspecie;
+    private javax.swing.JLabel txID;
+    private javax.swing.JLabel txNomb;
+    private javax.swing.JLabel txPeso;
+    private javax.swing.JLabel txRaza;
+    private javax.swing.JLabel txSexo;
+    private javax.swing.JLabel txVacunas;
     private javax.swing.JTextField txtChipidCli;
     private javax.swing.JTextArea txtCitaAsunto;
     private javax.swing.JTextField txtCitaMailFami;
