@@ -1,6 +1,7 @@
 package hibernate_clinicaveterinaria;
 import POJOS.*;
 import funciones.*;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -46,7 +47,7 @@ public class MainWindow extends javax.swing.JFrame {
     static String[] razasPerro = {"Carlino","Akita","Beagle"};
     static String[] vacunasPerro = {"Parvo","Moquillo","Parainfluenza","Rabia"};
     static String[] razasGato = {"Siamés","Persa","Bengala"};
-    static String[] vacunasGato = {"Panleucopenia","Rinotraqueitis","Calcivirosis","Leucemia felina"};
+    static String[] vacunasGato = {"Tri_Vírica","Panleucopenia","Rinotraqueitis","Calcivirosis","Leucemia felina","Clamidias"};
     static String[] razasPajaro = {"Periquito","Agaporni","Loro"};
     static String[] vacunasPajaro = {"Viruela","Profilaxis","Bronipra","Coripravac"};
     static String[] razasPez= {"Ángel","Gato","Arcoíris"};
@@ -191,8 +192,8 @@ public class MainWindow extends javax.swing.JFrame {
             today=cal.getTime();
         }
         
-        for(int i=0;i<horas.length;i++){
-            cbCitaHora.addItem(horas[i]);
+        for (String hora : horas) {
+            cbCitaHora.addItem(hora);
         }
         
         cbCitaMes.setSelectedIndex(cal.get(Calendar.MONTH));
@@ -1884,6 +1885,11 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel3.setText("Sexo:");
 
         cbTipoAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gato", "Perro", "Ave", "Roedor", "Conejo", "Pez", "Cerdo Vietnamita", "Animal de Granja", "Otro" }));
+        cbTipoAni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoAniActionPerformed(evt);
+            }
+        });
 
         cbRazaAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -2451,9 +2457,21 @@ public class MainWindow extends javax.swing.JFrame {
         
         dialogEditClientes.setVisible(true);
         dialogEditClientes.setModal(true);
-        cargarFamiliares();
+        cbTipoAni.removeAllItems();
+        cbRazaAni.removeAllItems();
         
-        //frameClientes.disable();
+        for (String tipo : tipos) {
+            cbTipoAni.addItem(tipo);
+        }
+        
+        for (String rGato : razasGato) {
+            cbRazaAni.addItem(rGato);
+        }
+        Component[] vacunas= panelVacunas.getComponents();
+        for (int i=0;i<vacunasGato.length;i++) {
+            ((JCheckBox)vacunas[i]).setText(vacunasGato[i]);
+        }
+        
         
         
     }//GEN-LAST:event_btnNuevoCliActionPerformed
@@ -2464,7 +2482,6 @@ public class MainWindow extends javax.swing.JFrame {
         Date fecha_nac;
         float peso;
         char sexo;
-        //boolean[] vacunas = new boolean[6];
         
         nombreAni=txtNombreCli.getText();
         tipo=cbTipoAni.getSelectedItem().toString();
@@ -2500,28 +2517,13 @@ public class MainWindow extends javax.swing.JFrame {
         
         C_Animal animal=new C_Animal(nombreAni, tipo, raza, sexo, fecha_nac, peso, comentario, familiar);
         
-        /*
-        for(int i=0;i<panelVacunas.getComponentCount();i++){
-            if ( ((JCheckBox)panelVacunas.getComponent(i)).isSelected() ){
-                vacuna=((JCheckBox)panelVacunas.getComponent(i)).getText();
-                C_Medicamento medicamento=(C_Medicamento)sesion.createQuery("FROM POJOS.C_Medicamento m WHERE m.nombre='"+vacuna+"' AND m.tipo='vacuna' ").uniqueResult();
-                animal.getVacunas().add(medicamento);//OJO!!!
-            }
-        }
-        */
 
         Guardar.guardarAnimal(animal);
         
         dialogEditClientes.dispose();
         
         
-        /*
-        /////
-        for(int i=0;i<panelVacunas.getComponentCount();i++){
-            if ( ((JCheckBox)panelVacunas.getComponent(i)).isSelected() )
-                animal.getVacunas().add(i);//OJO!!!
-        }
-        */
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnNuevoCli2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCli2ActionPerformed
@@ -2531,16 +2533,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
         
         cambiarPanel(panelCitas);
-        /*
-        Date today=new Date();
-        Session sesion=HibernateUtil.getSession();
-        Iterator citas=sesion.createQuery("FROM POJOS.C_Cita c WHERE c.fecha > '"+today+"'").list().iterator();
-        List citasDiaActual= new LinkedList<C_Cita>();
-        while(citas.hasNext()){
-            System.out.println("tengo citas");
-            C_Cita cita =(C_Cita) citas.next();
-            
-        }*/
+
         Calendar calendar=Calendar.getInstance();
         String[] columnasCitas=new String[7];
         switch(calendar.get(Calendar.DAY_OF_WEEK)){
@@ -2567,15 +2560,6 @@ public class MainWindow extends javax.swing.JFrame {
                 break;
             
         }
-        
-        
-        
-        
-//        String[] filaCitas = {"9:00","9:15","9:30","9:45","10:00","10:15","10:30","10:45",
-//                              "11:00","11:15","11:30","11:45","12:00","12:15","12:30","12:45",
-//                              "13:00","13:15","13:30","13:45","     ",
-//                              "17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45",
-//                              "19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"};
         
         for (int i=0;i<horas.length;i++){
             citas[i][0]=horas[i];
@@ -2844,40 +2828,67 @@ public class MainWindow extends javax.swing.JFrame {
         modeloClientes.setRowCount(0);
         Session sesion=HibernateUtil.getSession();
         String filtro=txtFiltro.getText();
-        Query qry=null;
+        Query qry;
+        Iterator animales;
         
-        switch(cbFiltro.getSelectedIndex()){
-            case 0:
-                qry = sesion.createQuery("FROM POJOS.C_Animal a JOIN a.familiar f WHERE f.nombre like ?");
-                
-                qry.setString(0, filtro+"%");
-                break;
-            case 1:
-                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
-                qry.setString(0, filtro+"%");
-                
-                break;
-            case 2:
-                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id like ?");
-                qry.setString(0, filtro);
-                break;
-        }
-        if(qry==null || filtro.length()==0)
+        if(txtFiltro.getText().length()==0)
             cargarAnimales();
-        else{
-        
-        Iterator animales =qry.list().iterator();
-        while(animales.hasNext())
-             {
-                 C_Animal animal=(C_Animal)animales.next();
-                 Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
-                 modeloClientes.addRow(fila);
+        else
+        {
+            switch(cbFiltro.getSelectedIndex()){
+                case 0:
+                    //qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar.nombre like 'Miguel'");
+                    System.out.println("busco por "+filtro);
+                    qry = sesion.createQuery("FROM POJOS.C_Persona f WHERE f.nombre like ?");
+                    qry.setString(0, filtro+"%");
+                    Iterator familiares = qry.list().iterator();
+                    while(familiares.hasNext())
+                    {
+                        System.out.println("algo hay");
+                        C_Familiar familiar=(C_Familiar)familiares.next();
+                        System.out.println("tengo a un familiar "+familiar.getNombre());
+                        filtro=String.format("%05d", familiar.getId());
+                        qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar = ?");
+                        qry.setString(0, filtro);
+                        animales =qry.list().iterator();
+                        while(animales.hasNext())
+                        {
+                            C_Animal animal=(C_Animal)animales.next();
+                            System.out.println("tengo a un animal"+animal.getNombre());
+                            Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
+                            modeloClientes.addRow(fila);
 
-             }
+                        }
+                    }
+                    break;
+                case 1:
+                    qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
+                    qry.setString(0, filtro+"%");
+                    animales =qry.list().iterator();
+                    while(animales.hasNext())
+                    {
+                        C_Animal animal=(C_Animal)animales.next();
+                        Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
+                        modeloClientes.addRow(fila);
+
+                    }
+                    break;
+                case 2:
+                    if (filtro.length() < 5)
+                        filtro=String.format("%05d", Integer.parseInt(filtro));
+                    qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id like ?");
+                    qry.setString(0, filtro);
+                    animales =qry.list().iterator();
+                    while(animales.hasNext())
+                    {
+                        C_Animal animal=(C_Animal)animales.next();
+                        Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
+                        modeloClientes.addRow(fila);
+
+                    }
+                    break;
+            }
         }
-        
-        
-        sesion.close();
         
         
         
@@ -2888,44 +2899,168 @@ public class MainWindow extends javax.swing.JFrame {
         modeloClientes.setRowCount(0);
         Session sesion=HibernateUtil.getSession();
         String filtro=txtFiltro.getText();
-        Query qry=null;
+        Query qry;
+        Iterator animales;
         
-        switch(cbFiltro.getSelectedIndex()){
-            case 0:
-                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar.nombre like 'Miguel'");
-                
-                //qry.setString(0, filtro+"%");
-                break;
-            case 1:
-                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
-                qry.setString(0, filtro+"%");
-                
-                break;
-            case 2:
-                if (filtro.length() < 5)
-                    filtro=String.format("%05d", Integer.parseInt(filtro));
-                qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id like ?");
-                qry.setString(0, filtro);
-                break;
-        }
-        if(qry==null || txtFiltro.getText().length()==0)
+        if(txtFiltro.getText().length()==0)
             cargarAnimales();
-        else{
-        
-        Iterator animales =qry.list().iterator();
-        while(animales.hasNext())
-             {
-                 C_Animal animal=(C_Animal)animales.next();
-                 Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
-                 modeloClientes.addRow(fila);
+        else
+        {
+            switch(cbFiltro.getSelectedIndex()){
+                case 0:
+                    //qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar.nombre like 'Miguel'");
+                    System.out.println("busco por "+filtro);
+                    qry = sesion.createQuery("FROM POJOS.C_Persona f WHERE f.nombre like ?");
+                    qry.setString(0, filtro+"%");
+                    Iterator familiares = qry.list().iterator();
+                    while(familiares.hasNext())
+                    {
+                        System.out.println("algo hay");
+                        C_Familiar familiar=(C_Familiar)familiares.next();
+                        System.out.println("tengo a un familiar "+familiar.getNombre());
+                        filtro=String.format("%05d", familiar.getId());
+                        qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar = ?");
+                        qry.setString(0, filtro);
+                        animales =qry.list().iterator();
+                        while(animales.hasNext())
+                        {
+                            C_Animal animal=(C_Animal)animales.next();
+                            System.out.println("tengo a un animal"+animal.getNombre());
+                            Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
+                            modeloClientes.addRow(fila);
 
-             }
+                        }
+                    }
+                    break;
+                case 1:
+                    qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
+                    qry.setString(0, filtro+"%");
+                    animales =qry.list().iterator();
+                    while(animales.hasNext())
+                    {
+                        C_Animal animal=(C_Animal)animales.next();
+                        Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
+                        modeloClientes.addRow(fila);
+
+                    }
+                    break;
+                case 2:
+                    if (filtro.length() < 5)
+                        filtro=String.format("%05d", Integer.parseInt(filtro));
+                    qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id like ?");
+                    qry.setString(0, filtro);
+                    animales =qry.list().iterator();
+                    while(animales.hasNext())
+                    {
+                        C_Animal animal=(C_Animal)animales.next();
+                        Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
+                        modeloClientes.addRow(fila);
+
+                    }
+                    break;
+            }
         }
+
         
         
         sesion.close();
         
     }//GEN-LAST:event_txtFiltroKeyReleased
+
+    private void cbTipoAniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAniActionPerformed
+        
+        cbRazaAni.removeAllItems();
+        
+        Component[] vacunas= panelVacunas.getComponents();
+        for (int i=0;i<vacunasGato.length;i++) {
+            ((JCheckBox)vacunas[i]).setText(vacunasGato[i]);
+        }
+        switch(cbTipoAni.getSelectedIndex()){
+            case 0:
+                for (String raza : razasGato) 
+                    cbRazaAni.addItem(raza);
+                cbVacuna1.setText(vacunasGato[0]); cbVacuna1.setVisible(true);
+                cbVacuna2.setText(vacunasGato[1]); cbVacuna2.setVisible(true);
+                cbVacuna3.setText(vacunasGato[2]); cbVacuna3.setVisible(true);
+                cbVacuna4.setText(vacunasGato[3]); cbVacuna4.setVisible(true);
+                cbVacuna5.setText(vacunasGato[4]); cbVacuna5.setVisible(true);
+                cbVacuna6.setText(vacunasGato[5]); cbVacuna6.setVisible(true);
+                break;
+            case 1:
+                for (String raza : razasPerro) 
+                    cbRazaAni.addItem(raza);
+                cbVacuna1.setText(vacunasPerro[0]); cbVacuna1.setVisible(true);
+                cbVacuna2.setText(vacunasPerro[1]); cbVacuna2.setVisible(true);
+                cbVacuna3.setText(vacunasPerro[2]); cbVacuna3.setVisible(true);
+                cbVacuna4.setText(vacunasPerro[3]); cbVacuna4.setVisible(true);
+                cbVacuna5.setVisible(false);
+                cbVacuna6.setVisible(false);
+                break;
+            case 2:
+                for (String raza : razasPajaro) 
+                    cbRazaAni.addItem(raza);
+                cbVacuna1.setText(vacunasPajaro[0]); cbVacuna1.setVisible(true);
+                cbVacuna2.setText(vacunasPajaro[1]); cbVacuna2.setVisible(true);
+                cbVacuna3.setText(vacunasPajaro[2]); cbVacuna3.setVisible(true);
+                cbVacuna4.setText(vacunasPajaro[3]); cbVacuna4.setVisible(true);
+                cbVacuna5.setVisible(false);
+                cbVacuna6.setVisible(false);
+                break;
+            case 3:
+                for (String raza : razasPez) 
+                    cbRazaAni.addItem(raza);
+                cbVacuna1.setText(vacunasPez[0]); cbVacuna1.setVisible(true);
+                cbVacuna2.setText(vacunasPez[1]); cbVacuna2.setVisible(true);
+                cbVacuna3.setText(vacunasPez[2]); cbVacuna3.setVisible(true);
+                cbVacuna4.setText(vacunasPez[3]); cbVacuna4.setVisible(true);
+                cbVacuna5.setVisible(false);
+                cbVacuna6.setVisible(false);
+                break;
+            case 4:
+                for (String raza : razasRoedor) 
+                    cbRazaAni.addItem(raza);
+                cbVacuna1.setText(vacunasRoedor[0]); cbVacuna1.setVisible(true);
+                cbVacuna2.setText(vacunasRoedor[1]); cbVacuna2.setVisible(true);
+                cbVacuna3.setText(vacunasRoedor[2]); cbVacuna3.setVisible(true);
+                cbVacuna4.setText(vacunasRoedor[3]); cbVacuna4.setVisible(true);
+                cbVacuna5.setVisible(false);
+                cbVacuna6.setVisible(false);
+                break;
+            case 5:
+                for (String raza : razasVaca) 
+                    cbRazaAni.addItem(raza);
+                cbVacuna1.setText(vacunasVaca[0]); cbVacuna1.setVisible(true);
+                cbVacuna2.setText(vacunasVaca[1]); cbVacuna2.setVisible(true);
+                cbVacuna3.setText(vacunasVaca[2]); cbVacuna3.setVisible(true);
+                cbVacuna4.setText(vacunasVaca[3]); cbVacuna4.setVisible(true);
+                cbVacuna5.setVisible(false);
+                cbVacuna6.setVisible(false);
+                break;
+            case 6:
+                for (String raza : razasCerdo) 
+                    cbRazaAni.addItem(raza);
+                cbVacuna1.setText(vacunasCerdo[0]); cbVacuna1.setVisible(true);
+                cbVacuna2.setText(vacunasCerdo[1]); cbVacuna2.setVisible(true);
+                cbVacuna3.setText(vacunasCerdo[2]); cbVacuna3.setVisible(true);
+                cbVacuna4.setText(vacunasCerdo[3]); cbVacuna4.setVisible(true);
+                cbVacuna5.setVisible(false);
+                cbVacuna6.setVisible(false);
+                break;
+            case 7:
+                for (String raza : razasCaballo) 
+                    cbRazaAni.addItem(raza);
+                cbVacuna1.setText(vacunasCaballo[0]); cbVacuna1.setVisible(true);
+                cbVacuna2.setText(vacunasCaballo[1]); cbVacuna2.setVisible(true);
+                cbVacuna3.setText(vacunasCaballo[2]); cbVacuna3.setVisible(true);
+                cbVacuna4.setText(vacunasCaballo[3]); cbVacuna4.setVisible(true);
+                cbVacuna5.setVisible(false);
+                cbVacuna6.setVisible(false);
+                break;
+            
+        }
+        
+        
+    }//GEN-LAST:event_cbTipoAniActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
