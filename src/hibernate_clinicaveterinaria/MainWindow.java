@@ -515,8 +515,23 @@ public class MainWindow extends javax.swing.JFrame {
         btnVetCancelar = new javax.swing.JButton();
         lbVetNombre = new javax.swing.JLabel();
         btnVetAceptar = new javax.swing.JButton();
+
+        dialogContacto = new javax.swing.JDialog();
+        icContacto = new javax.swing.JLabel();
+        lbDNI = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
+        lbTel = new javax.swing.JLabel();
+        lbEmail = new javax.swing.JLabel();
+        lbDir = new javax.swing.JLabel();
+        txDNI = new javax.swing.JLabel();
+        txNombre = new javax.swing.JLabel();
+        txTel = new javax.swing.JLabel();
+        txEmail = new javax.swing.JLabel();
+        txDir = new javax.swing.JLabel();
+
         txtVetNombre = new javax.swing.JTextField();
         lbVetTlf = new javax.swing.JLabel();
+
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -2487,7 +2502,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        dialogFichaAnimal.setMinimumSize(new java.awt.Dimension(532, 475));
+        dialogFichaAnimal.setMaximumSize(new java.awt.Dimension(532, 476));
+        dialogFichaAnimal.setMinimumSize(new java.awt.Dimension(532, 476));
         dialogFichaAnimal.setModal(true);
 
         lbFotoPerfil.setBackground(new java.awt.Color(255, 255, 255));
@@ -2521,60 +2537,51 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
-                        .addComponent(lbID)
-                        .addGap(18, 18, 18)
-                        .addComponent(txID))
-                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
-                        .addComponent(lbNomb)
-                        .addGap(18, 18, 18)
-                        .addComponent(txNomb))
-                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
-                        .addComponent(lbEspecie)
-                        .addGap(18, 18, 18)
-                        .addComponent(txEspecie))
-                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
-                        .addComponent(lbRaza)
-                        .addGap(18, 18, 18)
-                        .addComponent(txRaza))
-                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
-                        .addComponent(lbSexo)
-                        .addGap(18, 18, 18)
-                        .addComponent(txSexo))
-                    .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
-                        .addComponent(lbFechaNac)
-                        .addGap(18, 18, 18)
-                        .addComponent(txFechaNac)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                    .addComponent(lbFechaNac)
+                    .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lbID, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbNomb))
+                    .addComponent(lbEspecie)
+                    .addComponent(lbRaza)
+                    .addComponent(lbSexo))
+                .addGap(18, 18, 18)
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txID, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(txNomb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txEspecie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txRaza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txSexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelDatosFichaCliLayout.setVerticalGroup(
             panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosFichaCliLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbID)
-                    .addComponent(txID))
+                    .addComponent(txID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNomb)
-                    .addComponent(txNomb))
+                    .addComponent(txNomb, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbEspecie)
-                    .addComponent(txEspecie))
+                    .addComponent(txEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbRaza)
-                    .addComponent(txRaza))
+                    .addComponent(txRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbSexo)
-                    .addComponent(txSexo))
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txSexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbSexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbFechaNac)
-                    .addComponent(txFechaNac))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
         lbID.getAccessibleContext().setAccessibleName("lbID");
@@ -2606,18 +2613,16 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelDatosClinicosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addGroup(panelDatosClinicosLayout.createSequentialGroup()
                         .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDatosClinicosLayout.createSequentialGroup()
-                                .addComponent(lbPeso)
-                                .addGap(18, 18, 18)
-                                .addComponent(txPeso))
-                            .addGroup(panelDatosClinicosLayout.createSequentialGroup()
-                                .addComponent(lbVacunas)
-                                .addGap(18, 18, 18)
-                                .addComponent(txVacunas))
-                            .addComponent(lbComentarios))
+                            .addComponent(lbPeso)
+                            .addComponent(lbComentarios)
+                            .addComponent(lbVacunas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2627,11 +2632,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPeso)
-                    .addComponent(txPeso))
+                    .addComponent(txPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbVacunas)
-                    .addComponent(txVacunas))
+                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbVacunas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txVacunas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbComentarios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2753,6 +2758,80 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        icContacto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/contacto.png"))); // NOI18N
+
+        lbDNI.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbDNI.setText("DNI:");
+
+        lbNombre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbNombre.setText("Nombre:");
+
+        lbTel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbTel.setText("Teléfono:");
+
+        lbEmail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbEmail.setText("Email:");
+
+        lbDir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbDir.setText("Dirección");
+
+        javax.swing.GroupLayout dialogContactoLayout = new javax.swing.GroupLayout(dialogContacto.getContentPane());
+        dialogContacto.getContentPane().setLayout(dialogContactoLayout);
+        dialogContactoLayout.setHorizontalGroup(
+            dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogContactoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(icContacto)
+                .addGap(18, 18, 18)
+                .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogContactoLayout.createSequentialGroup()
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbDir)
+                            .addComponent(lbEmail))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txEmail)
+                            .addComponent(txDir)))
+                    .addGroup(dialogContactoLayout.createSequentialGroup()
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTel)
+                            .addComponent(lbNombre)
+                            .addComponent(lbDNI))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txDNI)
+                            .addComponent(txNombre)
+                            .addComponent(txTel))))
+                .addContainerGap(210, Short.MAX_VALUE))
+        );
+        dialogContactoLayout.setVerticalGroup(
+            dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogContactoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogContactoLayout.createSequentialGroup()
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbDNI)
+                            .addComponent(txDNI))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbNombre)
+                            .addComponent(txNombre))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbTel)
+                            .addComponent(txTel))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbEmail)
+                            .addComponent(txEmail))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbDir)
+                            .addComponent(txDir)))
+                    .addComponent(icContacto))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         javax.swing.GroupLayout dialogEditVetLayout = new javax.swing.GroupLayout(dialogEditVet.getContentPane());
         dialogEditVet.getContentPane().setLayout(dialogEditVetLayout);
         dialogEditVetLayout.setHorizontalGroup(
@@ -2764,6 +2843,7 @@ public class MainWindow extends javax.swing.JFrame {
         dialogEditVetLayout.setVerticalGroup(
             dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -3694,11 +3774,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbVacuna6;
     private javax.swing.JComboBox<String> cbVetCita;
     private javax.swing.JCheckBox chkConsulta;
+    private javax.swing.JDialog dialogContacto;
     private javax.swing.JDialog dialogEditCitas;
     public javax.swing.JDialog dialogEditClientes;
     private javax.swing.JDialog dialogEditVet;
     private javax.swing.JDialog dialogFichaAnimal;
     private javax.swing.JFrame frameClientes;
+    private javax.swing.JLabel icContacto;
     private javax.swing.JLabel imgProducto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -3759,9 +3841,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbCitaTipo;
     private javax.swing.JLabel lbComentarioCli;
     private javax.swing.JLabel lbComentarios;
+    private javax.swing.JLabel lbDNI;
+    private javax.swing.JLabel lbDir;
     private javax.swing.JLabel lbDireFami;
     private javax.swing.JLabel lbDniCli;
     private javax.swing.JLabel lbDniCli2;
+    private javax.swing.JLabel lbEmail;
     private javax.swing.JLabel lbEspecie;
     private javax.swing.JLabel lbFechaFactura;
     private javax.swing.JLabel lbFechaNac;
@@ -3773,6 +3858,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbMailFami;
     private javax.swing.JLabel lbMailFami5;
     private javax.swing.JLabel lbNomb;
+    private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbNombreAni;
     private javax.swing.JLabel lbNombreFami;
     private javax.swing.JLabel lbNombreFami2;
@@ -3788,6 +3874,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbResumenCita;
     private javax.swing.JLabel lbSexo;
     private javax.swing.JLabel lbStatus;
+    private javax.swing.JLabel lbTel;
     private javax.swing.JLabel lbTipoAni;
     private javax.swing.JLabel lbTlfFami;
     private javax.swing.JLabel lbTlfFami5;
@@ -3834,13 +3921,18 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
     private javax.swing.JTextArea txComentario;
+    private javax.swing.JLabel txDNI;
+    private javax.swing.JLabel txDir;
+    private javax.swing.JLabel txEmail;
     private javax.swing.JLabel txEspecie;
     private javax.swing.JLabel txFechaNac;
     private javax.swing.JLabel txID;
     private javax.swing.JLabel txNomb;
+    private javax.swing.JLabel txNombre;
     private javax.swing.JLabel txPeso;
     private javax.swing.JLabel txRaza;
     private javax.swing.JLabel txSexo;
+    private javax.swing.JLabel txTel;
     private javax.swing.JLabel txVacunas;
     private javax.swing.JTextField txtChipidCli;
     private javax.swing.JTextArea txtCitaAsunto;
