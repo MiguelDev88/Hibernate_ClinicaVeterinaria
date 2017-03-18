@@ -2831,7 +2831,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(txDir)))
                     .addComponent(icContacto))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-
+        );
         javax.swing.GroupLayout dialogEditVetLayout = new javax.swing.GroupLayout(dialogEditVet.getContentPane());
         dialogEditVet.getContentPane().setLayout(dialogEditVetLayout);
         dialogEditVetLayout.setHorizontalGroup(
