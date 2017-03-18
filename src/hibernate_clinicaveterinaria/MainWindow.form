@@ -979,11 +979,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNuevoCli2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnNuevaCita" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEditarCli2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEditarCita" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEliminarCli2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEliminarCita" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -993,9 +993,9 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnNuevoCli2" max="32767" attributes="0"/>
-                          <Component id="btnEditarCli2" max="32767" attributes="0"/>
-                          <Component id="btnEliminarCli2" max="32767" attributes="0"/>
+                          <Component id="btnNuevaCita" max="32767" attributes="0"/>
+                          <Component id="btnEditarCita" max="32767" attributes="0"/>
+                          <Component id="btnEliminarCita" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1003,7 +1003,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnEliminarCli2">
+            <Component class="javax.swing.JButton" name="btnEliminarCita">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/drawable/archivo.png"/>
@@ -1013,7 +1013,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnEditarCli2">
+            <Component class="javax.swing.JButton" name="btnEditarCita">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/drawable/archivo-nuevo.png"/>
@@ -1022,8 +1022,11 @@
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarCitaActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnNuevoCli2">
+            <Component class="javax.swing.JButton" name="btnNuevaCita">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/drawable/anadir-pagina-nueva.png"/>
@@ -1033,7 +1036,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoCli2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevaCitaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -2613,11 +2616,13 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCitaTlfFami">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCitaMailFami">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                 </Component>
@@ -2681,6 +2686,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCitaNombreFami">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                 </Component>
@@ -2838,6 +2844,7 @@
                       <Properties>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
+                        <Property name="text" type="java.lang.String" value="Escriba el motivo de la cita"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -2848,8 +2855,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCitaTipo">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCitaRaza">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbCitaNombreAni">
                   <Properties>
@@ -2872,6 +2885,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCitaId">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -3318,16 +3334,10 @@
     </Container>
     <Container class="javax.swing.JDialog" name="dialogFichaAnimal">
       <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[532, 475]"/>
-        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[532, 475]"/>
         </Property>
         <Property name="modal" type="boolean" value="true"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[532, 475]"/>
-        </Property>
       </Properties>
 
       <Layout>

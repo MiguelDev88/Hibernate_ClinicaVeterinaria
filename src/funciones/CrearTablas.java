@@ -63,7 +63,7 @@ public class CrearTablas {
                     + "raza VARCHAR(30) NOT NULL, "
                     + "sexo CHAR NOT NULL, "
                     + "fecha_nac DATE NULL, "
-                    + "peso VARCHAR(30) NOT NULL, "
+                    + "peso VARCHAR(30) NULL, "
                     + "comentario TEXT NULL, "
                     + "familiar INT(5) UNSIGNED ZEROFILL NOT NULL, "
                     + "PRIMARY KEY (id), "

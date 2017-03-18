@@ -1,11 +1,13 @@
 package funciones;
 import POJOS.C_Animal;
+import POJOS.C_Cita;
 import POJOS.C_Familiar;
 import POJOS.C_Persona;
 import POJOS.C_Veterinario;
 import hibernate_clinicaveterinaria.HibernateUtil;
 import java.util.Iterator;
 import javax.swing.JComboBox;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 
@@ -23,6 +25,36 @@ public class Consultas {
         sesion.close();
         
         return animal;
+        
+    }
+    
+    public static Iterator cargarFamiliares () {
+        
+        Session sesion=HibernateUtil.getSession();
+        Iterator familiares = sesion.createCriteria(C_Familiar.class).list().iterator();
+        sesion.close();
+        return familiares;
+    }
+    
+    //este método devuelve un iterator con todos los animales
+    public static Iterator cargarAnimales () {
+
+        Session sesion=HibernateUtil.getSession();
+        Iterator animales = sesion.createCriteria(C_Animal.class).list().iterator();
+            
+        sesion.close();
+
+        return animales;
+        
+    }
+    
+    public static Iterator cargarCitas () {
+        
+        
+        Session sesion=HibernateUtil.getSession();
+        Iterator citasIt = sesion.createCriteria(C_Cita.class).list().iterator();
+        sesion.close();
+        return citasIt;
         
     }
     
@@ -46,6 +78,47 @@ public class Consultas {
             
             System.out.println(e.getMessage());
         }  
+    }
+    
+    public static Iterator recuperarPersonasPordni(String dni ) {
+        
+        Session sesion=HibernateUtil.getSession();
+        Query qry = sesion.createQuery("FROM POJOS.C_Persona f WHERE f.dni like ?");
+        qry.setString(0, dni+"%");
+        Iterator familiares =qry.list().iterator();
+        
+        return familiares;
+    }
+    
+    public static C_Persona recuperarUnaPersonaPordni (String dni) {
+        
+        
+        Session sesion=HibernateUtil.getSession();
+        C_Persona familiar = (C_Familiar)sesion.createQuery("FROM POJOS.C_Persona f WHERE f.dni='"+dni+"'").uniqueResult();
+        
+        return familiar;
+        
+        
+    }
+    
+    public static Iterator recuperarAnimalesPorNombre (String filtro) {
+        
+        Session sesion=HibernateUtil.getSession();
+        Query qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
+        qry.setString(0, filtro+"%");
+        Iterator animales =qry.list().iterator();
+        
+        return animales;
+    }
+    
+    public static Iterator recuperarAnimalesPorId (String filtro) {
+        
+        Session sesion=HibernateUtil.getSession();
+        Query qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id like ?");
+        qry.setString(0, filtro+"%");
+        Iterator animales =qry.list().iterator();
+        
+        return animales;
     }
 
 }
