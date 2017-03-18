@@ -44,4 +44,14 @@ public class Guardar {
         
     }
     
+    public static void guardarVet (C_Veterinario vet ){
+        
+        Session sesion=HibernateUtil.getSession();
+        
+        sesion.beginTransaction();
+        sesion.save(vet);
+        sesion.getTransaction().commit();
+        sesion.close();
+    }
+    
 }

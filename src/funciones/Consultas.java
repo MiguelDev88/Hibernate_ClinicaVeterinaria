@@ -28,12 +28,47 @@ public class Consultas {
         
     }
     
+    public static C_Veterinario recuperarVeterinarioPorId (int id){
+        
+        
+        Session sesion=HibernateUtil.getSession();
+            
+        C_Veterinario vet=(C_Veterinario)sesion.createQuery("FROM POJOS.C_Veterinario v WHERE v.id='"+id+"'").uniqueResult();
+        
+        sesion.close();
+        
+        return vet;
+        
+    }
+    
+    public static C_Veterinario recuperarVeterinarioPorDni (int dni){
+        
+        
+        Session sesion=HibernateUtil.getSession();
+            
+        C_Veterinario vet=(C_Veterinario)sesion.createQuery("FROM POJOS.C_Veterinario v WHERE v.dni='"+dni+"'").uniqueResult();
+        
+        sesion.close();
+        
+        return vet;
+        
+    }
+    
     public static Iterator cargarFamiliares () {
         
         Session sesion=HibernateUtil.getSession();
         Iterator familiares = sesion.createCriteria(C_Familiar.class).list().iterator();
         sesion.close();
         return familiares;
+    }
+    
+    public static Iterator cargarVeterinarios () {
+        
+        Session sesion=HibernateUtil.getSession();
+        Iterator veterinarios = sesion.createCriteria(C_Veterinario.class).list().iterator();
+        sesion.close();
+        return veterinarios;
+        
     }
     
     //este método devuelve un iterator con todos los animales
