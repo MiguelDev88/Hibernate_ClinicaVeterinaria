@@ -31,6 +31,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     Timer timer;
     DefaultTableModel modeloCitas;
+    DefaultTableModel modeloVet;
     static DefaultTableModel modeloClientes;
     static Object[][] citas = new Object[38][8];
     static String[] horas = {"9:00","9:15","9:30","9:45","10:00","10:15","10:30","10:45",
@@ -55,6 +56,7 @@ public class MainWindow extends javax.swing.JFrame {
     static String[] vacunasCerdo = {"Pasyeurela","Salmonela","Actinobacillus","Écoli"};
     static String[] razasCaballo = {"Pura Sangre","Cuarto de Milla","Mustang"};
     static String[] vacunasCaballo = {"Influenza","Tétanos","Rinoneumonitis","Papera equina"};
+    boolean update;
     
     
     public MainWindow() {
@@ -501,6 +503,19 @@ public class MainWindow extends javax.swing.JFrame {
         lbComentarios = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         txComentario = new javax.swing.JTextArea();
+        dialogEditVet = new javax.swing.JDialog();
+        lbVetNombre = new javax.swing.JLabel();
+        txtVetNombre = new javax.swing.JTextField();
+        lbVetTlf = new javax.swing.JLabel();
+        txtVetTlf = new javax.swing.JTextField();
+        lbVetDni = new javax.swing.JLabel();
+        txtVetDni = new javax.swing.JTextField();
+        lbVetEmail = new javax.swing.JLabel();
+        txtNumLicencia = new javax.swing.JTextField();
+        lbNum_Licencia = new javax.swing.JLabel();
+        txtVetEmail = new javax.swing.JTextField();
+        btnVetCancelar = new javax.swing.JButton();
+        btnVetAceptar = new javax.swing.JButton();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -891,6 +906,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnEditarCli1.setText("Editar");
         btnEditarCli1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditarCli1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditarCli1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarCli1ActionPerformed(evt);
+            }
+        });
 
         btnNuevoCli1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/anadir-pagina-nueva.png"))); // NOI18N
         btnNuevoCli1.setText("Nuevo");
@@ -2646,6 +2666,93 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lbVetNombre.setText("Nombre:");
+
+        lbVetTlf.setText("Teléfono:");
+
+        lbVetDni.setText("DNI:");
+
+        lbVetEmail.setText("E_Mail:");
+
+        lbNum_Licencia.setText("Num_Licencia:");
+
+        btnVetCancelar.setText("Cancelar");
+        btnVetCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVetCancelarActionPerformed(evt);
+            }
+        });
+
+        btnVetAceptar.setText("Aceptar");
+        btnVetAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVetAceptarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dialogEditVetLayout = new javax.swing.GroupLayout(dialogEditVet.getContentPane());
+        dialogEditVet.getContentPane().setLayout(dialogEditVetLayout);
+        dialogEditVetLayout.setHorizontalGroup(
+            dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogEditVetLayout.createSequentialGroup()
+                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogEditVetLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dialogEditVetLayout.createSequentialGroup()
+                                .addComponent(lbNum_Licencia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNumLicencia))
+                            .addGroup(dialogEditVetLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbVetDni)
+                                    .addComponent(lbVetEmail)
+                                    .addComponent(lbVetTlf)
+                                    .addComponent(lbVetNombre))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtVetEmail)
+                                    .addComponent(txtVetTlf)
+                                    .addComponent(txtVetNombre)
+                                    .addComponent(txtVetDni)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogEditVetLayout.createSequentialGroup()
+                        .addContainerGap(191, Short.MAX_VALUE)
+                        .addComponent(btnVetAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVetCancelar)))
+                .addContainerGap())
+        );
+        dialogEditVetLayout.setVerticalGroup(
+            dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogEditVetLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVetNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVetNombre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVetTlf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVetTlf))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVetDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVetDni))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVetEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVetEmail))
+                .addGap(15, 15, 15)
+                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNum_Licencia)
+                    .addComponent(txtNumLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVetCancelar)
+                    .addComponent(btnVetAceptar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -2845,6 +2952,34 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnVeterinariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVeterinariosActionPerformed
         cambiarPanel(panelVeterinarios);
+        
+        String[] columnasVet={"id", "Nombre", "Num_Licencia"};
+        modeloVet=new DefaultTableModel(columnasVet,0);
+        tablaVeterinarios.setModel(modeloVet);
+        
+        try{
+            
+            Iterator veterinarios = Consultas.cargarVeterinarios();
+            
+            while(veterinarios.hasNext())
+            {
+                C_Veterinario vet=(C_Veterinario)veterinarios.next();
+                
+                int id=vet.getId();
+                String nombre=vet.getNombre();
+                String licencia=vet.getNumLicencia();
+                
+                Object[] fila= {id, nombre,licencia};
+                modeloVet.addRow(fila);
+            }
+
+        }catch (Exception e) {
+            
+            System.out.println(e.getMessage());
+        }
+        
+        
+        
     }//GEN-LAST:event_btnVeterinariosActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
@@ -2929,7 +3064,7 @@ public class MainWindow extends javax.swing.JFrame {
         {
             int id=(int)modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0);    
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog (null, "¿Está Seguro que desea eliminar este registro?","Warning",dialogButton);
+            int dialogResult = JOptionPane.showConfirmDialog (frameClientes, "¿Está Seguro que desea eliminar este registro?","Warning",dialogButton);
             
             if(dialogResult == JOptionPane.YES_OPTION){
             
@@ -3089,33 +3224,7 @@ public class MainWindow extends javax.swing.JFrame {
         else
         {
             switch(cbFiltro.getSelectedIndex()){
-                case 0:/*
-                    //qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar.nombre like 'Miguel'");
-                    System.out.println("busco por "+filtro);
-                    qry = sesion.createQuery("FROM POJOS.C_Persona f WHERE f.nombre like ?");
-                    qry.setString(0, filtro+"%");
-                    Iterator familiares = qry.list().iterator();
-                    while(familiares.hasNext())
-                    {
-                        System.out.println("algo hay");
-                        C_Familiar familiar=(C_Familiar)familiares.next();
-                        System.out.println("tengo a un familiar "+familiar.getNombre());
-                        filtro=String.format("%05d", familiar.getId());
-                        qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar = ?");
-                        qry.setString(0, filtro);
-                        animales =qry.list().iterator();
-                        while(animales.hasNext())
-                        {
-                            C_Animal animal=(C_Animal)animales.next();
-                            System.out.println("tengo a un animal"+animal.getNombre());
-                            Object[] fila= {animal.getId(), animal.getNombre(),animal.getTipo(),animal.getRaza(),animal.getFamiliar().getNombre()};
-                            modeloClientes.addRow(fila);
-
-                        }
-                    }*/
-                    break;
-                case 1:
-                    
+                case 0:
                     animales = Consultas.recuperarAnimalesPorNombre(filtro);
                     while(animales.hasNext())
                     {
@@ -3125,7 +3234,7 @@ public class MainWindow extends javax.swing.JFrame {
 
                     }
                     break;
-                case 2:
+                case 1:
                     if (filtro.length() < 5)
                         filtro=String.format("%05d", Integer.parseInt(filtro));
                     animales = Consultas.recuperarAnimalesPorId(filtro);
@@ -3307,14 +3416,7 @@ public class MainWindow extends javax.swing.JFrame {
         fecha=calendar.getTime();
         
         Guardar.guardarCita(veterinario, idAnimal, fecha, asunto);
-        
-        /*
-        if(today.after(calendar.getTime()))
-            System.out.println("today after date!!");
-        else
-            System.out.println("today before the date!!");
-*/
-        
+    
         
         
     }//GEN-LAST:event_btnCitaAceptarActionPerformed
@@ -3426,6 +3528,57 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarCitaActionPerformed
 
+    private void btnVetCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVetCancelarActionPerformed
+        
+        dialogEditVet.dispose();
+    }//GEN-LAST:event_btnVetCancelarActionPerformed
+
+    private void btnVetAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVetAceptarActionPerformed
+        
+        
+        
+        String nombre, dni, licencia, tlf, mail;
+        
+        nombre=txtVetNombre.getText();
+        dni=txtVetDni.getText();
+        tlf=txtVetTlf.getText();
+        mail=txtVetEmail.getText();
+        licencia=txtNumLicencia.getText();
+        
+        if(update==true)
+        {
+            Update.updateVet(dni);
+        }
+        else
+        {
+            C_Veterinario veterinario= new C_Veterinario(dni, nombre, tlf, mail, licencia);
+            Guardar.guardarVet(veterinario);
+        }    
+                
+    }//GEN-LAST:event_btnVetAceptarActionPerformed
+
+    private void btnEditarCli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCli1ActionPerformed
+        
+        
+        if(tablaVeterinarios.getSelectedRowCount()>0)
+        {
+            int id=Integer.parseInt(modeloVet.getValueAt(tablaVeterinarios.getSelectedRow(), 0).toString());
+            
+            C_Veterinario vet = Consultas.recuperarVeterinarioPorId(id);
+            
+            txtVetNombre.setText(vet.getNombre());
+            txtVetDni.setText(vet.getDni());
+            txtVetTlf.setText(vet.getTelefono());
+            txtVetEmail.setText(vet.getEmail());
+            txtNumLicencia.setText(vet.getNumLicencia());
+            update=true;
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnEditarCli1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -3500,6 +3653,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnVerCli;
     private javax.swing.JButton btnVerCli1;
     private javax.swing.JButton btnVerCli2;
+    private javax.swing.JButton btnVetAceptar;
+    private javax.swing.JButton btnVetCancelar;
     private javax.swing.JButton btnVeterinarios;
     private static javax.swing.JComboBox<String> cbCitaDia;
     private static javax.swing.JComboBox<String> cbCitaDni;
@@ -3520,6 +3675,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkConsulta;
     private javax.swing.JDialog dialogEditCitas;
     public javax.swing.JDialog dialogEditClientes;
+    private javax.swing.JDialog dialogEditVet;
     private javax.swing.JDialog dialogFichaAnimal;
     private javax.swing.JFrame frameClientes;
     private javax.swing.JLabel imgProducto;
@@ -3601,6 +3757,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbNombreVet;
     private javax.swing.JLabel lbNombreVet1;
     private javax.swing.JLabel lbNumFactura;
+    private javax.swing.JLabel lbNum_Licencia;
     private javax.swing.JLabel lbPeso;
     private javax.swing.JLabel lbPesoCli;
     private javax.swing.JLabel lbPrecioInv;
@@ -3614,6 +3771,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbTlfFami5;
     private javax.swing.JLabel lbVacunas;
     private javax.swing.JLabel lbVetCita;
+    private javax.swing.JLabel lbVetDni;
+    private javax.swing.JLabel lbVetEmail;
+    private javax.swing.JLabel lbVetNombre;
+    private javax.swing.JLabel lbVetTlf;
     private javax.swing.JRadioButton newRbHembra;
     private javax.swing.JRadioButton newRbMacho;
     private javax.swing.JPanel panelCitas;
@@ -3683,9 +3844,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreVet;
     private javax.swing.JTextField txtNombreVet1;
     private javax.swing.JTextField txtNumFactura;
+    private javax.swing.JTextField txtNumLicencia;
     private javax.swing.JTextField txtPesoCli;
     private javax.swing.JTextField txtPrecioInv;
     private javax.swing.JTextArea txtResumenCita;
     private javax.swing.JTextField txtTlfFami;
+    private javax.swing.JTextField txtVetDni;
+    private javax.swing.JTextField txtVetEmail;
+    private javax.swing.JTextField txtVetNombre;
+    private javax.swing.JTextField txtVetTlf;
     // End of variables declaration//GEN-END:variables
 }
