@@ -3,11 +3,6 @@
 <Form version="1.7" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JFrame" name="frameClientes">
-      <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[912, 686]"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -517,7 +512,7 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="panelDatosClientes1" max="32767" attributes="0"/>
+                          <Component id="panelDatosVet" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="panelVerClientes1" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
@@ -535,7 +530,7 @@
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="panelContactoClientes1" alignment="2" pref="83" max="32767" attributes="0"/>
                       <Component id="panelVerClientes1" alignment="2" pref="83" max="32767" attributes="0"/>
-                      <Component id="panelDatosClientes1" max="32767" attributes="0"/>
+                      <Component id="panelDatosVet" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -635,7 +630,7 @@
             <Property name="text" type="java.lang.String" value="Nombre:"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="panelDatosClientes1">
+        <Container class="javax.swing.JPanel" name="panelDatosVet">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -655,11 +650,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNuevoCli1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnNuevoVet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEditarCli1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEditarVet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEliminarCli1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEliminarVet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -669,9 +664,9 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnNuevoCli1" max="32767" attributes="0"/>
-                          <Component id="btnEliminarCli1" max="32767" attributes="0"/>
-                          <Component id="btnEditarCli1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnNuevoVet" max="32767" attributes="0"/>
+                          <Component id="btnEliminarVet" max="32767" attributes="0"/>
+                          <Component id="btnEditarVet" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -679,7 +674,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnEliminarCli1">
+            <Component class="javax.swing.JButton" name="btnEliminarVet">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/drawable/archivo.png"/>
@@ -689,7 +684,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnEditarCli1">
+            <Component class="javax.swing.JButton" name="btnEditarVet">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/drawable/archivo-nuevo.png"/>
@@ -699,10 +694,10 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarCli1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarVetActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnNuevoCli1">
+            <Component class="javax.swing.JButton" name="btnNuevoVet">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/drawable/anadir-pagina-nueva.png"/>
@@ -712,7 +707,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoCli1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoVetActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -3660,139 +3655,167 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="dialogEditVet">
+      <Properties>
+        <Property name="resizable" type="boolean" value="false"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="lbNum_Licencia" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtNumLicencia" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="lbVetDni" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbVetEmail" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbVetTlf" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbVetNombre" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtVetEmail" max="32767" attributes="0"/>
-                                      <Component id="txtVetTlf" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtVetNombre" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtVetDni" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="191" max="32767" attributes="0"/>
-                          <Component id="btnVetAceptar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnVetCancelar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel10" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtVetNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbVetNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtVetTlf" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbVetTlf" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtVetDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbVetDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtVetEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbVetEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbNum_Licencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNumLicencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnVetCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnVetAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
+              <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lbVetNombre">
+        <Container class="javax.swing.JPanel" name="jPanel10">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre:"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="Datos Veterinario">
+                  <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+                </TitledBorder>
+              </Border>
+            </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtVetNombre">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbVetTlf">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtVetTlf">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbVetDni">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="DNI:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtVetDni">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbVetEmail">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="E_Mail:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNumLicencia">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbNum_Licencia">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Num_Licencia:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtVetEmail">
-        </Component>
-        <Component class="javax.swing.JButton" name="btnVetCancelar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cancelar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVetCancelarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnVetAceptar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Aceptar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVetAceptarActionPerformed"/>
-          </Events>
-        </Component>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lbVetDni" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbVetEmail" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbVetTlf" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbVetNombre" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="lbNum_Licencia" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txtVetTlf" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtVetDni" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtNumLicencia" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtVetEmail" max="32767" attributes="0"/>
+                                  <Component id="txtVetNombre" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace pref="194" max="32767" attributes="0"/>
+                              <Component id="btnVetAceptar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnVetCancelar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtVetNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbVetNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtVetTlf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbVetTlf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtVetDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbVetDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtVetEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbVetEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbNum_Licencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNumLicencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnVetCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVetAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JTextField" name="txtVetTlf">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbVetDni">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="DNI:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtVetDni">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbVetEmail">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="E_Mail:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtNumLicencia">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbNum_Licencia">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Num_Licencia:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtVetEmail">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnVetCancelar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cancelar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVetCancelarActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbVetNombre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nombre:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnVetAceptar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Aceptar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVetAceptarActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtVetNombre">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbVetTlf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </NonVisualComponents>
