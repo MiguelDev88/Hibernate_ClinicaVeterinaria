@@ -43,23 +43,23 @@ public class MainWindow extends javax.swing.JFrame {
                               "13:00","13:15","13:30","13:45","     ",
                               "17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45",
                               "19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"};
-    static String[] tipos = {"Gato","Perro","Pájaro","Pez","Roedor","Vaca","Cerdo","Caballo"};
+    static String[] tipos = {"Gato","Perro","Pajaro","Pez","Roedor","Vaca","Cerdo","Caballo"};
     static String[] razasPerro = {"Carlino","Akita","Beagle"};
     static String[] vacunasPerro = {"Parvo","Moquillo","Parainfluenza","Rabia"};
-    static String[] razasGato = {"Siamés","Persa","Bengala"};
-    static String[] vacunasGato = {"Tri_Vírica","Panleucopenia","Rinotraqueitis","Calcivirosis","Leucemia felina","Clamidias"};
+    static String[] razasGato = {"Siames","Persa","Bengala"};
+    static String[] vacunasGato = {"Tri_Virica","Panleucopenia","Rinotraqueitis","Calcivirosis","Leucemia felina","Clamidias"};
     static String[] razasPajaro = {"Periquito","Agaporni","Loro"};
     static String[] vacunasPajaro = {"Viruela","Profilaxis","Bronipra","Coripravac"};
-    static String[] razasPez= {"Ángel","Gato","Arcoíris"};
+    static String[] razasPez= {"Ángel","Gato","Arcoiris"};
     static String[] vacunasPez = {"Intra-peritoneal","Anemia","Viremia","Septicemia"};
-    static String[] razasRoedor = {"Cobaya","Hámster","Jerbo"};
-    static String[] vacunasRoedor = {"Mixomatosis","Hemorragia vírica","Nobivac","Rabia"};
+    static String[] razasRoedor = {"Cobaya","Hamster","Jerbo"};
+    static String[] vacunasRoedor = {"Mixomatosis","Hemorragia virica","Nobivac","Rabia"};
     static String[] razasVaca = {"Holstein","Shorthorn","Hereford"};
     static String[] vacunasVaca = {"Fiebre aftosa","Rabia","Edema maligno","Virus-T"};
     static String[] razasCerdo = {"Vietnamita","Duroc","Berkshire"};
-    static String[] vacunasCerdo = {"Pasyeurela","Salmonela","Actinobacillus","Écoli"};
+    static String[] vacunasCerdo = {"Pasyeurela","Salmonela","Actinobacillus","Ecoli"};
     static String[] razasCaballo = {"Pura Sangre","Cuarto de Milla","Mustang"};
-    static String[] vacunasCaballo = {"Influenza","Tétanos","Rinoneumonitis","Papera equina"};
+    static String[] vacunasCaballo = {"Influenza","Tetanos","Rinoneumonitis","Papera equina"};
     boolean update;
     int idUpdate;
     static Date fechaInicio, fechaFin;
@@ -3161,11 +3161,24 @@ public class MainWindow extends javax.swing.JFrame {
         txtDireFami.setText("");
         txtPesoCli.setText("");
         
+        cbTipoAni.removeAllItems();
+        for (String tipo : tipos) {
+            cbTipoAni.addItem(tipo);
+        }
+        
+        cbRazaAni.removeAllItems();
+        for (String rGato : razasGato) {
+            cbRazaAni.addItem(rGato);
+        }
+        Component[] vacunas= panelVacunas.getComponents();
+        for (int i=0;i<vacunasGato.length;i++) {
+            ((JCheckBox)vacunas[i]).setText(vacunasGato[i]);
+        }
+        
         cbDniFami.removeAllItems();
         cbTipoAni.setSelectedIndex(0);
         
         newRbHembra.setSelected(true);
-        
     }
     
     
@@ -3178,17 +3191,7 @@ public class MainWindow extends javax.swing.JFrame {
         cbTipoAni.removeAllItems();
         cbRazaAni.removeAllItems();
         
-        for (String tipo : tipos) {
-            cbTipoAni.addItem(tipo);
-        }
         
-        for (String rGato : razasGato) {
-            cbRazaAni.addItem(rGato);
-        }
-        Component[] vacunas= panelVacunas.getComponents();
-        for (int i=0;i<vacunasGato.length;i++) {
-            ((JCheckBox)vacunas[i]).setText(vacunasGato[i]);
-        }
         
         
         
@@ -3387,6 +3390,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnEditarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCliActionPerformed
         //PANEL CLIENTES BOTON EDITAR CLIENTE
+        clearClientes();
         if(tablaClientes.getSelectedRowCount()>0)
         {
             int id=(int)modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
@@ -3397,7 +3401,7 @@ public class MainWindow extends javax.swing.JFrame {
             
             txtNombreCli.setText(animal.getNombre());
             txtChipidCli.setText(animal.getId_chip());
-            cbTipoAni.setSelectedItem(animal.getTipo());
+            //cbTipoAni.setSelectedItem(animal.getTipo());
             cbRazaAni.setSelectedItem(animal.getRaza());
             
             txtFechaCli.setText(animal.getFecha_nac().toString());
@@ -3411,7 +3415,7 @@ public class MainWindow extends javax.swing.JFrame {
                 tipo=0;
             else if(animal.getTipo().compareToIgnoreCase("perro")==0)
                 tipo=1;
-            else if(animal.getTipo().compareToIgnoreCase("Pájaro")==0)
+            else if(animal.getTipo().compareToIgnoreCase("Pajaro")==0)
                 tipo=2;
             else if(animal.getTipo().compareToIgnoreCase("pez")==0)
                 tipo=3;
@@ -3424,7 +3428,9 @@ public class MainWindow extends javax.swing.JFrame {
             else if(animal.getTipo().compareToIgnoreCase("caballo")==0)
                 tipo=7;
             
+            System.out.println("el tipo es "+tipo);
             cargarComboTipos(tipo);
+            cbTipoAni.setSelectedIndex(tipo);
             
             //--vacunas
             
@@ -3448,11 +3454,6 @@ public class MainWindow extends javax.swing.JFrame {
                     cbVacuna6.setSelected(true);
             }
 
-
-            
-            
-            
-            
             //--familiar--
             
             cbDniFami.setSelectedItem(animal.getFamiliar().getDni());
@@ -3463,7 +3464,7 @@ public class MainWindow extends javax.swing.JFrame {
             
             dialogEditClientes.setVisible(true);
             dialogEditClientes.setModal(true);
-            cargarFamiliares();
+            //cargarFamiliares();
             
             update=true;
             idUpdate=id;
@@ -3522,7 +3523,7 @@ public class MainWindow extends javax.swing.JFrame {
         {
             int id=(int)modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0);    
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog (frameClientes, "¿Está Seguro que desea eliminar este registro?","Warning",dialogButton);
+            int dialogResult = JOptionPane.showConfirmDialog (frameClientes, "¿Esta Seguro que desea eliminar este registro?","Warning",dialogButton);
             
             if(dialogResult == JOptionPane.YES_OPTION){
             
@@ -4175,7 +4176,7 @@ public class MainWindow extends javax.swing.JFrame {
         {
             int id=(int)modeloVet.getValueAt(tablaVeterinarios.getSelectedRow(), 0);    
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog (frameClientes, "¿Está Seguro que desea eliminar este registro?","Warning",dialogButton);
+            int dialogResult = JOptionPane.showConfirmDialog (frameClientes, "¿Esta Seguro que desea eliminar este registro?","Warning",dialogButton);
             
             if(dialogResult == JOptionPane.YES_OPTION){
             
