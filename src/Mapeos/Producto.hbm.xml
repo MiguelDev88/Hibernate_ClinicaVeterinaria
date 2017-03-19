@@ -13,6 +13,7 @@
         <property name="nombre" />
         <property name="tipo" />
         <property name="precio" />
+        <property name="img" />
     
     <joined-subclass name="POJOS.C_Medicamento" table="medicamentos" >
             <key column="id" />

@@ -79,6 +79,7 @@ public class CrearTablas {
                     + "tipo VARCHAR(30) NOT NULL, "
                     + "descripcion TEXT NOT NULL, "
                     + "precio FLOAT NOT NULL, "
+                    + "img INT NULL, "
                     + "PRIMARY KEY (id))"
                     + "ENGINE INNODB;");
             
@@ -123,6 +124,32 @@ public class CrearTablas {
                     + "  ON UPDATE CASCADE,"
                     + "CONSTRAINT fk6_veterinario "
                     + " FOREIGN KEY(veterinario) REFERENCES veterinarios(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE)"
+                    + "ENGINE INNODB;");
+            
+            sentencia.execute ("CREATE TABLE IF NOT EXISTS facturas ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "importe FLOAT NOT NULL, "
+                    + "cliente INT(5) UNSIGNED ZEROFILL NULL, "
+                    + "PRIMARY KEY (id), "
+                    + "CONSTRAINT fk7_familiar "
+                    + " FOREIGN KEY(cliente) REFERENCES familiares(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE)"
+                    + "ENGINE INNODB;");
+            
+            sentencia.execute ("CREATE TABLE IF NOT EXISTS facturas_productos ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "id_factura INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "id_producto INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "PRIMARY KEY (id), "
+                    + "CONSTRAINT fk8_factura "
+                    + " FOREIGN KEY(id_factura) REFERENCES facturas(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE, "
+                    + "CONSTRAINT fk9_facturas "
+                    + " FOREIGN KEY(id_producto) REFERENCES productos(id) "
                     + "  ON DELETE CASCADE "
                     + "  ON UPDATE CASCADE)"
                     + "ENGINE INNODB;");

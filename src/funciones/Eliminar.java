@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package funciones;
-
-import POJOS.C_Animal;
-import POJOS.C_Familiar;
-import POJOS.C_Persona;
+import POJOS.*;
 import hibernate_clinicaveterinaria.HibernateUtil;
 import org.hibernate.Session;
 
-/**
- *
- * @author a15carlosmpf
- */
+
 public class Eliminar {
     
     public static void EliminarAnimal (int id) {
@@ -26,6 +15,19 @@ public class Eliminar {
 
         sesion.beginTransaction();
         sesion.delete(animal);
+        sesion.getTransaction().commit();
+        sesion.close();
+        
+    }
+
+    public static void EliminarVeterinario(int id) {
+        
+        Session sesion=HibernateUtil.getSession();
+        
+        C_Veterinario vet = (C_Veterinario)sesion.createQuery("FROM POJOS.C_Veterinario v WHERE v.id='"+id+"'").uniqueResult();
+
+        sesion.beginTransaction();
+        sesion.delete(vet);
         sesion.getTransaction().commit();
         sesion.close();
         

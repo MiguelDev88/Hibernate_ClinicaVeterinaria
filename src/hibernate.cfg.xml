@@ -12,5 +12,6 @@
     <mapping resource="Mapeos/Persona.hbm.xml"/>
     <mapping resource="Mapeos/Producto.hbm.xml"/>
     <mapping resource="Mapeos/Cita.hbm.xml"/>
+    <mapping resource="Mapeos/Factura.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

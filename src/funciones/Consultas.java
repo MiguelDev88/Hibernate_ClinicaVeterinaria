@@ -28,6 +28,38 @@ public class Consultas {
         
     }
     
+    public static Iterator recuperarAnimalesPorIdFamiliar (int id){
+        
+        
+        Session sesion=HibernateUtil.getSession();
+            
+        
+        Iterator animales=sesion.createQuery("FROM POJOS.C_Animal a WHERE a.familiar='"+id+"'").list().iterator();
+        
+        sesion.close();
+        
+        return animales;
+        
+    }
+    
+    public static int numFactura (){
+        
+        
+        Session sesion=HibernateUtil.getSession();
+        int max;
+        
+        try{
+            max=Integer.parseInt(sesion.createQuery("select max(id) from POJOS.C_Factura").uniqueResult().toString());
+        }catch(Exception e){
+            max=0;
+        }
+        
+        sesion.close();
+        
+        return max;
+        
+    }
+    
     public static C_Veterinario recuperarVeterinarioPorId (int id){
         
         

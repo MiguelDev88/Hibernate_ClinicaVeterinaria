@@ -30,7 +30,7 @@ import org.hibernate.Session;
 public class MainWindow extends javax.swing.JFrame {
 
     Timer timer;
-    DefaultTableModel modeloCitas;
+    static DefaultTableModel modeloCitas;
     DefaultTableModel modeloVet;
     static DefaultTableModel modeloClientes;
     static Object[][] citas = new Object[38][8];
@@ -57,6 +57,8 @@ public class MainWindow extends javax.swing.JFrame {
     static String[] razasCaballo = {"Pura Sangre","Cuarto de Milla","Mustang"};
     static String[] vacunasCaballo = {"Influenza","Tétanos","Rinoneumonitis","Papera equina"};
     boolean update;
+    int idUpdate;
+    static Date fechaInicio, fechaFin;
     
     
     public MainWindow() {
@@ -106,8 +108,10 @@ public class MainWindow extends javax.swing.JFrame {
                      Iterator familiares = Consultas.recuperarPersonasPordni(dni);
                      while(familiares.hasNext())
                      {
-                         C_Persona familiar=(C_Familiar)familiares.next();
-                         cbDniFami.addItem(familiar.getDni());
+                        try{
+                            C_Persona familiar=(C_Familiar)familiares.next();
+                            cbDniFami.addItem(familiar.getDni());
+                        }catch(Exception e){}
                      }
                  }
                  //else{
@@ -129,8 +133,10 @@ public class MainWindow extends javax.swing.JFrame {
                      Iterator familiares = Consultas.recuperarPersonasPordni(dni);
                      while(familiares.hasNext())
                      {
-                         C_Persona familiar=(C_Familiar)familiares.next();
-                         cbCitaDni.addItem(familiar.getDni());
+                         try{
+                            C_Persona familiar=(C_Familiar)familiares.next();
+                            cbCitaDni.addItem(familiar.getDni());
+                         }catch(Exception e){}
                      }
                  }
                  //else{
@@ -139,6 +145,16 @@ public class MainWindow extends javax.swing.JFrame {
                 
             }
          });
+        Calendar cal = Calendar.getInstance();
+        fechaInicio=new Date();
+        cal.setTime(fechaInicio);
+        cal.add(Calendar.DATE, 7);
+        fechaFin=cal.getTime();
+        
+        cargarCitas();
+        
+        cal.setTime(fechaInicio);
+        cbCitaFiltroMes.setSelectedIndex(cal.get(Calendar.MONTH));
         
         
         
@@ -191,6 +207,9 @@ public class MainWindow extends javax.swing.JFrame {
     
     
     public static void cargarCitas() {
+           
+        
+        citas = new Object[38][8];
         
         try{
             
@@ -202,7 +221,7 @@ public class MainWindow extends javax.swing.JFrame {
                 
                 Date fecha = cita.getFecha();
                 
-                if(fecha.compareTo(new Date())>0)
+                if(fecha.after(fechaInicio) && fecha.before(fechaFin))
                    
                 {
                     System.out.println("LA FECHA ES MAYOR QUE HOY!!");
@@ -210,7 +229,13 @@ public class MainWindow extends javax.swing.JFrame {
                     c.setTime(fecha);
                     
                     int dia=c.get(Calendar.DAY_OF_WEEK)-1;
-                    String hora=c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE);
+                    String minutos;
+                    if(c.get(Calendar.MINUTE)==0)
+                        minutos="00";
+                    else
+                        minutos=String.valueOf(c.get(Calendar.MINUTE));
+                    
+                    String hora=c.get(Calendar.HOUR_OF_DAY)+":"+minutos;
                     System.out.println("la cita es en un:"+dia+"para las "+hora);
                     
                     for (int i=0;i<horas.length;i++)
@@ -221,6 +246,22 @@ public class MainWindow extends javax.swing.JFrame {
                 }
                 
             }
+            
+            for(int i=0;i<horas.length;i++){
+                citas[i][0]=horas[i];
+            }
+        
+        String[] columnasCitas=new String[]{"   ", "Lunes ","Martes"," Miercoles", "Jueves" , "Viernes" , "Sabado"};
+        modeloCitas=new DefaultTableModel(citas, columnasCitas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //no quiero que se edite nada!!! 
+                return false;
+            }
+        };
+        
+            System.out.println("RESETEO MODELO!!!!!!!!");
+        tablaCitas.setModel(modeloCitas);
          
         }catch (Exception e) {
             
@@ -330,13 +371,15 @@ public class MainWindow extends javax.swing.JFrame {
         btnEliminarCita = new javax.swing.JButton();
         btnEditarCita = new javax.swing.JButton();
         btnNuevaCita = new javax.swing.JButton();
-        txtNombreVet1 = new javax.swing.JTextField();
         panelVerClientes2 = new javax.swing.JPanel();
-        btnVerCli2 = new javax.swing.JButton();
+        btnVetCita = new javax.swing.JButton();
         btnCitaCli2 = new javax.swing.JButton();
-        lbNombreVet1 = new javax.swing.JLabel();
+        lbFechasCita = new javax.swing.JLabel();
         panelCitasList = new javax.swing.JScrollPane();
         tablaCitas = new javax.swing.JTable();
+        cbCitaFiltroMes = new javax.swing.JComboBox<>();
+        jLabel20 = new javax.swing.JLabel();
+        cbCitaFiltroSemana = new javax.swing.JComboBox<>();
         panelFacturas = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnModificarFact = new javax.swing.JButton();
@@ -515,7 +558,8 @@ public class MainWindow extends javax.swing.JFrame {
         btnVetCancelar = new javax.swing.JButton();
         lbVetNombre = new javax.swing.JLabel();
         btnVetAceptar = new javax.swing.JButton();
-
+        txtVetNombre = new javax.swing.JTextField();
+        lbVetTlf = new javax.swing.JLabel();
         dialogContacto = new javax.swing.JDialog();
         icContacto = new javax.swing.JLabel();
         lbDNI = new javax.swing.JLabel();
@@ -528,10 +572,6 @@ public class MainWindow extends javax.swing.JFrame {
         txTel = new javax.swing.JLabel();
         txEmail = new javax.swing.JLabel();
         txDir = new javax.swing.JLabel();
-
-        txtVetNombre = new javax.swing.JTextField();
-        lbVetTlf = new javax.swing.JLabel();
-
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -718,6 +758,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnContactoCli.setText("Datos Contacto");
         btnContactoCli.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnContactoCli.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnContactoCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContactoCliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelContactoClientesLayout = new javax.swing.GroupLayout(panelContactoClientes);
         panelContactoClientes.setLayout(panelContactoClientesLayout);
@@ -748,7 +793,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Familiar", "Nombre", "Id" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Id" }));
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroActionPerformed(evt);
@@ -798,11 +843,11 @@ public class MainWindow extends javax.swing.JFrame {
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelClientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelDatosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelVerClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelContactoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelVerClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelContactoClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelDatosClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
                 .addComponent(panelFiltrosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scrollTabla)
@@ -915,6 +960,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnEliminarVet.setText("Eliminar");
         btnEliminarVet.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminarVet.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminarVet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarVetActionPerformed(evt);
+            }
+        });
 
         btnEditarVet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/archivo-nuevo.png"))); // NOI18N
         btnEditarVet.setText("Editar");
@@ -1054,7 +1104,7 @@ public class MainWindow extends javax.swing.JFrame {
         panelContactoClientes2.setPreferredSize(new java.awt.Dimension(197, 67));
 
         btnMailCli2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/mensaje.png"))); // NOI18N
-        btnMailCli2.setText("Enviar Mail");
+        btnMailCli2.setText("borrame");
         btnMailCli2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnMailCli2.setMaximumSize(new java.awt.Dimension(93, 23));
         btnMailCli2.setMinimumSize(new java.awt.Dimension(93, 23));
@@ -1062,7 +1112,7 @@ public class MainWindow extends javax.swing.JFrame {
         btnMailCli2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnContactoCli2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/phone.png"))); // NOI18N
-        btnContactoCli2.setText("Contacto");
+        btnContactoCli2.setText("borrametb");
         btnContactoCli2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnContactoCli2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnContactoCli2.addActionListener(new java.awt.event.ActionListener() {
@@ -1093,8 +1143,8 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         panelDatosClientes2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelDatosClientes2.setMaximumSize(new java.awt.Dimension(227, 67));
-        panelDatosClientes2.setMinimumSize(new java.awt.Dimension(227, 67));
+        panelDatosClientes2.setMinimumSize(new java.awt.Dimension(0, 0));
+        panelDatosClientes2.setPreferredSize(new java.awt.Dimension(249, 91));
 
         btnEliminarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/archivo.png"))); // NOI18N
         btnEliminarCita.setText("Eliminar");
@@ -1114,6 +1164,9 @@ public class MainWindow extends javax.swing.JFrame {
         btnNuevaCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/anadir-pagina-nueva.png"))); // NOI18N
         btnNuevaCita.setText("Nuevo");
         btnNuevaCita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNuevaCita.setMaximumSize(new java.awt.Dimension(65, 65));
+        btnNuevaCita.setMinimumSize(new java.awt.Dimension(65, 65));
+        btnNuevaCita.setPreferredSize(new java.awt.Dimension(65, 65));
         btnNuevaCita.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnNuevaCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1127,7 +1180,7 @@ public class MainWindow extends javax.swing.JFrame {
             panelDatosClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosClientes2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnNuevaCita)
+                .addComponent(btnNuevaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditarCita)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1149,13 +1202,13 @@ public class MainWindow extends javax.swing.JFrame {
         panelVerClientes2.setMaximumSize(new java.awt.Dimension(278, 47));
         panelVerClientes2.setMinimumSize(new java.awt.Dimension(278, 47));
 
-        btnVerCli2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/reanudar.png"))); // NOI18N
-        btnVerCli2.setText("Últimos Diagnosticos");
-        btnVerCli2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVerCli2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVetCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/reanudar.png"))); // NOI18N
+        btnVetCita.setText("Ver Detalles");
+        btnVetCita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnVetCita.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnCitaCli2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/calendario green.png"))); // NOI18N
-        btnCitaCli2.setText("Crear Cita");
+        btnCitaCli2.setText("no se");
         btnCitaCli2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCitaCli2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
@@ -1165,7 +1218,7 @@ public class MainWindow extends javax.swing.JFrame {
             panelVerClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelVerClientes2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnVerCli2)
+                .addComponent(btnVetCita)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCitaCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1176,11 +1229,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelVerClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCitaCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVerCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVetCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        lbNombreVet1.setText("Nombre:");
+        lbFechasCita.setText("Seleccione mes:");
 
         tablaCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1198,6 +1251,22 @@ public class MainWindow extends javax.swing.JFrame {
         tablaCitas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         panelCitasList.setViewportView(tablaCitas);
 
+        cbCitaFiltroMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        cbCitaFiltroMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCitaFiltroMesActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Seleccione semana:");
+
+        cbCitaFiltroSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semana 1", "Semana 2", "Semana 3", "Semana 4" }));
+        cbCitaFiltroSemana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCitaFiltroSemanaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCitasLayout = new javax.swing.GroupLayout(panelCitas);
         panelCitas.setLayout(panelCitasLayout);
         panelCitasLayout.setHorizontalGroup(
@@ -1205,34 +1274,46 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelCitasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelCitasList, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+                    .addComponent(panelCitasList, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
                     .addGroup(panelCitasLayout.createSequentialGroup()
-                        .addComponent(lbNombreVet1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNombreVet1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelCitasLayout.createSequentialGroup()
-                        .addComponent(panelDatosClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelVerClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelContactoClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelCitasLayout.createSequentialGroup()
+                                .addComponent(lbFechasCita)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbCitaFiltroMes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelCitasLayout.createSequentialGroup()
+                                .addComponent(panelDatosClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelCitasLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelVerClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelContactoClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelCitasLayout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addComponent(jLabel20)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbCitaFiltroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         panelCitasLayout.setVerticalGroup(
             panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCitasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelDatosClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelVerClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelContactoClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panelVerClientes2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelDatosClientes2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(panelContactoClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNombreVet1)
-                    .addComponent(txtNombreVet1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCitasList, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+                    .addComponent(lbFechasCita)
+                    .addComponent(cbCitaFiltroMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(cbCitaFiltroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelCitasList, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1424,12 +1505,12 @@ public class MainWindow extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lbNumFactura)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumFactura)
-                .addContainerGap())
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout panelFacturasLayout = new javax.swing.GroupLayout(panelFacturas);
@@ -1438,30 +1519,26 @@ public class MainWindow extends javax.swing.JFrame {
             panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFacturasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDatosFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelFacturasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelDatosFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelFacturasLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(4, 4, 4)
                         .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelFacturasLayout.createSequentialGroup()
                                 .addComponent(lbFechaFactura)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtFechaFactura))
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 237, Short.MAX_VALUE)
                             .addGroup(panelFacturasLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturasLayout.createSequentialGroup()
-                                .addGap(123, 123, 123)
-                                .addComponent(chkConsulta)))))
-                .addContainerGap())
+                                .addComponent(chkConsulta)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(937, 937, 937))
         );
         panelFacturasLayout.setVerticalGroup(
             panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1474,12 +1551,11 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbFechaFactura)
-                                .addComponent(txtFechaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(chkConsulta, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbFechaFactura)
+                            .addComponent(txtFechaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkConsulta))
+                        .addGap(9, 9, 9)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(panelDatosFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -2028,9 +2104,11 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(PanelDatosMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelDatosAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(dialogEditClientesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar)
+                        .addGap(4, 4, 4)))
                 .addContainerGap())
         );
         dialogEditClientesLayout.setVerticalGroup(
@@ -2042,11 +2120,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(PanelDatosMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelDatosFamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(dialogEditClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         panelDatosFamiliar5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Familiar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -2179,6 +2257,11 @@ public class MainWindow extends javax.swing.JFrame {
         txtCitaRaza.setEditable(false);
 
         cbCitaNombreAni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCitaNombreAni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCitaNombreAniActionPerformed(evt);
+            }
+        });
 
         lbCitaId.setText("ID:");
 
@@ -2315,7 +2398,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCitaDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCitaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2354,6 +2437,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         btnCitaCancel.setText("Cancelar");
+        btnCitaCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCitaCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dialogEditCitasLayout = new javax.swing.GroupLayout(dialogEditCitas.getContentPane());
         dialogEditCitas.getContentPane().setLayout(dialogEditCitasLayout);
@@ -2366,9 +2454,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(panelDatosCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(dialogEditCitasLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCitaAceptar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCitaCancel)
                 .addGap(29, 29, 29))
         );
@@ -2379,10 +2467,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(panelDatosFamiliar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDatosCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(dialogEditCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCitaAceptar)
-                    .addComponent(btnCitaCancel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dialogEditCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCitaCancel)
+                    .addComponent(btnCitaAceptar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2502,15 +2590,15 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        dialogFichaAnimal.setMaximumSize(new java.awt.Dimension(532, 476));
-        dialogFichaAnimal.setMinimumSize(new java.awt.Dimension(532, 476));
+        dialogFichaAnimal.setMinimumSize(new java.awt.Dimension(532, 520));
         dialogFichaAnimal.setModal(true);
+        dialogFichaAnimal.setResizable(false);
 
         lbFotoPerfil.setBackground(new java.awt.Color(255, 255, 255));
         lbFotoPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/placeHolder.png"))); // NOI18N
         lbFotoPerfil.setOpaque(true);
 
-        panelDatosFichaCli.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos básicos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        panelDatosFichaCli.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos básicos"));
 
         lbID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbID.setText("ID:");
@@ -2562,25 +2650,25 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(lbID)
                     .addComponent(txID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNomb)
-                    .addComponent(txNomb, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txNomb, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNomb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbEspecie)
-                    .addComponent(txEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbEspecie))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbRaza)
-                    .addComponent(txRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbRaza))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txSexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbSexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbFechaNac)
-                    .addComponent(txFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDatosFichaCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txFechaNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbFechaNac))
                 .addGap(22, 22, 22))
         );
 
@@ -2630,9 +2718,9 @@ public class MainWindow extends javax.swing.JFrame {
             panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosClinicosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPeso)
-                    .addComponent(txPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txPeso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbPeso))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbVacunas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2758,6 +2846,19 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout dialogEditVetLayout = new javax.swing.GroupLayout(dialogEditVet.getContentPane());
+        dialogEditVet.getContentPane().setLayout(dialogEditVetLayout);
+        dialogEditVetLayout.setHorizontalGroup(
+            dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogEditVetLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dialogEditVetLayout.setVerticalGroup(
+            dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         icContacto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/contacto.png"))); // NOI18N
 
         lbDNI.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -2807,9 +2908,12 @@ public class MainWindow extends javax.swing.JFrame {
         dialogContactoLayout.setVerticalGroup(
             dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogContactoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dialogContactoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(icContacto))
+                    .addGroup(dialogContactoLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbDNI)
                             .addComponent(txDNI))
@@ -2828,22 +2932,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(dialogContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbDir)
-                            .addComponent(txDir)))
-                    .addComponent(icContacto))
+                            .addComponent(txDir))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        javax.swing.GroupLayout dialogEditVetLayout = new javax.swing.GroupLayout(dialogEditVet.getContentPane());
-        dialogEditVet.getContentPane().setLayout(dialogEditVetLayout);
-        dialogEditVetLayout.setHorizontalGroup(
-            dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogEditVetLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        dialogEditVetLayout.setVerticalGroup(
-            dialogEditVetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -2888,8 +2978,30 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCliActionPerformed
+    private void clearClientes () {
         
+        txtNombreCli.setText("");
+        txtChipidCli.setText("");
+        txtFechaCli.setText("");
+        txtComentarioCli.setText("");
+        txtNombreFami.setText("");
+        txtTlfFami.setText("");
+        txtMailFami.setText("");
+        txtDireFami.setText("");
+        txtPesoCli.setText("");
+        
+        cbDniFami.removeAllItems();
+        cbTipoAni.setSelectedIndex(0);
+        
+        newRbHembra.setSelected(true);
+        
+    }
+    
+    
+    private void btnNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCliActionPerformed
+
+
+        clearClientes();
         dialogEditClientes.setVisible(true);
         dialogEditClientes.setModal(true);
         cbTipoAni.removeAllItems();
@@ -2940,7 +3052,6 @@ public class MainWindow extends javax.swing.JFrame {
         else
             sexo='M';
 
-
         String dni= cbDniFami.getSelectedItem().toString();
 
         String Nombre = txtNombreFami.getText();
@@ -2952,14 +3063,46 @@ public class MainWindow extends javax.swing.JFrame {
         C_Familiar familiar= new C_Familiar (dni, Nombre, Telefono, mail, Telefono);
 
         C_Animal animal=new C_Animal(nombreAni, tipo, raza, sexo, fecha_nac, peso, comentario, familiar);
-
-
-        Guardar.guardarAnimal(animal);
+        
+        
+        if(update)
+        { 
+            Update.updateAnimal(animal,idUpdate);
+            update=false;
+            
+        }
+        else
+            Guardar.guardarAnimal(animal);
+        
+        modeloClientes.setRowCount(0);
+        cargarAnimales();
 
         dialogEditClientes.dispose();
         
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void clearDialogCitas() {
+        
+        cbCitaDni.removeAllItems();
+        cbCitaDni.setEnabled(true);
+        txtCitaNombreFami.setText("");
+        txtCitaTipo.setText("");
+        txtCitaTlfFami.setText("");
+        txtCitaMailFami.setText("");
+        cbCitaNombreAni.removeAllItems();
+        cbCitaNombreAni.setEnabled(true);
+        
+        txtCitaAsunto.setText("");
+        txtCitaRaza.setText("");
+        txtCitaId.setText("");
+
+
+        cbVetCita.removeAllItems();
+        Consultas.cargarVetCombo(cbVetCita); 
+        txtResumenCita.setText("");
+        cargarCitasLibres();
+                
+    }
     private void btnNuevaCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCitaActionPerformed
         
         
@@ -2968,6 +3111,7 @@ public class MainWindow extends javax.swing.JFrame {
         dialogEditCitas.setModal(true);
         dialogEditCitas.setSize(800, 650);
         cbCitaNombreAni.setEnabled(false);
+        clearDialogCitas();
         cargarCitasLibres();
         Consultas.cargarVetCombo(cbVetCita);   
         
@@ -2976,45 +3120,9 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
         
         cambiarPanel(panelCitas);
-
-        Calendar calendar=Calendar.getInstance();
-        String[] columnasCitas=new String[7];
-        switch(calendar.get(Calendar.DAY_OF_WEEK)){
-            case Calendar.MONDAY:
-                columnasCitas=new String[]{"   ", "Lunes ","Martes"," Miercoles", "Jueves" , "Viernes" , "Sabado"};
-                break;
-            case Calendar.TUESDAY:
-                columnasCitas=new String[]{"   ","Martes"," Miercoles", "Jueves" , "Viernes" , "Sabado", "Lunes "};
-                break;
-            case Calendar.WEDNESDAY:
-                columnasCitas=new String[]{"   "," Miercoles", "Jueves" , "Viernes" , "Sabado", "Lunes ","Martes"};
-                break;
-            case Calendar.THURSDAY:
-                columnasCitas=new String[]{"   ", "Jueves" , "Viernes" , "Sabado", "Lunes ","Martes"," Miercoles"};
-                break;
-            case Calendar.FRIDAY:
-                columnasCitas=new String[]{"   ", "Viernes" , "Sabado", "Lunes ","Martes"," Miercoles", "Jueves"};
-                break;
-            case Calendar.SATURDAY:
-                columnasCitas=new String[]{"   " , "Sabado", "Lunes ","Martes"," Miercoles", "Jueves" , "Viernes"};
-                break;
-            case Calendar.SUNDAY:
-                columnasCitas=new String[]{"   ", "Lunes ","Martes"," Miercoles", "Jueves" , "Viernes" , "Sabado"};
-                break;
-            
-        }
-        
-        for (int i=0;i<horas.length;i++){
-            citas[i][0]=horas[i];
-        }
         cargarCitas();
-        modeloCitas=new DefaultTableModel(citas, columnasCitas){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                //no quiero que se edite nada!!! 
-                return false;
-            }
-        };
+
+
         
         //configuracion del renderer
         DefaultTableCellRenderer myRenderer = new DefaultTableCellRenderer();
@@ -3037,6 +3145,16 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
         cambiarPanel(panelFacturas);
+        
+        Date today=new Date();
+        
+        txtFechaFactura.setText(today.toString());
+        
+        int max=Consultas.numFactura();
+        
+        
+        
+        
     }//GEN-LAST:event_btnFacturasActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
@@ -3084,13 +3202,10 @@ public class MainWindow extends javax.swing.JFrame {
         if(tablaClientes.getSelectedRowCount()>0)
         {
             int id=(int)modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
-
+            System.out.println("tengo el id:"+id);
             C_Animal animal = Consultas.recuperarAnimalPorId(id);
+            System.out.println("tengo el id:"+id+" q es de "+animal.getNombre());
             
-            
-            dialogEditClientes.setVisible(true);
-            dialogEditClientes.setModal(true);
-            cargarFamiliares();
             
             txtNombreCli.setText(animal.getNombre());
             txtChipidCli.setText(animal.getId_chip());
@@ -3108,6 +3223,13 @@ public class MainWindow extends javax.swing.JFrame {
             txtTlfFami.setText(animal.getFamiliar().getTelefono());
             txtMailFami.setText(animal.getFamiliar().getEmail());
             txtDireFami.setText( ((C_Familiar)animal.getFamiliar()).getDireccion());
+            
+            dialogEditClientes.setVisible(true);
+            dialogEditClientes.setModal(true);
+            cargarFamiliares();
+            
+            update=true;
+            idUpdate=id;
         
         }
         
@@ -3176,7 +3298,33 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void cbCitaDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCitaDniActionPerformed
         
-        cbCitaNombreAni.setEnabled(true);
+        
+        try{
+           
+            String dni= cbCitaDni.getSelectedItem().toString();
+
+            
+            C_Persona familiar= Consultas.recuperarUnaPersonaPordni(dni);
+
+            if(familiar != null){
+
+                txtCitaTlfFami.setText(familiar.getTelefono());
+                txtCitaMailFami.setText(familiar.getEmail());
+                txtCitaNombreFami.setText(familiar.getNombre());
+                cbCitaNombreAni.setEnabled(true);
+                cbCitaNombreAni.removeAllItems();
+                Iterator animales=Consultas.recuperarAnimalesPorIdFamiliar(familiar.getId());
+                while(animales.hasNext())
+                {
+                    C_Animal animal=(C_Animal)animales.next();
+                    cbCitaNombreAni.addItem(animal.getNombre());
+                }
+            
+        }
+      }catch(Exception e){}
+        
+        
+        
     }//GEN-LAST:event_cbCitaDniActionPerformed
 
     private void btnCitaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaCliActionPerformed
@@ -3234,10 +3382,17 @@ public class MainWindow extends javax.swing.JFrame {
                     System.out.println("coincide!!");
                     //cal.setTime(fecha);
                     
-                    String hora=cal.getTime().getHours()+":"+cal.getTime().getMinutes();
+                    //String hora=cal.getTime().getHours()+":"+cal.getTime().getMinutes();
+                    String hora=String.valueOf(cal.getTime().getHours());
+                    String mins;
+                    if(cal.getTime().getMinutes()==0)
+                        mins="00";
+                    else
+                        mins=String.valueOf(cal.getTime().getMinutes());
                     System.out.println("elimino la hora"+hora);
 
-                    cbCitaHora.removeItem(hora);
+                    String horaCita = hora+":"+mins;
+                    cbCitaHora.removeItem(horaCita);
                     System.out.println("cita eliminada");
                 }
                 else
@@ -3480,6 +3635,7 @@ public class MainWindow extends javax.swing.JFrame {
             txComentario.setText(animal.getComentario());
             
             dialogFichaAnimal.setVisible(true);
+            //dialogFichaAnimal.setSize(532,500);
         }
         
         
@@ -3515,6 +3671,10 @@ public class MainWindow extends javax.swing.JFrame {
         fecha=calendar.getTime();
         
         Guardar.guardarCita(veterinario, idAnimal, fecha, asunto);
+        modeloCitas.setRowCount(0);
+        cargarCitas();
+        
+        dialogEditCitas.dispose();
     
         
         
@@ -3609,33 +3769,84 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_cbCitaHoraActionPerformed
 
     private void btnEditarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCitaActionPerformed
-        
-        if(tablaCitas.getSelectedRowCount()>0)
+        try{
+        System.out.println("empezamos");
+        if(tablaCitas.getSelectedRowCount()>0 && tablaCitas.getSelectedColumn()>0)
         {
-            dialogEditCitas.setVisible(true);
-            dialogEditCitas.setModal(true);
-            dialogEditCitas.setSize(800, 650);
-            cbCitaNombreAni.setEnabled(false);
-            cbCitaDni.setEnabled(false);
-            
-            String hora= modeloCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString();
-            String dia=modeloCitas.getValueAt(0, tablaCitas.getSelectedColumn()).toString();
-            Calendar calendar=Calendar.getInstance();
-            
-            cargarCitasLibres();
-            Consultas.cargarVetCombo(cbVetCita);  
+            System.out.println("busco la cita");
+            C_Cita cita= (C_Cita)modeloCitas.getValueAt(tablaCitas.getSelectedRow(), tablaCitas.getSelectedColumn());
+            System.out.println("sera null?");
+            if(cita!=null)
+            {
+                System.out.println("no es NULL");
+                clearDialogCitas();
+                System.out.println("a poner cosas"+cita.getAnimal().getNombre());
+                dialogEditCitas.setVisible(true);
+                System.out.println("esto hace plof?");
+                dialogEditCitas.setModal(true);
+                dialogEditCitas.setSize(800, 650);
+                cbCitaNombreAni.setEnabled(false);
+                cbCitaDni.setEnabled(false);
+                cbCitaDni.removeAllItems();
+                cbCitaDni.addItem(cita.getAnimal().getFamiliar().getDni());
+                System.out.println("ahora los txt");
+                txtCitaNombreFami.setText(cita.getAnimal().getFamiliar().getNombre());
+                        System.out.println("nombre puesto");
+                txtCitaTipo.setText(cita.getAnimal().getTipo());
+                txtCitaTlfFami.setText(cita.getAnimal().getFamiliar().getTelefono());
+                txtCitaMailFami.setText(cita.getAnimal().getFamiliar().getEmail());
+                cbCitaNombreAni.removeAllItems();
+                cbCitaNombreAni.addItem(cita.getAnimal().getNombre());
+                txtCitaAsunto.setText(cita.getAsunto());
+                txtCitaRaza.setText(cita.getAnimal().getRaza());
+                txtCitaId.setText(String.valueOf(cita.getAnimal().getId()));
+                
+                Date fecha = cita.getFecha();
+                Calendar cal=Calendar.getInstance();
+                
+                cal.setTime(fecha);
+                
+                cbCitaMes.setSelectedIndex(cal.get(Calendar.MONTH));
+                cbCitaDia.setSelectedIndex(cal.get(Calendar.DAY_OF_MONTH)-1);
+                
+                String hora=String.valueOf(cal.get(Calendar.HOUR));
+                String minutos;
+                
+                if(cal.get(Calendar.MINUTE)==0)
+                    minutos="00";
+                else
+                    minutos=String.valueOf(cal.get(Calendar.MINUTE));
+                
+                String time=hora+":"+minutos;
+                
+                cbCitaHora.setSelectedItem(time);
+
+                cbVetCita.removeAllItems();
+                cbVetCita.addItem(cita.getVeterinario().getNombre());
+                txtResumenCita.setText("cita para el:    "+fecha.toString());
+                
+            }
         }
+        }catch(Exception e){System.out.println(e.getMessage());}
     }//GEN-LAST:event_btnEditarCitaActionPerformed
 
     private void btnVetCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVetCancelarActionPerformed
         
         dialogEditVet.dispose();
+        clearDialogVet();
     }//GEN-LAST:event_btnVetCancelarActionPerformed
 
+    private void clearDialogVet () {
+        
+        txtVetNombre.setText("");
+        txtVetDni.setText("");
+        txtVetEmail.setText("");
+        txtVetTlf.setText("");
+        txtNumLicencia.setText("");
+    }
     private void btnVetAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVetAceptarActionPerformed
         
-        
-        
+
         String nombre, dni, licencia, tlf, mail;
         
         nombre=txtVetNombre.getText();
@@ -3644,15 +3855,20 @@ public class MainWindow extends javax.swing.JFrame {
         mail=txtVetEmail.getText();
         licencia=txtNumLicencia.getText();
         
+        C_Veterinario veterinario= new C_Veterinario(dni, nombre, tlf, mail, licencia);
+        
         if(update==true)
         {
-            Update.updateVet(dni);
+            Update.updateVet(veterinario,idUpdate);
+            update=false;
         }
         else
         {
-            C_Veterinario veterinario= new C_Veterinario(dni, nombre, tlf, mail, licencia);
             Guardar.guardarVet(veterinario);
         }    
+        
+        dialogEditVet.dispose();
+        clearDialogVet();
                 
     }//GEN-LAST:event_btnVetAceptarActionPerformed
 
@@ -3673,12 +3889,204 @@ public class MainWindow extends javax.swing.JFrame {
             txtVetEmail.setText(vet.getEmail());
             txtNumLicencia.setText(vet.getNumLicencia());
             update=true;
+            idUpdate=id;
         }
         
         
         
         
     }//GEN-LAST:event_btnEditarVetActionPerformed
+
+    private void btnContactoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactoCliActionPerformed
+        
+        
+        if(tablaClientes.getSelectedRowCount()>0)
+        {
+            dialogContacto.setVisible(true);
+            dialogContacto.setSize(480,225);
+         
+            int id=Integer.parseInt(modeloClientes.getValueAt(tablaClientes.getSelectedRow(), 0).toString());
+            
+            C_Animal animal = Consultas.recuperarAnimalPorId(id);
+            
+            C_Persona familiar=animal.getFamiliar();
+            
+            txDNI.setText(familiar.getDni());
+            txNombre.setText(familiar.getNombre());
+            txTel.setText(familiar.getTelefono());
+            txEmail.setText(familiar.getEmail());
+            txDir.setText(((C_Familiar)familiar).getDireccion());
+            
+                    
+        }
+    }//GEN-LAST:event_btnContactoCliActionPerformed
+
+    private void btnEliminarVetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarVetActionPerformed
+        
+        if(tablaVeterinarios.getSelectedRowCount()>0)
+        {
+            int id=(int)modeloVet.getValueAt(tablaVeterinarios.getSelectedRow(), 0);    
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (frameClientes, "¿Está Seguro que desea eliminar este registro?","Warning",dialogButton);
+            
+            if(dialogResult == JOptionPane.YES_OPTION){
+            
+                Eliminar.EliminarVeterinario(id);
+                
+                modeloVet.removeRow(tablaVeterinarios.getSelectedRow()); 
+            }
+        }
+        
+    }//GEN-LAST:event_btnEliminarVetActionPerformed
+
+    private void btnCitaCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaCancelActionPerformed
+        
+        dialogEditCitas.dispose();
+        //clearDialogCitas();
+        
+    }//GEN-LAST:event_btnCitaCancelActionPerformed
+
+    private void cbCitaFiltroMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCitaFiltroMesActionPerformed
+        
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(fechaInicio);
+
+        switch(cbCitaFiltroMes.getSelectedIndex()){
+            case Calendar.JANUARY:
+                cal.set(Calendar.MONTH, Calendar.JANUARY);
+                break;
+            case Calendar.FEBRUARY:
+                cal.set(Calendar.MONTH, Calendar.FEBRUARY);
+                break;
+            case Calendar.MARCH:
+                cal.set(Calendar.MONTH, Calendar.MARCH);
+                break;
+            case Calendar.APRIL:
+                cal.set(Calendar.MONTH, Calendar.APRIL);
+                break;
+            case Calendar.MAY:
+                cal.set(Calendar.MONTH, Calendar.MAY);
+                break;
+            case Calendar.JUNE:
+                cal.set(Calendar.MONTH, Calendar.JUNE);
+                break;
+            case Calendar.JULY:
+                cal.set(Calendar.MONTH, Calendar.JULY);
+                break;
+            case Calendar.AUGUST:
+                cal.set(Calendar.MONTH, Calendar.AUGUST);
+                break;
+            case Calendar.SEPTEMBER:
+                cal.set(Calendar.MONTH, Calendar.SEPTEMBER);
+                break;
+            case Calendar.OCTOBER:
+                cal.set(Calendar.MONTH, Calendar.OCTOBER);
+                break;
+            case Calendar.NOVEMBER:
+                cal.set(Calendar.MONTH, Calendar.NOVEMBER);
+                break;
+            case Calendar.DECEMBER:
+                cal.set(Calendar.MONTH, Calendar.DECEMBER);
+                break;
+        }
+        
+        cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
+        
+        while(cal.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY){
+            cal.add(Calendar.DATE,1);
+            System.out.println("sumo un dia, ahora tengo:"+cal.getTime());
+        }
+        
+        
+        fechaInicio=cal.getTime();
+        cal.add(Calendar.DATE, 7);
+        fechaFin=cal.getTime();
+        System.out.println("ahora las fechas son"+fechaInicio.toString()+"   y  "+fechaFin.toString()  );
+        modeloCitas.setRowCount(0);
+        cargarCitas();
+        cbCitaFiltroSemana.setSelectedIndex(0);
+
+       
+        
+    }//GEN-LAST:event_cbCitaFiltroMesActionPerformed
+
+    private void cbCitaFiltroSemanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCitaFiltroSemanaActionPerformed
+        
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(fechaInicio);
+        //Time time= Time.valueOf("6:00:00");
+        cal.set(Calendar.HOUR_OF_DAY, 6);
+        //cal.get(Calendar.MONTH);
+        System.out.println("tengo la fecha"+cal.getTime());
+        System.out.println("pregunto algo raro");
+        cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
+        System.out.println("ahora tengo"+cal.getTime());
+        
+        while(cal.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY){
+            cal.add(Calendar.DATE,1);
+            System.out.println("sumo un dia, ahora tengo:"+cal.getTime());
+        }
+        
+        switch(cbCitaFiltroSemana.getSelectedIndex()){
+            case 0:
+                fechaInicio=cal.getTime();
+                cal.add(Calendar.DATE, 7);
+                fechaFin=cal.getTime();
+                break;
+            case 1:
+                cal.add(Calendar.DATE, 7);
+                fechaInicio=cal.getTime();
+                cal.add(Calendar.DATE, 7);
+                fechaFin=cal.getTime();
+                break;
+            case 2:
+                cal.add(Calendar.DATE, 14);
+                fechaInicio=cal.getTime();
+                cal.add(Calendar.DATE, 7);
+                fechaFin=cal.getTime();
+                break;
+            case 3:
+                cal.add(Calendar.DATE, 21);
+                fechaInicio=cal.getTime();
+                cal.add(Calendar.DATE, 7);
+                fechaFin=cal.getTime();
+                break;
+                
+        }
+        
+        System.out.println("LAS FECHAS FINALES SON!!!" +fechaInicio.toString() +"   y   "+ fechaFin.toString());
+        
+        modeloCitas.setRowCount(0);
+        cargarCitas();
+        
+        
+    }//GEN-LAST:event_cbCitaFiltroSemanaActionPerformed
+
+    private void cbCitaNombreAniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCitaNombreAniActionPerformed
+        
+
+        try{
+            String dni= cbCitaDni.getSelectedItem().toString();
+            C_Persona familiar= Consultas.recuperarUnaPersonaPordni(dni);
+
+            if(familiar != null){
+                Iterator animales=Consultas.recuperarAnimalesPorIdFamiliar(familiar.getId());
+                while(animales.hasNext())
+                {
+                    C_Animal animal=(C_Animal)animales.next();
+                    if(animal.getNombre().compareTo(cbCitaNombreAni.getSelectedItem().toString())==0)
+                    {
+                        txtCitaId.setText(String.valueOf(animal.getId()));
+                        txtCitaTipo.setText(animal.getTipo());
+                        txtCitaRaza.setText(animal.getRaza());  
+                    }
+                }
+
+            }
+        }catch(Exception e){}
+        
+        
+    }//GEN-LAST:event_cbCitaNombreAniActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -3753,12 +4161,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnVenta;
     private javax.swing.JButton btnVerCli;
     private javax.swing.JButton btnVerCli1;
-    private javax.swing.JButton btnVerCli2;
     private javax.swing.JButton btnVetAceptar;
     private javax.swing.JButton btnVetCancelar;
+    private javax.swing.JButton btnVetCita;
     private javax.swing.JButton btnVeterinarios;
     private static javax.swing.JComboBox<String> cbCitaDia;
     private static javax.swing.JComboBox<String> cbCitaDni;
+    private javax.swing.JComboBox<String> cbCitaFiltroMes;
+    private javax.swing.JComboBox<String> cbCitaFiltroSemana;
     private static javax.swing.JComboBox<String> cbCitaHora;
     private static javax.swing.JComboBox<String> cbCitaMes;
     private javax.swing.JComboBox<String> cbCitaNombreAni;
@@ -3798,6 +4208,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3851,6 +4262,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbFechaFactura;
     private javax.swing.JLabel lbFechaNac;
     private javax.swing.JLabel lbFecha_nacAni;
+    private javax.swing.JLabel lbFechasCita;
     private javax.swing.JLabel lbFotoPerfil;
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbIDInv;
@@ -3863,7 +4275,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbNombreFami;
     private javax.swing.JLabel lbNombreFami2;
     private javax.swing.JLabel lbNombreVet;
-    private javax.swing.JLabel lbNombreVet1;
     private javax.swing.JLabel lbNumFactura;
     private javax.swing.JLabel lbNum_Licencia;
     private javax.swing.JLabel lbPeso;
@@ -3917,7 +4328,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.ButtonGroup rbgSexo;
     private javax.swing.JScrollPane scrollTabla;
     private javax.swing.JScrollPane scrollTabla1;
-    private javax.swing.JTable tablaCitas;
+    private static javax.swing.JTable tablaCitas;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
     private javax.swing.JTextArea txComentario;
@@ -3956,7 +4367,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreFact;
     private javax.swing.JTextField txtNombreFami;
     private javax.swing.JTextField txtNombreVet;
-    private javax.swing.JTextField txtNombreVet1;
     private javax.swing.JTextField txtNumFactura;
     private javax.swing.JTextField txtNumLicencia;
     private javax.swing.JTextField txtPesoCli;

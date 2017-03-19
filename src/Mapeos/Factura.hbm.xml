@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    
+    <class name="POJOS.C_Factura" table="facturas" >
+        <id name="id" column="id" >
+            <generator class="increment"/>
+        </id>
+        <property name="importe" />
+        <many-to-one class="POJOS.C_Familiar"  name="cliente" column="cliente" lazy="false"/>
+        <set name="productos" table="facturas_productos" cascade="save-update" lazy="false">           
+            <key column="id_factura"/>
+            <many-to-many class="POJOS.C_Producto" column="id_producto"/>
+        </set>
+    </class>
+    
+</hibernate-mapping>

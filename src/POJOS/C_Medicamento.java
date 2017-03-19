@@ -11,9 +11,9 @@ public class C_Medicamento extends C_Producto {
     
     public C_Medicamento () {}
     
-    public C_Medicamento (String nombre, String tipo, String principioActivo, String dosis, String precio, String clasificacion) {
+    public C_Medicamento (String nombre, String tipo, int img, String principioActivo, String dosis, String precio, String clasificacion) {
         
-        super(nombre,tipo,precio);
+        super(nombre,tipo,precio, img);
         this.clasificacion=clasificacion;
         this.principioActivo=principioActivo;
         this.dosis=dosis;

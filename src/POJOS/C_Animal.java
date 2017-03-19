@@ -137,5 +137,10 @@ public class C_Animal implements Serializable {
     public void setVacunas(Set vacunas) {
         this.vacunas = vacunas;
     }
+    
+    @Override
+    public String toString(){
+      return nombre;  
+    }
 
 }

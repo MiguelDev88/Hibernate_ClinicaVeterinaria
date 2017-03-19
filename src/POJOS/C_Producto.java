@@ -11,14 +11,16 @@ public class C_Producto implements Serializable{
     private String descripcion;
     private String tipo;
     private String precio;
+    private int img;
     
     public C_Producto () {}
     
-    public C_Producto (String nombre, String tipo, String precio) {
+    public C_Producto (String nombre, String tipo, String precio, int img) {
         
         this.nombre=nombre;
         this.tipo=tipo;
         this.precio=precio;
+        this.img=img;
     }
 
     public int getId() {
@@ -61,4 +63,14 @@ public class C_Producto implements Serializable{
     public void setPrecio(String precio) {
         this.precio = precio;
     }
+
+    public int getImg() {
+        return img;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
+    
+    
 }

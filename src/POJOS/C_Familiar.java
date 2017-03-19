@@ -1,12 +1,10 @@
 package POJOS;
-import java.util.List;
 
 
 // @author Miguel
 
 public class C_Familiar extends C_Persona {
     
-    private List mascotas;
     private String direccion;
     
     public C_Familiar () {}
@@ -18,13 +16,6 @@ public class C_Familiar extends C_Persona {
         
     }
 
-    public List getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(List mascotas) {
-        this.mascotas = mascotas;
-    }
 
     public String getDireccion() {
         return direccion;
