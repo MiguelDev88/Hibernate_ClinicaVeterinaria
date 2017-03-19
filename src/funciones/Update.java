@@ -1,6 +1,10 @@
 package funciones;
 import POJOS.*;
 import hibernate_clinicaveterinaria.HibernateUtil;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Set;
 import org.hibernate.Session;
 
 
@@ -26,7 +30,7 @@ public class Update {
         sesion.close();
     }
     
-    public static void updateAnimal (C_Animal newAnimal, int id){
+    public static void updateAnimal (C_Animal newAnimal, int id, LinkedList listaVacunas){
         
         Session sesion=HibernateUtil.getSession();
             
@@ -38,6 +42,19 @@ public class Update {
         animal.setFecha_nac(newAnimal.getFecha_nac());
         animal.setPeso(newAnimal.getPeso());
         animal.setComentario(newAnimal.getComentario());
+        
+        Iterator vacunas=listaVacunas.iterator();
+        Set vacunasNew=new HashSet();
+        while(vacunas.hasNext())
+        {
+            String v=(String) vacunas.next();
+            C_Medicamento vacuna= (C_Medicamento)sesion.createQuery("FROM POJOS.C_Medicamento v WHERE v.nombre='"+v+"'").uniqueResult();
+            vacunasNew.add(vacuna);
+            System.out.println("puse una vacuna en update");
+        }
+        
+        animal.setVacunas(vacunasNew);
+        
         
         sesion.beginTransaction();
         sesion.save(animal);

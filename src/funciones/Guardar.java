@@ -2,6 +2,8 @@ package funciones;
 import POJOS.*;
 import hibernate_clinicaveterinaria.HibernateUtil;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import org.hibernate.Session;
 
 /**
@@ -10,7 +12,7 @@ import org.hibernate.Session;
  */
 public class Guardar {
     
-    public static void guardarAnimal (C_Animal animal) {
+    public static void guardarAnimal (C_Animal animal, LinkedList listaVacunas) {
         
         
         Session sesion=HibernateUtil.getSession();
@@ -19,6 +21,16 @@ public class Guardar {
 
         if(familiar != null)
             animal.setFamiliar(familiar);
+        
+        Iterator vacunas=listaVacunas.iterator();
+        
+        while(vacunas.hasNext())
+        {
+            String v=(String) vacunas.next();
+            C_Medicamento vacuna= (C_Medicamento)sesion.createQuery("FROM POJOS.C_Medicamento v WHERE v.nombre='"+v+"'").uniqueResult();
+            animal.getVacunas().add(vacuna);
+            System.out.println("puse una vacuna");
+        }
         
         sesion.beginTransaction();
         sesion.save(animal);

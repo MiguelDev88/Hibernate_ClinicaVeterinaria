@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     Timer timer;
     static DefaultTableModel modeloCitas;
+    static DefaultListModel modeloListaCitas;
     DefaultTableModel modeloVet;
     static DefaultTableModel modeloClientes;
     static Object[][] citas = new Object[38][8];
@@ -303,17 +305,20 @@ public class MainWindow extends javax.swing.JFrame {
         paneles.add(panelVeterinarios);
         paneles.add(panelFacturas);
         paneles.add(panelInventario);
+        paneles.add(panelDiagnosticos);
         
         for(int i=0;i<paneles.size();i++){
             if (paneles.get(i).isVisible()){
                 System.out.println("tengo un panel visible q es"+paneles.get(i));
                 paneles.get(i).getParent().add(panel);
-                //OJOO!! REVISAR exceso de paneles
+//              //OJOO!! REVISAR exceso de paneles
+                //paneles.get(i).getParent().remove(paneles.get(i));
+                 
                 paneles.get(i).setVisible(false);
                 panel.setSize(paneles.get(i).getSize());
                 panel.setLocation(paneles.get(i).getLocation());
                 panel.setVisible(true);
-                
+                break;
             }
         }
         
@@ -511,17 +516,31 @@ public class MainWindow extends javax.swing.JFrame {
         btnCitaCancel = new javax.swing.JButton();
         panelDiagnosticos = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        listaCitasVet = new javax.swing.JList<>();
         jPanel5 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
+        txhoraCitaDiag = new javax.swing.JLabel();
+        txTipoDiag = new javax.swing.JLabel();
+        txSexoDiag = new javax.swing.JLabel();
+        txNombreAniDiag = new javax.swing.JLabel();
+        txRazaDiag = new javax.swing.JLabel();
+        txFechaNacDiag = new javax.swing.JLabel();
+        txAsuntoDiag = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        panelTratamientos = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txTratamiento = new javax.swing.JTextArea();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        txDiagnostico = new javax.swing.JTextArea();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        listaMedicamentos = new javax.swing.JList<>();
+        jPanel11 = new javax.swing.JPanel();
+        btnFinDiag = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        cbVetDiagnosticos = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         dialogFichaAnimal = new javax.swing.JDialog();
         lbFotoPerfil = new javax.swing.JLabel();
@@ -578,6 +597,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/pawprint.png"))); // NOI18N
         btnClientes.setText("Clientes");
+        btnClientes.setToolTipText("");
         btnClientes.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -655,7 +675,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         btnNuevoCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/anadir-pagina-nueva.png"))); // NOI18N
         btnNuevoCli.setText("Nuevo");
-        btnNuevoCli.setToolTipText("");
         btnNuevoCli.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevoCli.setMaximumSize(new java.awt.Dimension(65, 65));
         btnNuevoCli.setMinimumSize(new java.awt.Dimension(65, 65));
@@ -850,11 +869,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(panelFiltrosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollTabla)
+                .addComponent(scrollTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        btnDiagnosticos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/almacen.png"))); // NOI18N
+        btnDiagnosticos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/medicina.png"))); // NOI18N
         btnDiagnosticos.setText("Diagnosticos");
         btnDiagnosticos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -893,12 +912,12 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVeterinarios, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDiagnosticos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDiagnosticos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -1281,9 +1300,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(lbFechasCita)
                                 .addGap(18, 18, 18)
                                 .addComponent(cbCitaFiltroMes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(panelCitasLayout.createSequentialGroup()
-                                .addComponent(panelDatosClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(panelDatosClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCitasLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1534,7 +1551,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 237, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                             .addGroup(panelFacturasLayout.createSequentialGroup()
                                 .addComponent(chkConsulta)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -2476,79 +2493,197 @@ public class MainWindow extends javax.swing.JFrame {
 
         panelDiagnosticos.setPreferredSize(new java.awt.Dimension(735, 680));
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        listaCitasVet.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane7.setViewportView(jList2);
+        listaCitasVet.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaCitasVetValueChanged(evt);
+            }
+        });
+        jScrollPane7.setViewportView(listaCitasVet);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        txhoraCitaDiag.setText("hora_Cita");
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txTipoDiag.setText("Tipo_Animal");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane8.setViewportView(jTextArea2);
+        txSexoDiag.setText("Sexo");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane9.setViewportView(jTextArea3);
+        txNombreAniDiag.setText("Nombre_Animal");
 
-        jLabel17.setText("Tratamiento:");
+        txRazaDiag.setText("Raza");
 
-        jLabel18.setText("Diagnóstico:");
+        txFechaNacDiag.setText("Fecha_Nac");
 
-        jButton2.setText("Finalizar");
+        txAsuntoDiag.setText("Asunto");
+
+        jCheckBox1.setText("jCheckBox1");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(txNombreAniDiag)
+                                .addGap(18, 18, 18)
+                                .addComponent(txSexoDiag))
+                            .addComponent(txTipoDiag)
+                            .addComponent(txRazaDiag)
+                            .addComponent(txFechaNacDiag)
+                            .addComponent(txAsuntoDiag)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(151, 151, 151)
+                        .addComponent(txhoraCitaDiag)))
+                .addContainerGap(152, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jCheckBox1)
+                .addGap(39, 39, 39))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel17))
+                .addGap(14, 14, 14)
+                .addComponent(txhoraCitaDiag)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txNombreAniDiag)
+                    .addComponent(txSexoDiag))
+                .addGap(11, 11, 11)
+                .addComponent(txTipoDiag)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txRazaDiag)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txFechaNacDiag)
+                .addGap(29, 29, 29)
+                .addComponent(txAsuntoDiag)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox1)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelTratamientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txTratamiento.setColumns(20);
+        txTratamiento.setRows(5);
+        jScrollPane8.setViewportView(txTratamiento);
+
+        txDiagnostico.setColumns(20);
+        txDiagnostico.setRows(5);
+        jScrollPane9.setViewportView(txDiagnostico);
+
+        jLabel17.setText("Tratamiento:");
+
+        jLabel18.setText("Diagnóstico:");
+
+        listaMedicamentos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane11.setViewportView(listaMedicamentos);
+
+        btnFinDiag.setText("Finalizar");
+        btnFinDiag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinDiagActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setText("jLabel21");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnFinDiag))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFinDiag, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout panelTratamientosLayout = new javax.swing.GroupLayout(panelTratamientos);
+        panelTratamientos.setLayout(panelTratamientosLayout);
+        panelTratamientosLayout.setHorizontalGroup(
+            panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTratamientosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel18)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                    .addComponent(jScrollPane11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                    .addComponent(jLabel17)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelTratamientosLayout.setVerticalGroup(
+            panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTratamientosLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        cbVetDiagnosticos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVetDiagnosticos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVetDiagnosticosActionPerformed(evt);
+            }
+        });
 
         jLabel19.setText("Citas para el veterinario:");
 
@@ -2559,17 +2694,17 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelDiagnosticosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelTratamientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelDiagnosticosLayout.createSequentialGroup()
                         .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDiagnosticosLayout.createSequentialGroup()
                                 .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbVetDiagnosticos, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(8, 8, 8)))
+                        .addGap(12, 12, 12)))
                 .addContainerGap())
         );
         panelDiagnosticosLayout.setVerticalGroup(
@@ -2578,15 +2713,14 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDiagnosticosLayout.createSequentialGroup()
-                        .addGap(0, 3, Short.MAX_VALUE)
                         .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbVetDiagnosticos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane7))
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelTratamientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -3064,15 +3198,33 @@ public class MainWindow extends javax.swing.JFrame {
 
         C_Animal animal=new C_Animal(nombreAni, tipo, raza, sexo, fecha_nac, peso, comentario, familiar);
         
+        LinkedList listaVacunas=new LinkedList<>();
+        
+        if(cbVacuna1.isSelected())
+            listaVacunas.add(cbVacuna1.getText());
+        if(cbVacuna2.isSelected())
+            listaVacunas.add(cbVacuna2.getText());
+        if(cbVacuna3.isSelected())
+            listaVacunas.add(cbVacuna3.getText());
+        if(cbVacuna4.isSelected())
+            listaVacunas.add(cbVacuna4.getText());
+        if(cbVacuna5.isSelected())
+            listaVacunas.add(cbVacuna5.getText());
+        if(cbVacuna6.isSelected())
+            listaVacunas.add(cbVacuna6.getText());
+        
+        
+        
+        
         
         if(update)
         { 
-            Update.updateAnimal(animal,idUpdate);
+            Update.updateAnimal(animal,idUpdate,listaVacunas);
             update=false;
             
         }
         else
-            Guardar.guardarAnimal(animal);
+            Guardar.guardarAnimal(animal, listaVacunas);
         
         modeloClientes.setRowCount(0);
         cargarAnimales();
@@ -3215,6 +3367,55 @@ public class MainWindow extends javax.swing.JFrame {
             txtFechaCli.setText(animal.getFecha_nac().toString());
             txtPesoCli.setText(""+animal.getPeso());
             txtComentarioCli.setText(animal.getComentario());
+            
+            //--tipo
+            
+            int tipo=0;
+            if(animal.getTipo().compareToIgnoreCase("gato")==0)
+                tipo=0;
+            else if(animal.getTipo().compareToIgnoreCase("perro")==0)
+                tipo=1;
+            else if(animal.getTipo().compareToIgnoreCase("Pájaro")==0)
+                tipo=2;
+            else if(animal.getTipo().compareToIgnoreCase("pez")==0)
+                tipo=3;
+            else if(animal.getTipo().compareToIgnoreCase("roedor")==0)
+                tipo=4;
+            else if(animal.getTipo().compareToIgnoreCase("vaca")==0)
+                tipo=5;
+            else if(animal.getTipo().compareToIgnoreCase("cerdo")==0)
+                tipo=6;
+            else if(animal.getTipo().compareToIgnoreCase("caballo")==0)
+                tipo=7;
+            
+            cargarComboTipos(tipo);
+            
+            //--vacunas
+            
+            Iterator vacunas=animal.getVacunas().iterator();
+            
+            while(vacunas.hasNext())
+            {
+                C_Medicamento vacuna=(C_Medicamento)vacunas.next();
+                System.out.println("tengo una vacuna");
+                if(cbVacuna1.getText().compareToIgnoreCase(vacuna.getNombre())==0)
+                    cbVacuna1.setSelected(true);
+                if(cbVacuna2.getText().compareToIgnoreCase(vacuna.getNombre())==0)
+                    cbVacuna2.setSelected(true);
+                if(cbVacuna3.getText().compareToIgnoreCase(vacuna.getNombre())==0)
+                    cbVacuna3.setSelected(true);
+                if(cbVacuna4.getText().compareToIgnoreCase(vacuna.getNombre())==0)
+                    cbVacuna4.setSelected(true);
+                if(cbVacuna5.getText().compareToIgnoreCase(vacuna.getNombre())==0)
+                    cbVacuna5.setSelected(true);
+                if(cbVacuna6.getText().compareToIgnoreCase(vacuna.getNombre())==0)
+                    cbVacuna6.setSelected(true);
+            }
+
+
+            
+            
+            
             
             //--familiar--
             
@@ -3422,10 +3623,6 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConfiguracionActionPerformed
 
-    private void btnDiagnosticosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosticosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDiagnosticosActionPerformed
-
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
         
         modeloClientes.setRowCount(0);
@@ -3505,15 +3702,10 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtFiltroKeyReleased
 
-    private void cbTipoAniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAniActionPerformed
+    private void cargarComboTipos(int tipo){
         
         cbRazaAni.removeAllItems();
-        
-        Component[] vacunas= panelVacunas.getComponents();
-        for (int i=0;i<vacunasGato.length;i++) {
-            ((JCheckBox)vacunas[i]).setText(vacunasGato[i]);
-        }
-        switch(cbTipoAni.getSelectedIndex()){
+        switch(tipo){
             case 0:
                 for (String raza : razasGato) 
                     cbRazaAni.addItem(raza);
@@ -3596,6 +3788,16 @@ public class MainWindow extends javax.swing.JFrame {
                 break;
             
         }
+    }
+    private void cbTipoAniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAniActionPerformed
+        
+        
+        Component[] vacunas= panelVacunas.getComponents();
+        for (int i=0;i<vacunasGato.length;i++) {
+            ((JCheckBox)vacunas[i]).setText(vacunasGato[i]);
+        }
+       
+        cargarComboTipos(cbTipoAni.getSelectedIndex());
         
         
     }//GEN-LAST:event_cbTipoAniActionPerformed
@@ -3624,8 +3826,10 @@ public class MainWindow extends javax.swing.JFrame {
             
             String listaVacunas="";
             Iterator vacunas=animal.getVacunas().iterator();
+            
             while(vacunas.hasNext())
             {
+                System.out.println("VISTA DE ANIMAL!! sumo vacuna!");
                 C_Medicamento vacuna=(C_Medicamento)vacunas.next();
                 listaVacunas+="  "+vacuna.getNombre();
             }
@@ -4088,6 +4292,100 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbCitaNombreAniActionPerformed
 
+    private void cbVetDiagnosticosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVetDiagnosticosActionPerformed
+        
+        try{
+            C_Veterinario vet=Consultas.recuperarVeterinarioPorNombre(cbVetDiagnosticos.getSelectedItem().toString());
+
+            Iterator itcitas=Consultas.cargarCitasporVet(vet.getId());
+
+            modeloListaCitas=new DefaultListModel();
+
+
+            while(itcitas.hasNext())
+            {
+                C_Cita cita=(C_Cita)itcitas.next();
+                modeloListaCitas.addElement(cita);
+            }
+
+
+            listaCitasVet.setModel(modeloListaCitas);
+        
+        }catch(Exception e){}
+        
+    }//GEN-LAST:event_cbVetDiagnosticosActionPerformed
+
+    private void clearDatosDiagnostico () {
+        
+        txNombreAniDiag.setText("");
+        txRazaDiag.setText("");
+        txFechaNacDiag.setText("");
+        txTipoDiag.setText("");
+        txSexoDiag.setText("");
+        txhoraCitaDiag.setText("");
+        txAsuntoDiag.setText("");
+        //txAsuntoDiag.setVisible(false);
+        txDiagnostico.setEnabled(false);
+        txTratamiento.setEnabled(false);
+        
+    }
+    private void listaCitasVetValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaCitasVetValueChanged
+        
+        if(listaCitasVet.getSelectedIndex()!= -1 )
+        {
+            txDiagnostico.setEnabled(true);
+            txTratamiento.setEnabled(true);
+            C_Cita cita=(C_Cita)modeloListaCitas.getElementAt(listaCitasVet.getSelectedIndex());
+            System.out.println("tengo la cita!!! ole!!!!!! ");
+            
+            txNombreAniDiag.setText(cita.getAnimal().getNombre());
+            txRazaDiag.setText(cita.getAnimal().getRaza());
+            txFechaNacDiag.setText(cita.getAnimal().getFecha_nac().toString());
+            txTipoDiag.setText(cita.getAnimal().getTipo());
+            txSexoDiag.setText(String.valueOf(cita.getAnimal().getSexo()));
+            txhoraCitaDiag.setText(cita.getFecha().toString());
+            txAsuntoDiag.setText(cita.getAsunto());
+            //txAsuntoDiag.setVisible(true);
+            
+        }
+        else
+        {
+            clearDatosDiagnostico();
+            txDiagnostico.setText("");
+            txTratamiento.setText("");
+        }
+        
+        
+        
+    }//GEN-LAST:event_listaCitasVetValueChanged
+
+    private void btnDiagnosticosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosticosActionPerformed
+
+        cambiarPanel(panelDiagnosticos);
+        Consultas.cargarVetCombo(cbVetDiagnosticos);
+
+        C_Veterinario vet=Consultas.recuperarVeterinarioPorNombre(cbVetDiagnosticos.getSelectedItem().toString());
+
+        Iterator itcitas=Consultas.cargarCitasporVet(vet.getId());
+
+        modeloListaCitas=new DefaultListModel();
+
+        while(itcitas.hasNext())
+        {
+            C_Cita cita=(C_Cita)itcitas.next();
+            modeloListaCitas.addElement(cita);
+        }
+
+        listaCitasVet.setModel(modeloListaCitas);
+        clearDatosDiagnostico();
+        
+
+    }//GEN-LAST:event_btnDiagnosticosActionPerformed
+
+    private void btnFinDiagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinDiagActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFinDiagActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -4150,6 +4448,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarCli3;
     private javax.swing.JButton btnEliminarVet;
     private javax.swing.JButton btnFacturas;
+    private javax.swing.JButton btnFinDiag;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnMailCli;
     private javax.swing.JButton btnMailCli1;
@@ -4183,6 +4482,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbVacuna5;
     private javax.swing.JCheckBox cbVacuna6;
     private javax.swing.JComboBox<String> cbVetCita;
+    private javax.swing.JComboBox<String> cbVetDiagnosticos;
     private javax.swing.JCheckBox chkConsulta;
     private javax.swing.JDialog dialogContacto;
     private javax.swing.JDialog dialogEditCitas;
@@ -4193,9 +4493,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel icContacto;
     private javax.swing.JLabel imgProducto;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -4209,6 +4508,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -4217,9 +4517,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel17;
@@ -4233,6 +4533,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -4242,8 +4543,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     private javax.swing.JLabel lbCitaAsunto;
     private javax.swing.JLabel lbCitaId;
@@ -4295,6 +4595,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbVetEmail;
     private javax.swing.JLabel lbVetNombre;
     private javax.swing.JLabel lbVetTlf;
+    private javax.swing.JList<String> listaCitasVet;
+    private javax.swing.JList<String> listaMedicamentos;
     private javax.swing.JRadioButton newRbHembra;
     private javax.swing.JRadioButton newRbMacho;
     private javax.swing.JPanel panelCitas;
@@ -4319,6 +4621,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelFacturas;
     private javax.swing.JPanel panelFiltrosClientes;
     private javax.swing.JPanel panelInventario;
+    private javax.swing.JPanel panelTratamientos;
     private javax.swing.JPanel panelVacunas;
     private javax.swing.JPanel panelVerClientes;
     private javax.swing.JPanel panelVerClientes1;
@@ -4331,20 +4634,29 @@ public class MainWindow extends javax.swing.JFrame {
     private static javax.swing.JTable tablaCitas;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
+    private javax.swing.JLabel txAsuntoDiag;
     private javax.swing.JTextArea txComentario;
     private javax.swing.JLabel txDNI;
+    private javax.swing.JTextArea txDiagnostico;
     private javax.swing.JLabel txDir;
     private javax.swing.JLabel txEmail;
     private javax.swing.JLabel txEspecie;
     private javax.swing.JLabel txFechaNac;
+    private javax.swing.JLabel txFechaNacDiag;
     private javax.swing.JLabel txID;
     private javax.swing.JLabel txNomb;
     private javax.swing.JLabel txNombre;
+    private javax.swing.JLabel txNombreAniDiag;
     private javax.swing.JLabel txPeso;
     private javax.swing.JLabel txRaza;
+    private javax.swing.JLabel txRazaDiag;
     private javax.swing.JLabel txSexo;
+    private javax.swing.JLabel txSexoDiag;
     private javax.swing.JLabel txTel;
+    private javax.swing.JLabel txTipoDiag;
+    private javax.swing.JTextArea txTratamiento;
     private javax.swing.JLabel txVacunas;
+    private javax.swing.JLabel txhoraCitaDiag;
     private javax.swing.JTextField txtChipidCli;
     private javax.swing.JTextArea txtCitaAsunto;
     private javax.swing.JTextField txtCitaId;

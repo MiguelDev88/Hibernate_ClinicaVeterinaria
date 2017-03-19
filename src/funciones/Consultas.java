@@ -86,6 +86,31 @@ public class Consultas {
         
     }
     
+    public static C_Veterinario recuperarVeterinarioPorNombre (String nombre){
+        
+        
+        Session sesion=HibernateUtil.getSession();
+            
+        C_Veterinario vet=(C_Veterinario)sesion.createQuery("FROM POJOS.C_Veterinario v WHERE v.nombre='"+nombre+"'").uniqueResult();
+        
+        sesion.close();
+        
+        return vet;
+        
+    }
+    
+    public static Iterator cargarCitasporVet(int idVet){
+        
+        Session sesion=HibernateUtil.getSession();
+            
+        Iterator citas=sesion.createQuery("FROM POJOS.C_Cita c WHERE c.veterinario='"+idVet+"' ORDER BY c.fecha").list().iterator();
+        
+        sesion.close();
+        
+        return citas;
+        
+    }
+    
     public static Iterator cargarFamiliares () {
         
         Session sesion=HibernateUtil.getSession();

@@ -71,6 +71,5 @@ public class C_Producto implements Serializable{
     public void setImg(int img) {
         this.img = img;
     }
-    
-    
+
 }
