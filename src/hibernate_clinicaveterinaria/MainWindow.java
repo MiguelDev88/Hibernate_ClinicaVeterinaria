@@ -53,7 +53,7 @@ public class MainWindow extends javax.swing.JFrame {
     static String[] razasRoedor = {"Cobaya","Hámster","Jerbo"};
     static String[] vacunasRoedor = {"Mixomatosis","Hemorragia vírica","Nobivac","Rabia"};
     static String[] razasVaca = {"Holstein","Shorthorn","Hereford"};
-    static String[] vacunasVaca = {"Fiebre aftosa","Rabia","Edema maligno","Septicemia"};
+    static String[] vacunasVaca = {"Fiebre aftosa","Rabia","Edema maligno","Virus-T"};
     static String[] razasCerdo = {"Vietnamita","Duroc","Berkshire"};
     static String[] vacunasCerdo = {"Pasyeurela","Salmonela","Actinobacillus","Écoli"};
     static String[] razasCaballo = {"Pura Sangre","Cuarto de Milla","Mustang"};
@@ -3174,7 +3174,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         try{
         Date date = parser.parse(txtFechaCli.getText());
-
         }catch (ParseException e){ 
             System.out.println("NO!!!!");
         }
