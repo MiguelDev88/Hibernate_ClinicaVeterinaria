@@ -1,6 +1,7 @@
 package funciones;
 import POJOS.*;
 import hibernate_clinicaveterinaria.HibernateUtil;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -63,6 +64,24 @@ public class Update {
         
     }
     
-    
-
+    public static void updateCita (String nombVeterinario, String idAnimal, Date fecha, String asunto, int id) {
+        
+        Session sesion=HibernateUtil.getSession();
+        
+        
+        C_Cita cita = (C_Cita) sesion.createQuery("FROM POJOS.C_Cita c WHERE c.id='"+id+"'").uniqueResult();
+        C_Veterinario veterinario = (C_Veterinario)sesion.createQuery("FROM POJOS.C_Persona v WHERE v.nombre='"+nombVeterinario+"'").uniqueResult();
+        C_Animal animal = (C_Animal)sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id='"+idAnimal+"'").uniqueResult();
+        
+        cita.setVeterinario(veterinario);
+        cita.setFecha(fecha);
+        cita.setAsunto(asunto);
+        cita.setAnimal(animal);
+        
+        sesion.beginTransaction();
+        sesion.save(cita);
+        sesion.getTransaction().commit();
+        sesion.close();
+        
+    }
 }

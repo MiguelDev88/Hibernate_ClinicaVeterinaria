@@ -43,4 +43,9 @@ public class C_Medicamento extends C_Producto {
         this.dosis = dosis;
     }
     
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
+    
 }

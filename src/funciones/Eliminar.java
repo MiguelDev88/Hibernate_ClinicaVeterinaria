@@ -33,4 +33,15 @@ public class Eliminar {
         
     }
     
+    public static void EliminarCita(C_Cita cita) {
+        
+        Session sesion=HibernateUtil.getSession();
+        
+        sesion.beginTransaction();
+        sesion.delete(cita);
+        sesion.getTransaction().commit();
+        sesion.close();
+        
+    }
+    
 }

@@ -44,7 +44,7 @@ public class C_Cita implements Serializable {
         return animal;
     }
 
-    public void setanimal(C_Animal animal) {
+    public void setAnimal(C_Animal animal) {
         this.animal=animal;
     }
 

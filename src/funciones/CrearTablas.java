@@ -153,6 +153,33 @@ public class CrearTablas {
                     + "  ON DELETE CASCADE "
                     + "  ON UPDATE CASCADE)"
                     + "ENGINE INNODB;");
+            
+            sentencia.execute ("CREATE TABLE IF NOT EXISTS diagnosticos ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "tratamiento TEXT NULL, "
+                    + "descripcion TEXT NULL, "
+                    + "veterinario INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "PRIMARY KEY (id), "
+                    + "CONSTRAINT fk10_veterinario "
+                    + " FOREIGN KEY(veterinario) REFERENCES veterinarios(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE)"
+                    + "ENGINE INNODB;");
+            
+            sentencia.execute ("CREATE TABLE IF NOT EXISTS diagnosticos_medicamentos ( "
+                    + "id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, "
+                    + "id_medicamento INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "id_diagnostico INT(5) UNSIGNED ZEROFILL NOT NULL, "
+                    + "PRIMARY KEY (id), "
+                    + "CONSTRAINT fk11_medicamento "
+                    + " FOREIGN KEY(id_medicamento) REFERENCES medicamentos(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE, "
+                    + "CONSTRAINT fk12_diagnosticos "
+                    + " FOREIGN KEY(id_diagnostico) REFERENCES diagnosticos(id) "
+                    + "  ON DELETE CASCADE "
+                    + "  ON UPDATE CASCADE)"
+                    + "ENGINE INNODB;");
 
             
             System.out.println("\n - BASE DE DATOS LISTA - \n");

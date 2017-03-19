@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+  <class name="POJOS.C_Diagnostico" table="diagnosticos">
+    <id name="id" column="id" >
+            <generator class="increment"/>
+        </id>
+    <property name="tratamiento"/>
+    <property name="descripcion"/>
+    <many-to-one class="POJOS.C_Veterinario"  name="veterinario" column="veterinario" lazy="false"/>
+    <set name="medicamentos" table="diagnosticos_medicamentos" cascade="save-update" lazy="false">           
+        <key column="id_diagnostico"/>
+        <many-to-many class="POJOS.C_Medicamento" column="id_medicamento"/>
+    </set>
+  </class>
+</hibernate-mapping>

@@ -66,4 +66,14 @@ public class Guardar {
         sesion.close();
     }
     
+    public static void guardarDiagnostico (C_Diagnostico diagnostico ){
+        
+        Session sesion=HibernateUtil.getSession();
+        
+        sesion.beginTransaction();
+        sesion.save(diagnostico);
+        sesion.getTransaction().commit();
+        sesion.close();
+    }
+    
 }

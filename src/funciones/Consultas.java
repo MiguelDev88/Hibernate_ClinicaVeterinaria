@@ -119,6 +119,14 @@ public class Consultas {
         return familiares;
     }
     
+    public static Iterator cargarMedicamentos () {
+        
+        Session sesion=HibernateUtil.getSession();
+        Iterator medicamentos=sesion.createQuery("FROM POJOS.C_Medicamento m WHERE m.tipo  is not 'vacuna'").list().iterator();
+        sesion.close();
+        return medicamentos;
+    }
+    
     public static Iterator cargarVeterinarios () {
         
         Session sesion=HibernateUtil.getSession();
@@ -197,6 +205,16 @@ public class Consultas {
         
         Session sesion=HibernateUtil.getSession();
         Query qry = sesion.createQuery("FROM POJOS.C_Animal a WHERE a.nombre like ?");
+        qry.setString(0, filtro+"%");
+        Iterator animales =qry.list().iterator();
+        
+        return animales;
+    }
+    
+    public static Iterator recuperarMedicamentosPorNombre (String filtro) {
+        
+        Session sesion=HibernateUtil.getSession();
+        Query qry = sesion.createQuery("FROM POJOS.C_Medicamento m WHERE m.tipo  is not 'vacuna' AND m.nombre like ?");
         qry.setString(0, filtro+"%");
         Iterator animales =qry.list().iterator();
         
