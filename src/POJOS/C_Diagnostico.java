@@ -12,15 +12,17 @@ public class C_Diagnostico implements Serializable {
     private String tratamiento;
     private Set  medicamentos;
     private C_Veterinario veterinario;
+    private C_Animal animal;
     private String descripcion;
     
     public C_Diagnostico () {}
     
-    public C_Diagnostico (String tratamiento, String descripcion, C_Veterinario vet ){
+    public C_Diagnostico (String tratamiento, String descripcion, C_Veterinario vet, C_Animal animal ){
         
         this.tratamiento=tratamiento;
         this.veterinario=vet;
         this.descripcion=descripcion;
+        this.animal=animal;
         this.medicamentos=new HashSet();
     }
 
@@ -54,6 +56,14 @@ public class C_Diagnostico implements Serializable {
 
     public void setVeterinario(C_Veterinario veterinario) {
         this.veterinario = veterinario;
+    }
+
+    public C_Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(C_Animal animal) {
+        this.animal = animal;
     }
 
     public String getDescripcion() {

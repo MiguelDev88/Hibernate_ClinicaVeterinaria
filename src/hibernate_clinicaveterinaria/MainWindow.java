@@ -1377,7 +1377,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jList1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jList1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -1560,7 +1560,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 237, Short.MAX_VALUE)
                             .addGroup(panelFacturasLayout.createSequentialGroup()
                                 .addComponent(chkConsulta)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -3159,6 +3159,12 @@ public class MainWindow extends javax.swing.JFrame {
         txtMailFami.setText("");
         txtDireFami.setText("");
         txtPesoCli.setText("");
+        cbVacuna1.setSelected(false);
+        cbVacuna2.setSelected(false);
+        cbVacuna3.setSelected(false);
+        cbVacuna4.setSelected(false);
+        cbVacuna5.setSelected(false);
+        cbVacuna6.setSelected(false);
         
         cbTipoAni.removeAllItems();
         for (String tipo : tipos) {
@@ -4250,6 +4256,7 @@ public class MainWindow extends javax.swing.JFrame {
         cal.setTime(fechaInicio);
         cal.set(Calendar.HOUR_OF_DAY, 6);
         
+        cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
         while(cal.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY){
             cal.add(Calendar.DATE,1);
         }
@@ -4280,6 +4287,8 @@ public class MainWindow extends javax.swing.JFrame {
                 break;
                 
         }
+        
+        System.out.println("las fechas finales son"+fechaInicio.toString()+" yy  "+fechaFin.toString());
         
         modeloCitas.setRowCount(0);
         cargarCitas();
@@ -4437,20 +4446,17 @@ public class MainWindow extends javax.swing.JFrame {
         String tratamiento = txTratamiento.getText();
         String descripcion = txDiagnostico.getText();
         
-        C_Diagnostico diagnostico = new C_Diagnostico (tratamiento, descripcion, vet);
+        C_Diagnostico diagnostico = new C_Diagnostico (tratamiento, descripcion, vet, cita.getAnimal());
         for(int i=0;i<modeloListaMedicamentos.getSize();i++)
         {
             C_Medicamento med=(C_Medicamento)modeloListaMedicamentos.getElementAt(i);
             diagnostico.getMedicamentos().add(med);
-            System.out.println("meto un medicamento en el diagnostico");
         }
         
         Guardar.guardarDiagnostico(diagnostico);
         Eliminar.EliminarCita(cita);
         clearDatosDiagnostico();
-        
-        
-
+        modeloListaCitas.removeElement(cita);
         
     }//GEN-LAST:event_btnFinDiagActionPerformed
 

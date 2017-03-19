@@ -25,6 +25,7 @@ public class DatosDemo {
         Session sesion = HibernateUtil.getSession();
         cargarMedicamentos(sesion);
         cargarFamiliaresyAnimales(sesion);
+        cargarVeterinarios(sesion);
                
         return true;
     }
