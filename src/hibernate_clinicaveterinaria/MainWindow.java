@@ -376,15 +376,14 @@ public class MainWindow extends javax.swing.JFrame {
         tablaVeterinarios = new javax.swing.JTable();
         panelCitas = new javax.swing.JPanel();
         panelContactoClientes2 = new javax.swing.JPanel();
-        btnMailCli2 = new javax.swing.JButton();
-        btnContactoCli2 = new javax.swing.JButton();
+        lbSemana = new javax.swing.JLabel();
+        lbNCitas = new javax.swing.JLabel();
         panelDatosClientes2 = new javax.swing.JPanel();
         btnEliminarCita = new javax.swing.JButton();
         btnEditarCita = new javax.swing.JButton();
         btnNuevaCita = new javax.swing.JButton();
         panelVerClientes2 = new javax.swing.JPanel();
         btnVetCita = new javax.swing.JButton();
-        btnCitaCli2 = new javax.swing.JButton();
         lbFechasCita = new javax.swing.JLabel();
         panelCitasList = new javax.swing.JScrollPane();
         tablaCitas = new javax.swing.JTable();
@@ -600,6 +599,34 @@ public class MainWindow extends javax.swing.JFrame {
         txTel = new javax.swing.JLabel();
         txEmail = new javax.swing.JLabel();
         txDir = new javax.swing.JLabel();
+        dialogDetallesCita = new javax.swing.JDialog();
+        lbVet = new javax.swing.JLabel();
+        lbCli = new javax.swing.JLabel();
+        lbHora = new javax.swing.JLabel();
+        lbFam = new javax.swing.JLabel();
+        lbAsunto = new javax.swing.JLabel();
+        txVet = new javax.swing.JLabel();
+        txCli = new javax.swing.JLabel();
+        txFam = new javax.swing.JLabel();
+        txHora = new javax.swing.JLabel();
+        txAsunto = new javax.swing.JLabel();
+        lbTelFam = new javax.swing.JLabel();
+        txTelFam = new javax.swing.JLabel();
+        dialogUltimosDiagnosticos = new javax.swing.JDialog();
+        comboBox5Ultimos = new javax.swing.JComboBox<>();
+        panelDetalles = new javax.swing.JPanel();
+        lbDiagAnimal = new javax.swing.JLabel();
+        lbDiagDiagnostico = new javax.swing.JLabel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        txaDiagnostico = new javax.swing.JTextArea();
+        jLabel21 = new javax.swing.JLabel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        txaTratamiento = new javax.swing.JTextArea();
+        lbContacto = new javax.swing.JLabel();
+        lbMedicacion = new javax.swing.JLabel();
+        txMedicacion = new javax.swing.JLabel();
+        txAnimal = new javax.swing.JLabel();
+        txContacto = new javax.swing.JLabel();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -1131,23 +1158,11 @@ public class MainWindow extends javax.swing.JFrame {
         panelContactoClientes2.setMinimumSize(new java.awt.Dimension(197, 67));
         panelContactoClientes2.setPreferredSize(new java.awt.Dimension(197, 67));
 
-        btnMailCli2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/mensaje.png"))); // NOI18N
-        btnMailCli2.setText("borrame");
-        btnMailCli2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMailCli2.setMaximumSize(new java.awt.Dimension(93, 23));
-        btnMailCli2.setMinimumSize(new java.awt.Dimension(93, 23));
-        btnMailCli2.setPreferredSize(new java.awt.Dimension(93, 23));
-        btnMailCli2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lbSemana.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbSemana.setText("Semana:");
 
-        btnContactoCli2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/phone.png"))); // NOI18N
-        btnContactoCli2.setText("borrametb");
-        btnContactoCli2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnContactoCli2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnContactoCli2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContactoCli2ActionPerformed(evt);
-            }
-        });
+        lbNCitas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbNCitas.setText("Nº de citas de esta semana:");
 
         javax.swing.GroupLayout panelContactoClientes2Layout = new javax.swing.GroupLayout(panelContactoClientes2);
         panelContactoClientes2.setLayout(panelContactoClientes2Layout);
@@ -1155,18 +1170,18 @@ public class MainWindow extends javax.swing.JFrame {
             panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContactoClientes2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnMailCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnContactoCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbSemana)
+                    .addComponent(lbNCitas))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelContactoClientes2Layout.setVerticalGroup(
             panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContactoClientes2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMailCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnContactoCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbSemana)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbNCitas)
                 .addContainerGap())
         );
 
@@ -1235,11 +1250,6 @@ public class MainWindow extends javax.swing.JFrame {
         btnVetCita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnVetCita.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        btnCitaCli2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/calendario green.png"))); // NOI18N
-        btnCitaCli2.setText("no se");
-        btnCitaCli2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCitaCli2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
         javax.swing.GroupLayout panelVerClientes2Layout = new javax.swing.GroupLayout(panelVerClientes2);
         panelVerClientes2.setLayout(panelVerClientes2Layout);
         panelVerClientes2Layout.setHorizontalGroup(
@@ -1247,17 +1257,13 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelVerClientes2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnVetCita)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCitaCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelVerClientes2Layout.setVerticalGroup(
             panelVerClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVerClientes2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelVerClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCitaCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVetCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnVetCita, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1302,7 +1308,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelCitasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelCitasList, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                    .addComponent(panelCitasList, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
                     .addGroup(panelCitasLayout.createSequentialGroup()
                         .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCitasLayout.createSequentialGroup()
@@ -1312,16 +1318,16 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(panelDatosClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCitasLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panelVerClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panelContactoClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(panelCitasLayout.createSequentialGroup()
                                 .addGap(86, 86, 86)
                                 .addComponent(jLabel20)
                                 .addGap(18, 18, 18)
                                 .addComponent(cbCitaFiltroSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panelCitasLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelVerClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelContactoClientes2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         panelCitasLayout.setVerticalGroup(
@@ -3106,6 +3112,188 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lbVet.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbVet.setText("Veterinario:");
+
+        lbCli.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbCli.setText("Animal:");
+
+        lbHora.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbHora.setText("Hora:");
+
+        lbFam.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbFam.setText("Familiar:");
+
+        lbAsunto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbAsunto.setText("Asunto:");
+
+        lbTelFam.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbTelFam.setText("Teléfono:");
+
+        javax.swing.GroupLayout dialogDetallesCitaLayout = new javax.swing.GroupLayout(dialogDetallesCita.getContentPane());
+        dialogDetallesCita.getContentPane().setLayout(dialogDetallesCitaLayout);
+        dialogDetallesCitaLayout.setHorizontalGroup(
+            dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogDetallesCitaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogDetallesCitaLayout.createSequentialGroup()
+                        .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbVet)
+                            .addComponent(lbCli)
+                            .addComponent(lbFam)
+                            .addComponent(lbHora)
+                            .addComponent(lbAsunto))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txAsunto)
+                            .addComponent(txHora)
+                            .addComponent(txFam)
+                            .addComponent(txCli)
+                            .addComponent(txVet)
+                            .addComponent(txTelFam)))
+                    .addComponent(lbTelFam))
+                .addContainerGap(406, Short.MAX_VALUE))
+        );
+        dialogDetallesCitaLayout.setVerticalGroup(
+            dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogDetallesCitaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbVet)
+                    .addComponent(txVet))
+                .addGap(18, 18, 18)
+                .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCli)
+                    .addComponent(txCli))
+                .addGap(18, 18, 18)
+                .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbFam)
+                    .addComponent(txFam))
+                .addGap(18, 18, 18)
+                .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbTelFam)
+                    .addComponent(txTelFam))
+                .addGap(18, 18, 18)
+                .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbHora)
+                    .addComponent(txHora))
+                .addGap(18, 18, 18)
+                .addGroup(dialogDetallesCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbAsunto)
+                    .addComponent(txAsunto))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        comboBox5Ultimos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox5Ultimos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBox5UltimosActionPerformed(evt);
+            }
+        });
+
+        panelDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles"));
+
+        lbDiagAnimal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbDiagAnimal.setText("Aminal:");
+
+        lbDiagDiagnostico.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbDiagDiagnostico.setText("Diagnósitico:");
+
+        txaDiagnostico.setColumns(20);
+        txaDiagnostico.setRows(5);
+        jScrollPane13.setViewportView(txaDiagnostico);
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel21.setText("Tratamiento:");
+
+        txaTratamiento.setColumns(20);
+        txaTratamiento.setRows(5);
+        jScrollPane14.setViewportView(txaTratamiento);
+
+        lbContacto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbContacto.setText("Contacto:");
+
+        lbMedicacion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbMedicacion.setText("Medicación:");
+
+        javax.swing.GroupLayout panelDetallesLayout = new javax.swing.GroupLayout(panelDetalles);
+        panelDetalles.setLayout(panelDetallesLayout);
+        panelDetallesLayout.setHorizontalGroup(
+            panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane13)
+                    .addComponent(jScrollPane14)
+                    .addGroup(panelDetallesLayout.createSequentialGroup()
+                        .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbDiagDiagnostico)
+                            .addComponent(jLabel21)
+                            .addGroup(panelDetallesLayout.createSequentialGroup()
+                                .addComponent(lbDiagAnimal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txAnimal))
+                            .addGroup(panelDetallesLayout.createSequentialGroup()
+                                .addComponent(lbMedicacion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txMedicacion))
+                            .addGroup(panelDetallesLayout.createSequentialGroup()
+                                .addComponent(lbContacto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txContacto)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelDetallesLayout.setVerticalGroup(
+            panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbDiagAnimal)
+                    .addComponent(txAnimal))
+                .addGap(18, 18, 18)
+                .addComponent(lbDiagDiagnostico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbMedicacion)
+                    .addComponent(txMedicacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbContacto)
+                    .addComponent(txContacto))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout dialogUltimosDiagnosticosLayout = new javax.swing.GroupLayout(dialogUltimosDiagnosticos.getContentPane());
+        dialogUltimosDiagnosticos.getContentPane().setLayout(dialogUltimosDiagnosticosLayout);
+        dialogUltimosDiagnosticosLayout.setHorizontalGroup(
+            dialogUltimosDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogUltimosDiagnosticosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogUltimosDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(dialogUltimosDiagnosticosLayout.createSequentialGroup()
+                        .addComponent(comboBox5Ultimos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 295, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        dialogUltimosDiagnosticosLayout.setVerticalGroup(
+            dialogUltimosDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogUltimosDiagnosticosLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(comboBox5Ultimos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -3513,10 +3701,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnMailCli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMailCli1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMailCli1ActionPerformed
-
-    private void btnContactoCli2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactoCli2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnContactoCli2ActionPerformed
 
     private void btnEliminarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCliActionPerformed
         //PANEL CLIENTES BOTON ELIMINAR CLIENTE
@@ -4530,6 +4714,10 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtFiltroMedKeyReleased
 
+    private void comboBox5UltimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox5UltimosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBox5UltimosActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -4574,14 +4762,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnCitaCancel;
     private javax.swing.JButton btnCitaCli;
     private javax.swing.JButton btnCitaCli1;
-    private javax.swing.JButton btnCitaCli2;
     private javax.swing.JButton btnCitas;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnContactoCli;
     private javax.swing.JButton btnContactoCli1;
-    private javax.swing.JButton btnContactoCli2;
     private javax.swing.JButton btnDiagnosticos;
     private javax.swing.JButton btnEditarCita;
     private javax.swing.JButton btnEditarCli;
@@ -4597,7 +4783,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnMailCli;
     private javax.swing.JButton btnMailCli1;
-    private javax.swing.JButton btnMailCli2;
     private javax.swing.JButton btnMedicamento;
     private javax.swing.JButton btnModificarFact;
     private javax.swing.JButton btnNuevaCita;
@@ -4631,11 +4816,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbVetDiagnosticos;
     private javax.swing.JCheckBox chkConsulta;
     private javax.swing.JCheckBox chkMedicacion;
+    private javax.swing.JComboBox<String> comboBox5Ultimos;
     private javax.swing.JDialog dialogContacto;
+    private javax.swing.JDialog dialogDetallesCita;
     private javax.swing.JDialog dialogEditCitas;
     public javax.swing.JDialog dialogEditClientes;
     private javax.swing.JDialog dialogEditVet;
     private javax.swing.JDialog dialogFichaAnimal;
+    private javax.swing.JDialog dialogUltimosDiagnosticos;
     private javax.swing.JFrame frameClientes;
     private javax.swing.JLabel icContacto;
     private javax.swing.JLabel imgProducto;
@@ -4652,6 +4840,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -4676,6 +4865,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -4686,31 +4877,40 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTree jTree1;
+    private javax.swing.JLabel lbAsunto;
     private javax.swing.JLabel lbCitaAsunto;
     private javax.swing.JLabel lbCitaId;
     private javax.swing.JLabel lbCitaNom;
     private javax.swing.JLabel lbCitaRaza;
     private javax.swing.JLabel lbCitaTipo;
+    private javax.swing.JLabel lbCli;
     private javax.swing.JLabel lbComentarioCli;
     private javax.swing.JLabel lbComentarios;
+    private javax.swing.JLabel lbContacto;
     private javax.swing.JLabel lbDNI;
+    private javax.swing.JLabel lbDiagAnimal;
+    private javax.swing.JLabel lbDiagDiagnostico;
     private javax.swing.JLabel lbDir;
     private javax.swing.JLabel lbDireFami;
     private javax.swing.JLabel lbDniCli;
     private javax.swing.JLabel lbDniCli2;
     private javax.swing.JLabel lbEmail;
     private javax.swing.JLabel lbEspecie;
+    private javax.swing.JLabel lbFam;
     private javax.swing.JLabel lbFechaFactura;
     private javax.swing.JLabel lbFechaNac;
     private javax.swing.JLabel lbFecha_nacAni;
     private javax.swing.JLabel lbFechasCita;
     private javax.swing.JLabel lbFlt;
     private javax.swing.JLabel lbFotoPerfil;
+    private javax.swing.JLabel lbHora;
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbIDInv;
     private javax.swing.JLabel lbLogo;
     private javax.swing.JLabel lbMailFami;
     private javax.swing.JLabel lbMailFami5;
+    private javax.swing.JLabel lbMedicacion;
+    private javax.swing.JLabel lbNCitas;
     private javax.swing.JLabel lbNomb;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbNombreAni;
@@ -4725,13 +4925,16 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbRaza;
     private javax.swing.JLabel lbRazaAni;
     private javax.swing.JLabel lbResumenCita;
+    private javax.swing.JLabel lbSemana;
     private javax.swing.JLabel lbSexo;
     private javax.swing.JLabel lbStatus;
     private javax.swing.JLabel lbTel;
+    private javax.swing.JLabel lbTelFam;
     private javax.swing.JLabel lbTipoAni;
     private javax.swing.JLabel lbTlfFami;
     private javax.swing.JLabel lbTlfFami5;
     private javax.swing.JLabel lbVacunas;
+    private javax.swing.JLabel lbVet;
     private javax.swing.JLabel lbVetCita;
     private javax.swing.JLabel lbVetDni;
     private javax.swing.JLabel lbVetEmail;
@@ -4762,6 +4965,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelDatosFamiliar5;
     private javax.swing.JPanel panelDatosFichaCli;
     private javax.swing.JPanel panelDatosVet;
+    private javax.swing.JPanel panelDetalles;
     private javax.swing.JPanel panelDiagnosticos;
     private javax.swing.JPanel panelFacturas;
     private javax.swing.JPanel panelFiltrosClientes;
@@ -4780,16 +4984,23 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
     private javax.swing.JLabel tbdesc;
+    private javax.swing.JLabel txAnimal;
+    private javax.swing.JLabel txAsunto;
     private javax.swing.JLabel txAsuntoDiag;
+    private javax.swing.JLabel txCli;
     private javax.swing.JTextArea txComentario;
+    private javax.swing.JLabel txContacto;
     private javax.swing.JLabel txDNI;
     private javax.swing.JTextArea txDiagnostico;
     private javax.swing.JLabel txDir;
     private javax.swing.JLabel txEmail;
     private javax.swing.JLabel txEspecie;
+    private javax.swing.JLabel txFam;
     private javax.swing.JLabel txFechaNac;
     private javax.swing.JLabel txFechaNacDiag;
+    private javax.swing.JLabel txHora;
     private javax.swing.JLabel txID;
+    private javax.swing.JLabel txMedicacion;
     private javax.swing.JLabel txNomb;
     private javax.swing.JLabel txNombre;
     private javax.swing.JLabel txNombreAniDiag;
@@ -4799,9 +5010,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel txSexo;
     private javax.swing.JLabel txSexoDiag;
     private javax.swing.JLabel txTel;
+    private javax.swing.JLabel txTelFam;
     private javax.swing.JLabel txTipoDiag;
     private javax.swing.JTextArea txTratamiento;
     private javax.swing.JLabel txVacunas;
+    private javax.swing.JLabel txVet;
+    private javax.swing.JTextArea txaDiagnostico;
+    private javax.swing.JTextArea txaTratamiento;
     private javax.swing.JLabel txhoraCitaDiag;
     private javax.swing.JTextField txtChipidCli;
     private javax.swing.JTextArea txtCitaAsunto;
