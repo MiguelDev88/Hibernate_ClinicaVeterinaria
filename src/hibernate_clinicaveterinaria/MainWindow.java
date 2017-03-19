@@ -268,9 +268,8 @@ public class MainWindow extends javax.swing.JFrame {
                 return false;
             }
         };
-        
-            System.out.println("RESETEO MODELO!!!!!!!!");
-        tablaCitas.setModel(modeloCitas);
+        //tablaCitas.setModel(modeloCitas);
+        configurarCalendario();
          
         }catch (Exception e) {
             
@@ -3215,7 +3214,7 @@ public class MainWindow extends javax.swing.JFrame {
         try{
         Date date = parser.parse(txtFechaCli.getText());
         }catch (ParseException e){ 
-            System.out.println("NO!!!!");
+            System.out.println("------------ERROR DE FORMATO EN LA FECHA!!!   yyy-MM-dd ---------------------------------");
         }
         peso=Float.parseFloat( txtPesoCli.getText() );
         comentario=txtComentarioCli.getText();
@@ -3251,10 +3250,6 @@ public class MainWindow extends javax.swing.JFrame {
             listaVacunas.add(cbVacuna5.getText());
         if(cbVacuna6.isSelected())
             listaVacunas.add(cbVacuna6.getText());
-        
-        
-        
-        
         
         if(update)
         { 
@@ -3308,13 +3303,7 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnNuevaCitaActionPerformed
 
-    private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
-        
-        cambiarPanel(panelCitas);
-        cargarCitas();
-
-
-        
+    private static void configurarCalendario() {
         //configuracion del renderer
         DefaultTableCellRenderer myRenderer = new DefaultTableCellRenderer();
         myRenderer.setHorizontalAlignment( SwingConstants.CENTER );
@@ -3330,7 +3319,13 @@ public class MainWindow extends javax.swing.JFrame {
         //tablaCitas.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 13));
         tablaCitas.getTableHeader().setDefaultRenderer(myRenderer);
         tablaCitas.getColumnModel().getColumn(0).setCellRenderer( myRenderer );
+    }
+    private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
         
+        cambiarPanel(panelCitas);
+        cargarCitas();
+        configurarCalendario();
+  
     }//GEN-LAST:event_btnCitasActionPerformed
 
     
@@ -4019,25 +4014,18 @@ public class MainWindow extends javax.swing.JFrame {
         try{
         if(tablaCitas.getSelectedRowCount()>0 && tablaCitas.getSelectedColumn()>0)
         {
-            System.out.println("busco la cita");
             C_Cita cita= (C_Cita)modeloCitas.getValueAt(tablaCitas.getSelectedRow(), tablaCitas.getSelectedColumn());
-            System.out.println("sera null?");
             if(cita!=null)
             {
-                System.out.println("no es NULL");
                 clearDialogCitas();
-                System.out.println("a poner cosas"+cita.getAnimal().getNombre());
                 dialogEditCitas.setVisible(true);
-                System.out.println("esto hace plof?");
                 dialogEditCitas.setModal(true);
                 dialogEditCitas.setSize(800, 650);
                 cbCitaNombreAni.setEnabled(false);
                 cbCitaDni.setEnabled(false);
                 cbCitaDni.removeAllItems();
                 cbCitaDni.addItem(cita.getAnimal().getFamiliar().getDni());
-                System.out.println("ahora los txt");
                 txtCitaNombreFami.setText(cita.getAnimal().getFamiliar().getNombre());
-                        System.out.println("nombre puesto");
                 txtCitaTipo.setText(cita.getAnimal().getTipo());
                 txtCitaTlfFami.setText(cita.getAnimal().getFamiliar().getTelefono());
                 txtCitaMailFami.setText(cita.getAnimal().getFamiliar().getEmail());
@@ -4069,7 +4057,6 @@ public class MainWindow extends javax.swing.JFrame {
 
                 cbVetCita.removeAllItems();
                 cbVetCita.addItem(cita.getVeterinario().getNombre());
-                txtResumenCita.setText("cita para el:    "+fecha.toString());
                 
                 update=true;
                 idUpdate=cita.getId();
@@ -4243,14 +4230,12 @@ public class MainWindow extends javax.swing.JFrame {
         
         while(cal.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY){
             cal.add(Calendar.DATE,1);
-            System.out.println("sumo un dia, ahora tengo:"+cal.getTime());
         }
         
         
         fechaInicio=cal.getTime();
         cal.add(Calendar.DATE, 7);
         fechaFin=cal.getTime();
-        System.out.println("ahora las fechas son"+fechaInicio.toString()+"   y  "+fechaFin.toString()  );
         modeloCitas.setRowCount(0);
         cargarCitas();
         cbCitaFiltroSemana.setSelectedIndex(0);
@@ -4263,17 +4248,10 @@ public class MainWindow extends javax.swing.JFrame {
         
         Calendar cal=Calendar.getInstance();
         cal.setTime(fechaInicio);
-        //Time time= Time.valueOf("6:00:00");
         cal.set(Calendar.HOUR_OF_DAY, 6);
-        //cal.get(Calendar.MONTH);
-        System.out.println("tengo la fecha"+cal.getTime());
-        System.out.println("pregunto algo raro");
-        cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
-        System.out.println("ahora tengo"+cal.getTime());
         
         while(cal.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY){
             cal.add(Calendar.DATE,1);
-            System.out.println("sumo un dia, ahora tengo:"+cal.getTime());
         }
         
         switch(cbCitaFiltroSemana.getSelectedIndex()){
@@ -4302,8 +4280,6 @@ public class MainWindow extends javax.swing.JFrame {
                 break;
                 
         }
-        
-        System.out.println("LAS FECHAS FINALES SON!!!" +fechaInicio.toString() +"   y   "+ fechaFin.toString());
         
         modeloCitas.setRowCount(0);
         cargarCitas();
