@@ -624,9 +624,9 @@ public class MainWindow extends javax.swing.JFrame {
         txaTratamiento = new javax.swing.JTextArea();
         lbContacto = new javax.swing.JLabel();
         lbMedicacion = new javax.swing.JLabel();
-        txMedicacion = new javax.swing.JLabel();
-        txAnimal = new javax.swing.JLabel();
-        txContacto = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -1566,7 +1566,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(panelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 237, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                             .addGroup(panelFacturasLayout.createSequentialGroup()
                                 .addComponent(chkConsulta)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -2880,13 +2880,15 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addGroup(panelDatosClinicosLayout.createSequentialGroup()
                         .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbPeso)
                             .addComponent(lbComentarios)
-                            .addComponent(lbVacunas))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDatosClinicosLayout.createSequentialGroup()
+                                .addComponent(lbPeso)
+                                .addGap(18, 18, 18)
+                                .addComponent(txPeso))
+                            .addGroup(panelDatosClinicosLayout.createSequentialGroup()
+                                .addComponent(lbVacunas)
+                                .addGap(40, 40, 40)
+                                .addComponent(txVacunas)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2895,17 +2897,17 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelDatosClinicosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txPeso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbPeso))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbVacunas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txVacunas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbPeso)
+                    .addComponent(txPeso))
+                .addGap(17, 17, 17)
+                .addGroup(panelDatosClinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbVacunas)
+                    .addComponent(txVacunas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbComentarios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         javax.swing.GroupLayout dialogFichaAnimalLayout = new javax.swing.GroupLayout(dialogFichaAnimal.getContentPane());
@@ -3233,15 +3235,15 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(panelDetallesLayout.createSequentialGroup()
                                 .addComponent(lbDiagAnimal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txAnimal))
+                                .addComponent(jLabel25))
                             .addGroup(panelDetallesLayout.createSequentialGroup()
                                 .addComponent(lbMedicacion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txMedicacion))
+                                .addComponent(jLabel24))
                             .addGroup(panelDetallesLayout.createSequentialGroup()
                                 .addComponent(lbContacto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txContacto)))
+                                .addComponent(jLabel26)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -3251,7 +3253,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDiagAnimal)
-                    .addComponent(txAnimal))
+                    .addComponent(jLabel25))
                 .addGap(18, 18, 18)
                 .addComponent(lbDiagDiagnostico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3263,11 +3265,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbMedicacion)
-                    .addComponent(txMedicacion))
+                    .addComponent(jLabel24))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbContacto)
-                    .addComponent(txContacto))
+                    .addComponent(jLabel26))
                 .addContainerGap())
         );
 
@@ -4841,6 +4843,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -4984,12 +4989,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaVeterinarios;
     private javax.swing.JLabel tbdesc;
-    private javax.swing.JLabel txAnimal;
     private javax.swing.JLabel txAsunto;
     private javax.swing.JLabel txAsuntoDiag;
     private javax.swing.JLabel txCli;
     private javax.swing.JTextArea txComentario;
-    private javax.swing.JLabel txContacto;
     private javax.swing.JLabel txDNI;
     private javax.swing.JTextArea txDiagnostico;
     private javax.swing.JLabel txDir;
@@ -5000,7 +5003,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel txFechaNacDiag;
     private javax.swing.JLabel txHora;
     private javax.swing.JLabel txID;
-    private javax.swing.JLabel txMedicacion;
     private javax.swing.JLabel txNomb;
     private javax.swing.JLabel txNombre;
     private javax.swing.JLabel txNombreAniDiag;

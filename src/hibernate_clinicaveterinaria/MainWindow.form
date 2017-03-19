@@ -3818,20 +3818,23 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane10" pref="480" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbPeso" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbComentarios" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbVacunas" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txVacunas" min="-2" pref="21" max="-2" attributes="0"/>
-                                  <Component id="txPeso" min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lbPeso" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txPeso" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lbVacunas" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="txVacunas" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -3845,19 +3848,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txPeso" alignment="1" min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="lbPeso" min="-2" max="-2" attributes="0"/>
+                          <Component id="txPeso" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lbVacunas" max="32767" attributes="0"/>
-                          <Component id="txVacunas" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lbVacunas" min="-2" max="-2" attributes="0"/>
+                          <Component id="txVacunas" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lbComentarios" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane10" pref="158" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4421,17 +4424,17 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lbDiagAnimal" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txAnimal" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lbMedicacion" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txMedicacion" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lbContacto" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txContacto" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -4447,7 +4450,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lbDiagAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lbDiagDiagnostico" min="-2" max="-2" attributes="0"/>
@@ -4460,12 +4463,12 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lbMedicacion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txMedicacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="18" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lbContacto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txContacto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -4543,11 +4546,11 @@
                 <Property name="text" type="java.lang.String" value="Medicaci&#xf3;n:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="txMedicacion">
+            <Component class="javax.swing.JLabel" name="jLabel24">
             </Component>
-            <Component class="javax.swing.JLabel" name="txAnimal">
+            <Component class="javax.swing.JLabel" name="jLabel25">
             </Component>
-            <Component class="javax.swing.JLabel" name="txContacto">
+            <Component class="javax.swing.JLabel" name="jLabel26">
             </Component>
           </SubComponents>
         </Container>
