@@ -69,6 +69,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         initComponents();
 //
+
         timer = new Timer(50, new ActionListener() {
             int counter = 10;
             public void actionPerformed(ActionEvent ae) {
@@ -91,6 +92,10 @@ public class MainWindow extends javax.swing.JFrame {
         
         timer.start();
         CrearTablas.crearTablas();
+        try{
+        DatosDemo.cargarTodos();
+        }catch(Exception e){
+        System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
         
         //////
         

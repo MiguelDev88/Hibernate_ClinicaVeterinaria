@@ -15,8 +15,9 @@ public class C_Producto implements Serializable{
     
     public C_Producto () {}
     
-    public C_Producto (String nombre, String tipo, String precio, int img) {
+    public C_Producto (String nombre, String tipo, String descripcion, String precio, int img) {
         
+        this.descripcion=descripcion;
         this.nombre=nombre;
         this.tipo=tipo;
         this.precio=precio;

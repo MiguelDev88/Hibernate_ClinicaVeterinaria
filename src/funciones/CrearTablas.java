@@ -36,7 +36,7 @@ public class CrearTablas {
             
             sentencia.execute("CREATE TABLE IF NOT EXISTS familiares ( "
                     + "id INT(5) UNSIGNED ZEROFILL NOT NULL, "
-                    + "direccion VARCHAR(30) NOT NULL, "
+                    + "direccion TEXT NOT NULL, "
                     + "CONSTRAINT fk1_familiar "
                     + " FOREIGN KEY(id) REFERENCES personas(id) "
                     + "  ON DELETE CASCADE "
