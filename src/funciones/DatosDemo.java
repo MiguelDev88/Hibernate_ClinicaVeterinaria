@@ -8,6 +8,7 @@ package funciones;
 import POJOS.C_Animal;
 import POJOS.C_Familiar;
 import POJOS.C_Medicamento;
+import POJOS.C_Veterinario;
 import hibernate_clinicaveterinaria.HibernateUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -163,6 +164,26 @@ public class DatosDemo {
         sesion.getTransaction().commit();
         return true;
        
+    }
+    
+    private static boolean cargarVeterinarios(Session sesion){
+        
+        C_Veterinario veterinario;
+
+        sesion.beginTransaction();
+        veterinario = new C_Veterinario("12121212M","Ashley Man","687141252","ashleym@gmail.com","900");
+        sesion.save(veterinario);
+        veterinario = new C_Veterinario("23232323T","Kirstin Rupp","687141252","kirstinr@gmail.com","742");
+        sesion.save(veterinario);
+        veterinario = new C_Veterinario("34343434H","Nobuko Wyatt","687141252","nobukow@gmail.com","345");
+        sesion.save(veterinario);
+        veterinario = new C_Veterinario("45454545J","Willian Giordano","687141252","williang@gmail.com","867");
+        sesion.save(veterinario);
+        veterinario = new C_Veterinario("56565656P","Ann Hall","687141252","annh@gmail.com","988");
+        sesion.save(veterinario);
+        sesion.getTransaction().commit();
+        
+        return true;
     }
     
 }
