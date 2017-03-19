@@ -4,10 +4,11 @@
 
 <hibernate-mapping>
   <class name="POJOS.C_Cita" table="citas">
-    <composite-id>
-      <key-many-to-one class="POJOS.C_Animal"  name="animal" column="animal" lazy="false"/>
-      <key-property name="fecha"/>
-    </composite-id>
+      <id name="id" column="id" >
+            <generator class="increment"/>
+        </id>
+    <many-to-one class="POJOS.C_Animal"  name="animal" column="animal" lazy="false"/>
+    <property name="fecha"/>
     <property name="asunto"/>
     <many-to-one class="POJOS.C_Veterinario"  name="veterinario" column="veterinario" lazy="false"/>
   </class>

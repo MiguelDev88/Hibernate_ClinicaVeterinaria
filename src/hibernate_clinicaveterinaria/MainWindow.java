@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -79,6 +80,7 @@ public class MainWindow extends javax.swing.JFrame {
                     timer.stop();
                     MainWindow.this.setVisible(false);
                     frameClientes.setSize(915, 750);
+                    frameClientes.setLocationRelativeTo(null);
                     frameClientes.setVisible(true);
                 } 
             }
@@ -92,10 +94,17 @@ public class MainWindow extends javax.swing.JFrame {
         
         timer.start();
         CrearTablas.crearTablas();
+        
+        
+        /*
         try{
         DatosDemo.cargarTodos();
         }catch(Exception e){
         System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
+        */
+        
+        
+        
         
         //////
         
@@ -213,12 +222,26 @@ public class MainWindow extends javax.swing.JFrame {
         cbCitaMes.setSelectedIndex(cal.get(Calendar.MONTH));
     }
     
+    private static void cambiarFechasCitas(){
+        
+
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(fechaInicio);
+        String mes = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        String dia=" "+cal.get(Calendar.DAY_OF_MONTH);
+        cal.setTime(fechaFin);
+        String fin=" "+cal.get(Calendar.DAY_OF_MONTH);
+        txSemana.setText(" del "+dia+" al "+fin);
+        txmesc.setText(mes);
+
+    }
     
     
     public static void cargarCitas() {
            
         
         citas = new Object[38][8];
+        int numCitas=0;
         
         try{
             
@@ -233,9 +256,9 @@ public class MainWindow extends javax.swing.JFrame {
                 if(fecha.after(fechaInicio) && fecha.before(fechaFin))
                    
                 {
-                    System.out.println("LA FECHA ES MAYOR QUE HOY!!");
                     Calendar c = Calendar.getInstance();
                     c.setTime(fecha);
+                    numCitas++;
                     
                     int dia=c.get(Calendar.DAY_OF_WEEK)-1;
                     String minutos;
@@ -270,6 +293,9 @@ public class MainWindow extends javax.swing.JFrame {
         };
         //tablaCitas.setModel(modeloCitas);
         configurarCalendario();
+        cambiarFechasCitas();
+        
+        txNumCitas.setText(""+numCitas);
          
         }catch (Exception e) {
             
@@ -378,12 +404,16 @@ public class MainWindow extends javax.swing.JFrame {
         panelContactoClientes2 = new javax.swing.JPanel();
         lbSemana = new javax.swing.JLabel();
         lbNCitas = new javax.swing.JLabel();
+        txSemana = new javax.swing.JLabel();
+        txNumCitas = new javax.swing.JLabel();
+        lbmm = new javax.swing.JLabel();
+        txmesc = new javax.swing.JLabel();
         panelDatosClientes2 = new javax.swing.JPanel();
         btnEliminarCita = new javax.swing.JButton();
         btnEditarCita = new javax.swing.JButton();
         btnNuevaCita = new javax.swing.JButton();
         panelVerClientes2 = new javax.swing.JPanel();
-        btnVetCita = new javax.swing.JButton();
+        btnVerCita = new javax.swing.JButton();
         lbFechasCita = new javax.swing.JLabel();
         panelCitasList = new javax.swing.JScrollPane();
         tablaCitas = new javax.swing.JTable();
@@ -1164,6 +1194,15 @@ public class MainWindow extends javax.swing.JFrame {
         lbNCitas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbNCitas.setText("Nº de citas de esta semana:");
 
+        txSemana.setText("txSemana");
+
+        txNumCitas.setText("5555");
+
+        lbmm.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbmm.setText("Mes:");
+
+        txmesc.setText("mesdemarzo");
+
         javax.swing.GroupLayout panelContactoClientes2Layout = new javax.swing.GroupLayout(panelContactoClientes2);
         panelContactoClientes2.setLayout(panelContactoClientes2Layout);
         panelContactoClientes2Layout.setHorizontalGroup(
@@ -1171,17 +1210,35 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelContactoClientes2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbSemana)
-                    .addComponent(lbNCitas))
+                    .addGroup(panelContactoClientes2Layout.createSequentialGroup()
+                        .addComponent(lbNCitas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txNumCitas))
+                    .addGroup(panelContactoClientes2Layout.createSequentialGroup()
+                        .addComponent(lbSemana)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txSemana))
+                    .addGroup(panelContactoClientes2Layout.createSequentialGroup()
+                        .addComponent(lbmm)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txmesc)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelContactoClientes2Layout.setVerticalGroup(
             panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContactoClientes2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbSemana)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbNCitas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbmm)
+                    .addComponent(txmesc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txSemana, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbSemana, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(panelContactoClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNCitas)
+                    .addComponent(txNumCitas))
                 .addContainerGap())
         );
 
@@ -1193,6 +1250,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnEliminarCita.setText("Eliminar");
         btnEliminarCita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminarCita.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCitaActionPerformed(evt);
+            }
+        });
 
         btnEditarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/archivo-nuevo.png"))); // NOI18N
         btnEditarCita.setText("Editar");
@@ -1245,10 +1307,15 @@ public class MainWindow extends javax.swing.JFrame {
         panelVerClientes2.setMaximumSize(new java.awt.Dimension(278, 47));
         panelVerClientes2.setMinimumSize(new java.awt.Dimension(278, 47));
 
-        btnVetCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/reanudar.png"))); // NOI18N
-        btnVetCita.setText("Ver Detalles");
-        btnVetCita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVetCita.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVerCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/reanudar.png"))); // NOI18N
+        btnVerCita.setText("Ver Detalles");
+        btnVerCita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnVerCita.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVerCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerCitaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelVerClientes2Layout = new javax.swing.GroupLayout(panelVerClientes2);
         panelVerClientes2.setLayout(panelVerClientes2Layout);
@@ -1256,14 +1323,14 @@ public class MainWindow extends javax.swing.JFrame {
             panelVerClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelVerClientes2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnVetCita)
+                .addComponent(btnVerCita)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelVerClientes2Layout.setVerticalGroup(
             panelVerClientes2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVerClientes2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnVetCita, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addComponent(btnVerCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3381,6 +3448,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 
         clearClientes();
+        dialogEditClientes.setLocationRelativeTo(frameClientes);
         dialogEditClientes.setVisible(true);
         dialogEditClientes.setModal(true);
         cbTipoAni.removeAllItems();
@@ -3467,7 +3535,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         cbCitaDni.removeAllItems();
         cbCitaDni.setEnabled(true);
-        txtCitaNombreFami.setText("");
+        txtCitaNombreFami.setText("         ");
         txtCitaTipo.setText("");
         txtCitaTlfFami.setText("");
         txtCitaMailFami.setText("");
@@ -3488,12 +3556,13 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnNuevaCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCitaActionPerformed
         
         
-
+        clearDialogCitas();
+        dialogEditCitas.setLocationRelativeTo(frameClientes);
         dialogEditCitas.setVisible(true);
         dialogEditCitas.setModal(true);
         dialogEditCitas.setSize(800, 650);
         cbCitaNombreAni.setEnabled(false);
-        clearDialogCitas();
+
         cargarCitasLibres();
         Consultas.cargarVetCombo(cbVetCita);   
         
@@ -3521,6 +3590,7 @@ public class MainWindow extends javax.swing.JFrame {
         cambiarPanel(panelCitas);
         cargarCitas();
         configurarCalendario();
+        cambiarFechasCitas();
   
     }//GEN-LAST:event_btnCitasActionPerformed
 
@@ -3653,6 +3723,7 @@ public class MainWindow extends javax.swing.JFrame {
             txtMailFami.setText(animal.getFamiliar().getEmail());
             txtDireFami.setText( ((C_Familiar)animal.getFamiliar()).getDireccion());
             
+            dialogEditClientes.setLocationRelativeTo(frameClientes);
             dialogEditClientes.setVisible(true);
             dialogEditClientes.setModal(true);
             //cargarFamiliares();
@@ -3667,6 +3738,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         
         dialogEditClientes.dispose();
+        update=false;
         //dialogEditClientes.setVisible(false);
 
                 
@@ -3692,6 +3764,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnNuevoVetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoVetActionPerformed
         
+        
+        clearDialogVet();
+        dialogEditVet.setLocationRelativeTo(frameClientes);
         dialogEditVet.setVisible(true);
         
         dialogEditVet.setSize(410, 330);
@@ -3754,6 +3829,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnCitaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaCliActionPerformed
         //PANEL CLIENTES BOTON NUEVA CITA
+        
+        clearDialogCitas();
         if(tablaClientes.getSelectedRowCount()>0)
         {
             
@@ -3761,10 +3838,8 @@ public class MainWindow extends javax.swing.JFrame {
             
             C_Animal animal = Consultas.recuperarAnimalPorId(id);
             
-            dialogEditCitas.setVisible(true);
-            dialogEditCitas.setModal(true);
-            dialogEditCitas.setSize(800, 650);
-            
+
+            cbCitaDni.addItem(animal.getFamiliar().getDni());
             txtCitaNombreFami.setText(animal.getFamiliar().getNombre()); txtCitaNombreFami.setEditable(false);
             txtCitaTlfFami.setText(animal.getFamiliar().getTelefono()); txtCitaTlfFami.setEditable(false);
             cbCitaDni.setSelectedItem(animal.getFamiliar().getDni()); cbCitaDni.setEditable(false);
@@ -3779,6 +3854,11 @@ public class MainWindow extends javax.swing.JFrame {
             
             cargarCitasLibres();
             Consultas.cargarVetCombo(cbVetCita);
+            
+            dialogEditCitas.setLocationRelativeTo(frameClientes);
+            dialogEditCitas.setVisible(true);
+            dialogEditCitas.setModal(true);
+            dialogEditCitas.setSize(800, 650);
         
         }
     }//GEN-LAST:event_btnCitaCliActionPerformed
@@ -3787,6 +3867,11 @@ public class MainWindow extends javax.swing.JFrame {
         // DIALOG_CITAS COMBO HORAS LIBRES
         
         try{
+            
+            cbCitaHora.removeAllItems();
+            for (String hora : horas) 
+                cbCitaHora.addItem(hora);
+            
             
             Iterator citasit=Consultas.cargarCitas();
             
@@ -3799,12 +3884,10 @@ public class MainWindow extends javax.swing.JFrame {
                 cal.setTime(fecha);
                 Calendar day2 = Calendar.getInstance();
                 day2.set(Calendar.DATE, Integer.parseInt(cbCitaDia.getSelectedItem().toString()));
-                
-                System.out.println("comparo:"+cal.getTime()+"  con  "+day2.getTime());
+                System.out.println("comparo si el dia "+cal.get(Calendar.DAY_OF_MONTH)+" es igual a "+day2.get(Calendar.DAY_OF_MONTH));
                 if(cal.get(Calendar.DAY_OF_MONTH)== day2.get(Calendar.DAY_OF_MONTH))
                    
                 {
-                    System.out.println("coincide!!");
                     //cal.setTime(fecha);
                     
                     //String hora=cal.getTime().getHours()+":"+cal.getTime().getMinutes();
@@ -3814,14 +3897,11 @@ public class MainWindow extends javax.swing.JFrame {
                         mins="00";
                     else
                         mins=String.valueOf(cal.getTime().getMinutes());
-                    System.out.println("elimino la hora"+hora);
 
                     String horaCita = hora+":"+mins;
+                    System.out.println("si q es, elimino la hora: "+horaCita);
                     cbCitaHora.removeItem(horaCita);
-                    System.out.println("cita eliminada");
                 }
-                else
-                    System.out.println("no coinciden");
                 
             }
          
@@ -3891,7 +3971,6 @@ public class MainWindow extends javax.swing.JFrame {
         
         modeloClientes.setRowCount(0);
         String filtro=txtFiltro.getText();
-        Query qry;
         Iterator animales;
         
         if(txtFiltro.getText().length()==0)
@@ -4062,6 +4141,7 @@ public class MainWindow extends javax.swing.JFrame {
             txVacunas.setText(listaVacunas);
             txComentario.setText(animal.getComentario());
             
+            dialogFichaAnimal.setLocationRelativeTo(frameClientes);
             dialogFichaAnimal.setVisible(true);
             //dialogFichaAnimal.setSize(532,500);
         }
@@ -4099,7 +4179,9 @@ public class MainWindow extends javax.swing.JFrame {
         
         if(update)
         { 
-            Update.updateCita(veterinario, idAnimal, fecha, asunto, idUpdate);
+            System.out.println("es update!");
+            C_Cita cita= (C_Cita)modeloCitas.getValueAt(tablaCitas.getSelectedRow(), tablaCitas.getSelectedColumn());
+            Update.updateCita(veterinario, idAnimal, fecha, asunto, cita);
             update=false;
             
         }
@@ -4196,7 +4278,7 @@ public class MainWindow extends javax.swing.JFrame {
 
             fecha=calendar.getTime();
 
-            txtResumenCita.setText("cita para el:    "+fecha.toString());
+            txtResumenCita.setText(fecha.toString());
         }catch(Exception e){}
         
     }//GEN-LAST:event_cbCitaHoraActionPerformed
@@ -4209,10 +4291,10 @@ public class MainWindow extends javax.swing.JFrame {
             C_Cita cita= (C_Cita)modeloCitas.getValueAt(tablaCitas.getSelectedRow(), tablaCitas.getSelectedColumn());
             if(cita!=null)
             {
+                
+                update=true;
+                idUpdate=cita.getId();
                 clearDialogCitas();
-                dialogEditCitas.setVisible(true);
-                dialogEditCitas.setModal(true);
-                dialogEditCitas.setSize(800, 650);
                 cbCitaNombreAni.setEnabled(false);
                 cbCitaDni.setEnabled(false);
                 cbCitaDni.removeAllItems();
@@ -4250,8 +4332,11 @@ public class MainWindow extends javax.swing.JFrame {
                 cbVetCita.removeAllItems();
                 cbVetCita.addItem(cita.getVeterinario().getNombre());
                 
-                update=true;
-                idUpdate=cita.getId();
+                dialogEditCitas.setVisible(true);
+                dialogEditCitas.setModal(true);
+                dialogEditCitas.setSize(800, 650);
+                cbCitaNombreAni.setEnabled(false);
+                
                 
             }
         }
@@ -4261,6 +4346,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnVetCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVetCancelarActionPerformed
         
         dialogEditVet.dispose();
+        update=false;
         clearDialogVet();
     }//GEN-LAST:event_btnVetCancelarActionPerformed
 
@@ -4302,6 +4388,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnEditarVetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarVetActionPerformed
         
+        
+        dialogEditVet.setLocationRelativeTo(frameClientes);
         dialogEditVet.setVisible(true);
         
         dialogEditVet.setSize(410, 330);
@@ -4330,6 +4418,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         if(tablaClientes.getSelectedRowCount()>0)
         {
+            dialogContacto.setLocationRelativeTo(frameClientes);
             dialogContacto.setVisible(true);
             dialogContacto.setSize(480,225);
          
@@ -4369,6 +4458,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnCitaCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaCancelActionPerformed
         
+        update=false;
         dialogEditCitas.dispose();
         //clearDialogCitas();
         
@@ -4432,8 +4522,7 @@ public class MainWindow extends javax.swing.JFrame {
         cargarCitas();
         cbCitaFiltroSemana.setSelectedIndex(0);
 
-       
-        
+
     }//GEN-LAST:event_cbCitaFiltroMesActionPerformed
 
     private void cbCitaFiltroSemanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCitaFiltroSemanaActionPerformed
@@ -4720,6 +4809,47 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBox5UltimosActionPerformed
 
+    private void btnVerCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerCitaActionPerformed
+        
+        if(tablaCitas.getSelectedRowCount()>0 && tablaCitas.getSelectedColumn()>0)
+        {
+            C_Cita cita= (C_Cita)modeloCitas.getValueAt(tablaCitas.getSelectedRow(), tablaCitas.getSelectedColumn());
+            if(cita!=null)
+            {
+                dialogDetallesCita.setVisible(true);
+                dialogDetallesCita.setSize(350, 250);
+                dialogDetallesCita.setLocationRelativeTo(frameClientes);
+                txVet.setText(cita.getVeterinario().getNombre());
+                txCli.setText(cita.getAnimal().getNombre());
+                txTelFam.setText(cita.getAnimal().getFamiliar().getTelefono());
+                txFam.setText(cita.getAnimal().getFamiliar().getNombre());
+                txHora.setText(cita.getFecha().toString());
+                txAsunto.setText(cita.getAsunto());        
+            }
+        }
+        
+    }//GEN-LAST:event_btnVerCitaActionPerformed
+
+    private void btnEliminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCitaActionPerformed
+        
+        
+        if(tablaCitas.getSelectedRowCount()>0 && tablaCitas.getSelectedColumn()>0)
+        {
+            C_Cita cita= (C_Cita)modeloCitas.getValueAt(tablaCitas.getSelectedRow(), tablaCitas.getSelectedColumn());
+            if(cita!=null)
+            {   
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog (frameClientes, "¿Esta Seguro que desea eliminar este registro?","Warning",dialogButton);
+            
+                if(dialogResult == JOptionPane.YES_OPTION){
+            
+                    Eliminar.EliminarCita(cita);
+                    cargarCitas();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnEliminarCitaActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -4747,7 +4877,10 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             
             public void run() {
-                new MainWindow().setVisible(true);
+                MainWindow main= new MainWindow();
+                main.setLocationRelativeTo(null);
+                main.setVisible(true);
+                
                 Session sesion=HibernateUtil.getSession();
                 sesion.close();
                 
@@ -4791,11 +4924,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoCli;
     private javax.swing.JButton btnNuevoVet;
     private javax.swing.JButton btnVenta;
+    private javax.swing.JButton btnVerCita;
     private javax.swing.JButton btnVerCli;
     private javax.swing.JButton btnVerCli1;
     private javax.swing.JButton btnVetAceptar;
     private javax.swing.JButton btnVetCancelar;
-    private javax.swing.JButton btnVetCita;
     private javax.swing.JButton btnVeterinarios;
     private static javax.swing.JComboBox<String> cbCitaDia;
     private static javax.swing.JComboBox<String> cbCitaDni;
@@ -4945,6 +5078,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbVetEmail;
     private javax.swing.JLabel lbVetNombre;
     private javax.swing.JLabel lbVetTlf;
+    private javax.swing.JLabel lbmm;
     private javax.swing.JLabel lbtrat;
     private javax.swing.JList<String> listaCitasVet;
     private javax.swing.JList<String> listaMedicamentos;
@@ -5006,9 +5140,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel txNomb;
     private javax.swing.JLabel txNombre;
     private javax.swing.JLabel txNombreAniDiag;
+    private static javax.swing.JLabel txNumCitas;
     private javax.swing.JLabel txPeso;
     private javax.swing.JLabel txRaza;
     private javax.swing.JLabel txRazaDiag;
+    private static javax.swing.JLabel txSemana;
     private javax.swing.JLabel txSexo;
     private javax.swing.JLabel txSexoDiag;
     private javax.swing.JLabel txTel;
@@ -5020,6 +5156,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea txaDiagnostico;
     private javax.swing.JTextArea txaTratamiento;
     private javax.swing.JLabel txhoraCitaDiag;
+    private static javax.swing.JLabel txmesc;
     private javax.swing.JTextField txtChipidCli;
     private javax.swing.JTextArea txtCitaAsunto;
     private javax.swing.JTextField txtCitaId;
