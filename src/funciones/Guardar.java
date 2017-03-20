@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import org.hibernate.Session;
+import hibernate_clinicaveterinaria.MainWindow;
+import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBFactory;
 
 /**
  *
@@ -14,7 +17,9 @@ public class Guardar {
     
     public static void guardarAnimal (C_Animal animal, LinkedList listaVacunas) {
         
-        
+        if (MainWindow.modo==0)
+        {
+            System.out.println("hibernate!!!");
         Session sesion=HibernateUtil.getSession();
         
         C_Familiar familiar = (C_Familiar)sesion.createQuery("FROM POJOS.C_Persona f WHERE f.dni='"+animal.getFamiliar().getDni()+"'").uniqueResult();
@@ -29,13 +34,21 @@ public class Guardar {
             String v=(String) vacunas.next();
             C_Medicamento vacuna= (C_Medicamento)sesion.createQuery("FROM POJOS.C_Medicamento v WHERE v.nombre='"+v+"'").uniqueResult();
             animal.getVacunas().add(vacuna);
-            System.out.println("puse una vacuna");
         }
         
         sesion.beginTransaction();
         sesion.save(animal);
         sesion.getTransaction().commit();
         sesion.close();
+        }
+        else if (MainWindow.modo==1)
+        {
+            System.out.println("neodatis!!");
+            //ODB odb = ODBFactory.openClient("192.168.4.20", 8000, "base");
+            ODB odb=ODBFactory.open("jugadores.db");
+            odb.store(animal);
+            odb.close();
+        }
         
     }
     

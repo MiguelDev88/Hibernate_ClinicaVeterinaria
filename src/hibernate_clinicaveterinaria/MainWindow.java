@@ -32,6 +32,7 @@ import org.hibernate.Session;
 public class MainWindow extends javax.swing.JFrame {
 
     Timer timer;
+    public static int modo;
     static DefaultTableModel modeloCitas;
     static DefaultListModel modeloListaCitas;
     static DefaultListModel modeloListaMedicamentosBD;
@@ -71,20 +72,7 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
 //
 
-        timer = new Timer(50, new ActionListener() {
-            int counter = 10;
-            public void actionPerformed(ActionEvent ae) {
-                counter++;
-                pbLoading.setValue(counter);
-                if (pbLoading.getValue()==100) {
-                    timer.stop();
-                    MainWindow.this.setVisible(false);
-                    frameClientes.setSize(915, 750);
-                    frameClientes.setLocationRelativeTo(null);
-                    frameClientes.setVisible(true);
-                } 
-            }
-        });
+        
         
         panelClientes.setVisible(true);
         panelCitas.setVisible(false);
@@ -92,17 +80,10 @@ public class MainWindow extends javax.swing.JFrame {
         panelFacturas.setVisible(false);
         panelInventario.setVisible(false);
         
-        timer.start();
         CrearTablas.crearTablas();
         
         
-        /*
-        try{
-        DatosDemo.cargarTodos();
-        }catch(Exception e){
-        System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
-        */
-        
+
         
         
         
@@ -657,9 +638,21 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        dialogConfiguracion = new javax.swing.JDialog();
+        panelConfigDB = new javax.swing.JPanel();
+        lbGestor = new javax.swing.JLabel();
+        cbGestor = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
+        btnPlay = new javax.swing.JButton();
+        btnConfig = new javax.swing.JButton();
 
         btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/pawprint.png"))); // NOI18N
         btnClientes.setText("Clientes");
@@ -3363,12 +3356,96 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        panelConfigDB.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Base de Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+
+        lbGestor.setText("Gestor:");
+
+        cbGestor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hibernate", "Neodatis" }));
+
+        jLabel17.setText("URL:");
+
+        jLabel18.setText("Usuario");
+
+        jLabel22.setText("Contraseña:");
+
+        javax.swing.GroupLayout panelConfigDBLayout = new javax.swing.GroupLayout(panelConfigDB);
+        panelConfigDB.setLayout(panelConfigDBLayout);
+        panelConfigDBLayout.setHorizontalGroup(
+            panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConfigDBLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(lbGestor)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel22))
+                .addGap(18, 18, 18)
+                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbGestor, 0, 100, Short.MAX_VALUE)
+                    .addComponent(jTextField1)
+                    .addComponent(jTextField3)
+                    .addComponent(jTextField2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelConfigDBLayout.setVerticalGroup(
+            panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConfigDBLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbGestor)
+                    .addComponent(cbGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dialogConfiguracionLayout = new javax.swing.GroupLayout(dialogConfiguracion.getContentPane());
+        dialogConfiguracion.getContentPane().setLayout(dialogConfiguracionLayout);
+        dialogConfiguracionLayout.setHorizontalGroup(
+            dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogConfiguracionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelConfigDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dialogConfiguracionLayout.setVerticalGroup(
+            dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogConfiguracionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelConfigDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/vet-logo.gif"))); // NOI18N
 
-        lbStatus.setText("Estoy haciendo cosas");
+        lbStatus.setText("  ");
+
+        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/playPeque.png"))); // NOI18N
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayActionPerformed(evt);
+            }
+        });
+
+        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/ajustesPqe.png"))); // NOI18N
+        btnConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -3380,15 +3457,16 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(121, 121, 121))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbStatus)
-                                .addGap(277, 277, 277))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbStatus)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3396,10 +3474,15 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbStatus)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnConfig)
+                    .addComponent(btnPlay)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbStatus)
+                            .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -4850,6 +4933,39 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarCitaActionPerformed
 
+    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
+        
+        dialogConfiguracion.setVisible(true);
+        dialogConfiguracion.setSize(230, 190);
+    }//GEN-LAST:event_btnConfigActionPerformed
+
+    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        
+        modo = cbGestor.getSelectedIndex();
+        
+        timer = new Timer(50, new ActionListener() {
+            int counter = 10;
+            public void actionPerformed(ActionEvent ae) {
+                counter++;
+                pbLoading.setValue(counter);
+                if (pbLoading.getValue()==100) {
+                    timer.stop();
+                    MainWindow.this.setVisible(false);
+                    frameClientes.setSize(915, 750);
+                    frameClientes.setLocationRelativeTo(null);
+                    frameClientes.setVisible(true);
+                } 
+            }
+        });
+        
+        timer.start();
+        
+        try{
+        DatosDemo.cargarTodos();
+        }catch(Exception e){
+        System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
+    }//GEN-LAST:event_btnPlayActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -4900,6 +5016,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnCitas;
     private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnContactoCli;
     private javax.swing.JButton btnContactoCli1;
@@ -4923,6 +5040,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevaCita;
     private javax.swing.JButton btnNuevoCli;
     private javax.swing.JButton btnNuevoVet;
+    private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnVenta;
     private javax.swing.JButton btnVerCita;
     private javax.swing.JButton btnVerCli;
@@ -4939,6 +5057,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbCitaNombreAni;
     private static javax.swing.JComboBox<String> cbDniFami;
     private javax.swing.JComboBox<String> cbFiltro;
+    private javax.swing.JComboBox<String> cbGestor;
     private javax.swing.JComboBox<String> cbRazaAni;
     private javax.swing.JComboBox<String> cbTipoAni;
     private javax.swing.JCheckBox cbVacuna1;
@@ -4952,6 +5071,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkConsulta;
     private javax.swing.JCheckBox chkMedicacion;
     private javax.swing.JComboBox<String> comboBox5Ultimos;
+    private javax.swing.JDialog dialogConfiguracion;
     private javax.swing.JDialog dialogContacto;
     private javax.swing.JDialog dialogDetallesCita;
     private javax.swing.JDialog dialogEditCitas;
@@ -4972,10 +5092,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -5014,6 +5137,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTree jTree1;
     private javax.swing.JLabel lbAsunto;
     private javax.swing.JLabel lbCitaAsunto;
@@ -5041,6 +5167,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbFechasCita;
     private javax.swing.JLabel lbFlt;
     private javax.swing.JLabel lbFotoPerfil;
+    private javax.swing.JLabel lbGestor;
     private javax.swing.JLabel lbHora;
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbIDInv;
@@ -5088,6 +5215,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panelCitas;
     private javax.swing.JScrollPane panelCitasList;
     private javax.swing.JPanel panelClientes;
+    private javax.swing.JPanel panelConfigDB;
     private javax.swing.JPanel panelContactoClientes;
     private javax.swing.JPanel panelContactoClientes1;
     private javax.swing.JPanel panelContactoClientes2;
