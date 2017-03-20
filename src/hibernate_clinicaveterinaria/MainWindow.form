@@ -4624,15 +4624,19 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="panelConfigDB" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="checkDemo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btAceptarConfig" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btCancelarConfig" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="panelConfigDB" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -4647,6 +4651,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btCancelarConfig" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btAceptarConfig" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="checkDemo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -4782,6 +4787,11 @@
         <Component class="javax.swing.JButton" name="btAceptarConfig">
           <Properties>
             <Property name="text" type="java.lang.String" value="Aceptar"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="checkDemo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cargar datos de demostraci&#xf3;n"/>
           </Properties>
         </Component>
       </SubComponents>

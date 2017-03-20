@@ -651,6 +651,7 @@ public class MainWindow extends javax.swing.JFrame {
         lbIconoGestor = new javax.swing.JLabel();
         btCancelarConfig = new javax.swing.JButton();
         btAceptarConfig = new javax.swing.JButton();
+        checkDemo = new javax.swing.JCheckBox();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -3428,19 +3429,24 @@ public class MainWindow extends javax.swing.JFrame {
 
         btAceptarConfig.setText("Aceptar");
 
+        checkDemo.setText("Cargar datos de demostración");
+
         javax.swing.GroupLayout dialogConfiguracionLayout = new javax.swing.GroupLayout(dialogConfiguracion.getContentPane());
         dialogConfiguracion.getContentPane().setLayout(dialogConfiguracionLayout);
         dialogConfiguracionLayout.setHorizontalGroup(
             dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogConfiguracionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogConfiguracionLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dialogConfiguracionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelConfigDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(dialogConfiguracionLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(checkDemo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btAceptarConfig)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btCancelarConfig))
-                    .addComponent(panelConfigDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btCancelarConfig)))
                 .addContainerGap())
         );
         dialogConfiguracionLayout.setVerticalGroup(
@@ -3451,7 +3457,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCancelarConfig)
-                    .addComponent(btAceptarConfig))
+                    .addComponent(btAceptarConfig)
+                    .addComponent(checkDemo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -5115,6 +5122,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbVacuna6;
     private javax.swing.JComboBox<String> cbVetCita;
     private javax.swing.JComboBox<String> cbVetDiagnosticos;
+    private javax.swing.JCheckBox checkDemo;
     private javax.swing.JCheckBox chkConsulta;
     private javax.swing.JCheckBox chkMedicacion;
     private javax.swing.JComboBox<String> comboBox5Ultimos;
