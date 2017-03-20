@@ -8,6 +8,12 @@ import org.hibernate.Session;
 import hibernate_clinicaveterinaria.MainWindow;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
+import org.neodatis.odb.ObjectValues;
+import org.neodatis.odb.Objects;
+import org.neodatis.odb.core.query.criteria.ICriterion;
+import org.neodatis.odb.core.query.criteria.Where;
+import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 
 /**
  *
@@ -19,7 +25,6 @@ public class Guardar {
         
         if (MainWindow.modo==0)
         {
-            System.out.println("hibernate!!!");
         Session sesion=HibernateUtil.getSession();
         
         C_Familiar familiar = (C_Familiar)sesion.createQuery("FROM POJOS.C_Persona f WHERE f.dni='"+animal.getFamiliar().getDni()+"'").uniqueResult();
@@ -43,44 +48,162 @@ public class Guardar {
         }
         else if (MainWindow.modo==1)
         {
-            System.out.println("neodatis!!");
-            //ODB odb = ODBFactory.openClient("192.168.4.20", 8000, "base");
-            ODB odb=ODBFactory.open("jugadores.db");
-            odb.store(animal);
-            odb.close();
+            guardarAnimal(animal);
         }
+        
+    }
+    
+    public static void guardarAnimal (C_Animal animal ){
+        //maldito neodatis
+        int id;
+        ObjectValues values;
+        ODB odb=ODBFactory.open("datos.db"); 
+        
+        Objects<C_Familiar> familiares=odb.getObjects(new CriteriaQuery(C_Familiar.class,Where.equal("dni",animal.getFamiliar().getDni())));
+
+        if(familiares.isEmpty()){
+            
+        values=odb.getValues(new ValuesCriteriaQuery(C_Familiar.class).max("id")).getFirst();
+        try{
+        id=Integer.valueOf(values.getByAlias("id").toString())+1;
+        }catch(Exception e)
+        {
+            id=1;
+        }
+        
+        animal.getFamiliar().setId(id);
+        }
+        else
+            animal.setFamiliar(familiares.getFirst());
+        
+        values=odb.getValues(new ValuesCriteriaQuery(C_Animal.class).max("id")).getFirst();
+        try{
+        id=Integer.valueOf(values.getByAlias("id").toString())+1;
+        }catch(Exception e)
+        {
+            id=1;
+        }
+        
+        animal.setId(id);
+        
+        odb.store(animal);
+        System.out.println("animal guardado"+id);
+        odb.close();
+        
+    }
+    
+    public static void guardarMedicamento (C_Medicamento medicamento ){
+        //maldito neodatis
+        int id;
+        ObjectValues values;
+        ODB odb=ODBFactory.open("datos.db"); 
+
+        
+        values=odb.getValues(new ValuesCriteriaQuery(C_Medicamento.class).max("id")).getFirst();
+        try{
+        id=Integer.valueOf(values.getByAlias("id").toString())+1;
+        }catch(Exception e)
+        {
+            id=1;
+        }
+        
+        medicamento.setId(id);
+        
+        odb.store(medicamento);
+        System.out.println("medicamento guardado"+id);
+        odb.close();
         
     }
     
     public static void guardarCita (String nombVeterinario, String idAnimal, Date fecha, String asunto) {
         
+        C_Cita cita;
+        C_Veterinario veterinario;
+        C_Animal animal;
+        ObjectValues values;
+        int id;
+        
+        if(MainWindow.modo==0)
+        {
         Session sesion=HibernateUtil.getSession();
         
-        C_Veterinario veterinario = (C_Veterinario)sesion.createQuery("FROM POJOS.C_Persona v WHERE v.nombre='"+nombVeterinario+"'").uniqueResult();
-        C_Animal animal = (C_Animal)sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id='"+idAnimal+"'").uniqueResult();
+        veterinario = (C_Veterinario)sesion.createQuery("FROM POJOS.C_Persona v WHERE v.nombre='"+nombVeterinario+"'").uniqueResult();
+        animal = (C_Animal)sesion.createQuery("FROM POJOS.C_Animal a WHERE a.id='"+idAnimal+"'").uniqueResult();
         
         
-        C_Cita cita = new C_Cita (fecha, animal, veterinario, asunto);
+        cita = new C_Cita (fecha, animal, veterinario, asunto);
         
         sesion.beginTransaction();
         sesion.save(cita);
         sesion.getTransaction().commit();
         sesion.close();
+        }
+        else if(MainWindow.modo==1)
+        {
+            ODB odb=ODBFactory.open("datos.db"); 
+            
+            Objects<C_Veterinario> veterinarios=odb.getObjects(new CriteriaQuery(C_Veterinario.class,Where.iequal("nombre",nombVeterinario)));
+            veterinario=veterinarios.getFirst();
+            System.out.println("tengo al vet "+veterinario.getNombre());
+            String idbusca=String.valueOf(idAnimal);
+            System.out.println("voy a buscar"+idbusca);
+            
+            int idBusca=Integer.parseInt(idAnimal);
+            ICriterion criterion=Where.equal("id", idBusca);
+            Objects<C_Animal> animales=odb.getObjects(new CriteriaQuery(C_Animal.class,criterion));
+            animal=animales.getFirst();
+            
+            cita = new C_Cita (fecha, animal, veterinario, asunto);
+            
+            values=odb.getValues(new ValuesCriteriaQuery(C_Cita.class).max("id")).getFirst();
+            try{
+            id=Integer.valueOf(values.getByAlias("id").toString())+1;
+            }catch(Exception e)
+            {
+                id=1;
+            }
+            
+            cita.setId(id);
+            odb.store(cita);
+            odb.close();
+        }
         
     }
     
     public static void guardarVet (C_Veterinario vet ){
         
+        ObjectValues values;
+        int id;
+        
+        if(MainWindow.modo==0)
+        {
         Session sesion=HibernateUtil.getSession();
         
         sesion.beginTransaction();
         sesion.save(vet);
         sesion.getTransaction().commit();
         sesion.close();
+        }
+        else if(MainWindow.modo==1)
+        {
+            ODB odb=ODBFactory.open("datos.db"); 
+            values=odb.getValues(new ValuesCriteriaQuery(C_Veterinario.class).max("id")).getFirst();
+            try{
+            id=Integer.valueOf(values.getByAlias("id").toString())+1;
+            }catch(Exception e)
+            {
+                id=1;
+            }
+            
+            vet.setId(id);
+            odb.store(vet);
+            odb.close();
+            System.out.println("vet guardado"+id);
+        }
     }
     
     public static void guardarDiagnostico (C_Diagnostico diagnostico ){
-        
+        ////////////////////////////////////FALTAAAAAAAAAAAAAAAAAAAAAA
         Session sesion=HibernateUtil.getSession();
         
         sesion.beginTransaction();
