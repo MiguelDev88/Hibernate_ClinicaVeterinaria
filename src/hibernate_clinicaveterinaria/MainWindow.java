@@ -560,7 +560,7 @@ public class MainWindow extends javax.swing.JFrame {
         listaMedicamentos = new javax.swing.JList<>();
         btnFinDiag = new javax.swing.JButton();
         cbVetDiagnosticos = new javax.swing.JComboBox<>();
-        jLabel19 = new javax.swing.JLabel();
+        lbCitasVeterinario = new javax.swing.JLabel();
         dialogFichaAnimal = new javax.swing.JDialog();
         lbFotoPerfil = new javax.swing.JLabel();
         panelDatosFichaCli = new javax.swing.JPanel();
@@ -642,12 +642,16 @@ public class MainWindow extends javax.swing.JFrame {
         panelConfigDB = new javax.swing.JPanel();
         lbGestor = new javax.swing.JLabel();
         cbGestor = new javax.swing.JComboBox<>();
-        jLabel17 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        lbURL = new javax.swing.JLabel();
+        txURL = new javax.swing.JTextField();
+        txUsuario = new javax.swing.JTextField();
+        txContraseña = new javax.swing.JTextField();
+        lbUsuario = new javax.swing.JLabel();
+        lbContraseña = new javax.swing.JLabel();
+        lbIconoGestor = new javax.swing.JLabel();
+        btCancelarConfig = new javax.swing.JButton();
+        btAceptarConfig = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -2630,7 +2634,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(txRazaDiag)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txFechaNacDiag)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txAsuntoDiag)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -2788,7 +2792,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setText("Citas para el veterinario:");
+        lbCitasVeterinario.setText("Citas para el veterinario:");
 
         javax.swing.GroupLayout panelDiagnosticosLayout = new javax.swing.GroupLayout(panelDiagnosticos);
         panelDiagnosticos.setLayout(panelDiagnosticosLayout);
@@ -2801,7 +2805,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(panelDiagnosticosLayout.createSequentialGroup()
                         .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelDiagnosticosLayout.createSequentialGroup()
-                                .addComponent(jLabel19)
+                                .addComponent(lbCitasVeterinario)
                                 .addGap(23, 23, 23)
                                 .addComponent(cbVetDiagnosticos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2817,9 +2821,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(panelDiagnosticosLayout.createSequentialGroup()
                         .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbVetDiagnosticos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19))
+                            .addComponent(lbCitasVeterinario))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                        .addComponent(jScrollPane7))
                     .addComponent(panelDatosDiag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelTratamientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3361,12 +3365,19 @@ public class MainWindow extends javax.swing.JFrame {
         lbGestor.setText("Gestor:");
 
         cbGestor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hibernate", "Neodatis" }));
+        cbGestor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGestorActionPerformed(evt);
+            }
+        });
 
-        jLabel17.setText("URL:");
+        lbURL.setText("URL:");
 
-        jLabel18.setText("Usuario");
+        lbUsuario.setText("Usuario");
 
-        jLabel22.setText("Contraseña:");
+        lbContraseña.setText("Contraseña:");
+
+        lbIconoGestor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/hibernate.png"))); // NOI18N
 
         javax.swing.GroupLayout panelConfigDBLayout = new javax.swing.GroupLayout(panelConfigDB);
         panelConfigDB.setLayout(panelConfigDBLayout);
@@ -3375,39 +3386,48 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelConfigDBLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
+                    .addComponent(lbURL)
                     .addComponent(lbGestor)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel22))
+                    .addComponent(lbUsuario)
+                    .addComponent(lbContraseña))
                 .addGap(18, 18, 18)
                 .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbGestor, 0, 100, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField2))
+                    .addComponent(txURL)
+                    .addComponent(txContraseña)
+                    .addComponent(txUsuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbIconoGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelConfigDBLayout.setVerticalGroup(
             panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConfigDBLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbGestor)
-                    .addComponent(cbGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(panelConfigDBLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbGestor)
+                            .addComponent(cbGestor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbURL)
+                            .addComponent(txURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbUsuario))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelConfigDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbContraseña)))
+                    .addComponent(lbIconoGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
+
+        btCancelarConfig.setText("Cancelar");
+
+        btAceptarConfig.setText("Aceptar");
 
         javax.swing.GroupLayout dialogConfiguracionLayout = new javax.swing.GroupLayout(dialogConfiguracion.getContentPane());
         dialogConfiguracion.getContentPane().setLayout(dialogConfiguracionLayout);
@@ -3415,16 +3435,28 @@ public class MainWindow extends javax.swing.JFrame {
             dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogConfiguracionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelConfigDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogConfiguracionLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btAceptarConfig)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btCancelarConfig))
+                    .addComponent(panelConfigDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         dialogConfiguracionLayout.setVerticalGroup(
             dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogConfiguracionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelConfigDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(dialogConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCancelarConfig)
+                    .addComponent(btAceptarConfig))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -4966,6 +4998,13 @@ public class MainWindow extends javax.swing.JFrame {
         System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
     }//GEN-LAST:event_btnPlayActionPerformed
 
+    private void cbGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGestorActionPerformed
+        if(cbGestor.getSelectedIndex()==0)
+            lbIconoGestor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/hibernate.png")));
+        if(cbGestor.getSelectedIndex()==1)
+            lbIconoGestor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/neodatis.png")));
+    }//GEN-LAST:event_cbGestorActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -5007,6 +5046,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelDatosMed;
+    private javax.swing.JButton btAceptarConfig;
+    private javax.swing.JButton btCancelarConfig;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCitaAceptar;
@@ -5083,6 +5124,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel icContacto;
     private javax.swing.JLabel imgProducto;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -5092,13 +5134,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -5137,9 +5175,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTree jTree1;
     private javax.swing.JLabel lbAsunto;
     private javax.swing.JLabel lbCitaAsunto;
@@ -5147,10 +5182,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbCitaNom;
     private javax.swing.JLabel lbCitaRaza;
     private javax.swing.JLabel lbCitaTipo;
+    private javax.swing.JLabel lbCitasVeterinario;
     private javax.swing.JLabel lbCli;
     private javax.swing.JLabel lbComentarioCli;
     private javax.swing.JLabel lbComentarios;
     private javax.swing.JLabel lbContacto;
+    private javax.swing.JLabel lbContraseña;
     private javax.swing.JLabel lbDNI;
     private javax.swing.JLabel lbDiagAnimal;
     private javax.swing.JLabel lbDiagDiagnostico;
@@ -5171,6 +5208,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbHora;
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbIDInv;
+    private javax.swing.JLabel lbIconoGestor;
     private javax.swing.JLabel lbLogo;
     private javax.swing.JLabel lbMailFami;
     private javax.swing.JLabel lbMailFami5;
@@ -5198,6 +5236,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbTipoAni;
     private javax.swing.JLabel lbTlfFami;
     private javax.swing.JLabel lbTlfFami5;
+    private javax.swing.JLabel lbURL;
+    private javax.swing.JLabel lbUsuario;
     private javax.swing.JLabel lbVacunas;
     private javax.swing.JLabel lbVet;
     private javax.swing.JLabel lbVetCita;
@@ -5255,6 +5295,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel txAsuntoDiag;
     private javax.swing.JLabel txCli;
     private javax.swing.JTextArea txComentario;
+    private javax.swing.JTextField txContraseña;
     private javax.swing.JLabel txDNI;
     private javax.swing.JTextArea txDiagnostico;
     private javax.swing.JLabel txDir;
@@ -5279,6 +5320,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel txTelFam;
     private javax.swing.JLabel txTipoDiag;
     private javax.swing.JTextArea txTratamiento;
+    private javax.swing.JTextField txURL;
+    private javax.swing.JTextField txUsuario;
     private javax.swing.JLabel txVacunas;
     private javax.swing.JLabel txVet;
     private javax.swing.JTextArea txaDiagnostico;
