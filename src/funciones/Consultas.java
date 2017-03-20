@@ -439,7 +439,8 @@ public class Consultas {
         else if(MainWindow.modo==1)
         {
             ODB odb=ODBFactory.open("datos.db");
-            ICriterion criterion=Where.ilike("id", filtro);
+            int busca=Integer.parseInt(filtro);
+            ICriterion criterion=Where.equal("id", busca);
             animales=odb.getObjects(new CriteriaQuery(C_Animal.class,criterion)).iterator();
             odb.close();
         }

@@ -24,14 +24,15 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Query;
 import org.hibernate.Session;
+
 
 
 
 public class MainWindow extends javax.swing.JFrame {
 
     Timer timer;
+    boolean demo;
     public static int modo;
     static DefaultTableModel modeloCitas;
     static DefaultListModel modeloListaCitas;
@@ -358,6 +359,7 @@ public class MainWindow extends javax.swing.JFrame {
         panelFiltrosClientes = new javax.swing.JPanel();
         txtFiltro = new javax.swing.JTextField();
         cbFiltro = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
         rbgSexo = new javax.swing.ButtonGroup();
         panelVeterinarios = new javax.swing.JPanel();
         panelContactoClientes1 = new javax.swing.JPanel();
@@ -697,7 +699,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         btnConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/ajustes.png"))); // NOI18N
-        btnConfiguracion.setText("Configuración");
         btnConfiguracion.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -937,6 +938,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/servicio-al-cliente big.png"))); // NOI18N
+
         javax.swing.GroupLayout frameClientesLayout = new javax.swing.GroupLayout(frameClientes.getContentPane());
         frameClientes.getContentPane().setLayout(frameClientesLayout);
         frameClientesLayout.setHorizontalGroup(
@@ -945,12 +948,15 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(frameClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnFacturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addComponent(btnInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCitas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVeterinarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDiagnosticos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDiagnosticos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameClientesLayout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -972,8 +978,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(frameClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(panelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -2169,13 +2177,14 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(cbTipoAni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombreCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtChipidCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(newRbHembra)
                         .addComponent(newRbMacho)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3))
+                    .addGroup(panelDatosAnimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtChipidCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -3416,8 +3425,18 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         btCancelarConfig.setText("Cancelar");
+        btCancelarConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarConfigActionPerformed(evt);
+            }
+        });
 
         btAceptarConfig.setText("Aceptar");
+        btAceptarConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAceptarConfigActionPerformed(evt);
+            }
+        });
 
         checkDemo.setText("Cargar datos de demostración");
 
@@ -4962,7 +4981,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         
         dialogConfiguracion.setVisible(true);
-        dialogConfiguracion.setSize(410, 264);
+        dialogConfiguracion.setSize(435, 320);
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
@@ -4977,7 +4996,7 @@ public class MainWindow extends javax.swing.JFrame {
                 if (pbLoading.getValue()==100) {
                     timer.stop();
                     MainWindow.this.setVisible(false);
-                    frameClientes.setSize(915, 750);
+                    frameClientes.setSize(950, 750);
                     frameClientes.setLocationRelativeTo(null);
                     frameClientes.setVisible(true);
                 } 
@@ -4986,12 +5005,16 @@ public class MainWindow extends javax.swing.JFrame {
         if(modo ==0)
         {
             CrearTablas.crearTablas();
+            HibernateUtil.buildSessionFactory();
         }
         
-        try{
-        DatosDemo.cargarTodos();
-        }catch(Exception e){
-        System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
+        
+        if(demo)
+        {
+            try{
+                DatosDemo.cargarTodos();
+            }catch(Exception e){System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
+        }
         
         cargarAnimales();
         cargarCitas();
@@ -5007,9 +5030,8 @@ public class MainWindow extends javax.swing.JFrame {
         
         
         cal.setTime(fechaInicio);
+        
         cbCitaFiltroMes.setSelectedIndex(cal.get(Calendar.MONTH));
-        
-        
         
         
     }//GEN-LAST:event_btnPlayActionPerformed
@@ -5029,6 +5051,21 @@ public class MainWindow extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_cbGestorActionPerformed
+
+    private void btAceptarConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarConfigActionPerformed
+        dialogConfiguracion.dispose();
+        if(checkDemo.isSelected())
+            demo=true;
+        else
+            demo=false;
+        
+        
+    }//GEN-LAST:event_btAceptarConfigActionPerformed
+
+    private void btCancelarConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarConfigActionPerformed
+        dialogConfiguracion.dispose();
+        cbGestor.setSelectedIndex(modo);
+    }//GEN-LAST:event_btCancelarConfigActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -5060,9 +5097,6 @@ public class MainWindow extends javax.swing.JFrame {
                 MainWindow main= new MainWindow();
                 main.setLocationRelativeTo(null);
                 main.setVisible(true);
-                
-                Session sesion=HibernateUtil.getSession();
-                sesion.close();
                 
             }
         });
@@ -5150,6 +5184,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel icContacto;
     private javax.swing.JLabel imgProducto;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
