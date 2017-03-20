@@ -4999,10 +4999,19 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void cbGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGestorActionPerformed
-        if(cbGestor.getSelectedIndex()==0)
-            lbIconoGestor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/hibernate.png")));
-        if(cbGestor.getSelectedIndex()==1)
-            lbIconoGestor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/neodatis.png")));
+        switch (cbGestor.getSelectedIndex()) {
+            case 0:
+                lbIconoGestor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/hibernate.png")));
+                break;
+            case 1:
+                lbIconoGestor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/neodatis.png")));
+                break;
+            case 3:
+                lbIconoGestor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/x.png")));
+                break;
+            default:
+                break;
+        }
     }//GEN-LAST:event_cbGestorActionPerformed
 
     public static void main(String args[]) {
