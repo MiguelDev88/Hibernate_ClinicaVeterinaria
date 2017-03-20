@@ -651,7 +651,6 @@ public class MainWindow extends javax.swing.JFrame {
         lbIconoGestor = new javax.swing.JLabel();
         btCancelarConfig = new javax.swing.JButton();
         btAceptarConfig = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
         lbStatus = new javax.swing.JLabel();
@@ -3456,8 +3455,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setText("jButton2");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -4968,7 +4965,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         
         dialogConfiguracion.setVisible(true);
-        dialogConfiguracion.setSize(230, 190);
+        dialogConfiguracion.setSize(410, 264);
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
@@ -5133,7 +5130,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel icContacto;
     private javax.swing.JLabel imgProducto;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
