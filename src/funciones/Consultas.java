@@ -1,6 +1,7 @@
 package funciones;
 import POJOS.C_Animal;
 import POJOS.C_Cita;
+import POJOS.C_Diagnostico;
 import POJOS.C_Familiar;
 import POJOS.C_Medicamento;
 import POJOS.C_Persona;
@@ -71,6 +72,32 @@ public class Consultas {
         }
         
         return animales;
+        
+    }
+    
+    public static C_Diagnostico recuperarDiagnosticoPorId (int id){
+        
+        C_Diagnostico d=null;
+        if(MainWindow.modo==0)
+        {
+            Session sesion=HibernateUtil.getSession();
+
+            d=(C_Diagnostico)sesion.createQuery("FROM POJOS.C_Diagnostico d WHERE d.id='"+id+"'").uniqueResult();
+
+            sesion.close();
+        }
+        else if(MainWindow.modo==1)
+        {
+            ODB odb=ODBFactory.open("datos.db");
+            //ICriterion criterion=Where.like("id", id);
+            //Iterator jugadores=odb.getObjects(new CriteriaQuery(C_Jugador.class, criterion)).iterator();
+            Objects<C_Diagnostico> diagnosticos=odb.getObjects(new CriteriaQuery(C_Diagnostico.class,Where.equal("id",id)));
+            d=diagnosticos.getFirst();
+            odb.close();
+            
+        }
+        
+        return d;
         
     }
     
