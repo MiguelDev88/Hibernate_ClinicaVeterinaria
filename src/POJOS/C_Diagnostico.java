@@ -74,4 +74,8 @@ public class C_Diagnostico implements Serializable {
         this.descripcion = descripcion;
     }
     
+    public String toString(){
+        return animal.getNombre();
+    }
+    
 }

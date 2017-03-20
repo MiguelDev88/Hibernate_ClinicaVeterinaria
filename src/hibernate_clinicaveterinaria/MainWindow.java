@@ -444,6 +444,37 @@ public class MainWindow extends javax.swing.JFrame {
         lbPrecioInv = new javax.swing.JLabel();
         txtIDInv = new javax.swing.JTextField();
         txtPrecioInv = new javax.swing.JTextField();
+        panelDiagnosticos = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        listaCitasVet = new javax.swing.JList<>();
+        panelDatosDiag = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        txhoraCitaDiag = new javax.swing.JLabel();
+        txTipoDiag = new javax.swing.JLabel();
+        txSexoDiag = new javax.swing.JLabel();
+        txNombreAniDiag = new javax.swing.JLabel();
+        txRazaDiag = new javax.swing.JLabel();
+        txFechaNacDiag = new javax.swing.JLabel();
+        txAsuntoDiag = new javax.swing.JLabel();
+        panelTratamientos = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        txTratamiento = new javax.swing.JTextArea();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        txDiagnostico = new javax.swing.JTextArea();
+        lbtrat = new javax.swing.JLabel();
+        tbdesc = new javax.swing.JLabel();
+        chkMedicacion = new javax.swing.JCheckBox();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        listaMedicamentosBD = new javax.swing.JList<>();
+        txtFiltroMed = new javax.swing.JTextField();
+        lbFlt = new javax.swing.JLabel();
+        btnMedicamento = new javax.swing.JButton();
+        btnEliminarMed = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        listaMedicamentos = new javax.swing.JList<>();
+        btnFinDiag = new javax.swing.JButton();
+        cbVetDiagnosticos = new javax.swing.JComboBox<>();
+        lbCitasVeterinario = new javax.swing.JLabel();
         dialogEditClientes = new javax.swing.JDialog();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -525,37 +556,6 @@ public class MainWindow extends javax.swing.JFrame {
         lbVetCita = new javax.swing.JLabel();
         btnCitaAceptar = new javax.swing.JButton();
         btnCitaCancel = new javax.swing.JButton();
-        panelDiagnosticos = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        listaCitasVet = new javax.swing.JList<>();
-        panelDatosDiag = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        txhoraCitaDiag = new javax.swing.JLabel();
-        txTipoDiag = new javax.swing.JLabel();
-        txSexoDiag = new javax.swing.JLabel();
-        txNombreAniDiag = new javax.swing.JLabel();
-        txRazaDiag = new javax.swing.JLabel();
-        txFechaNacDiag = new javax.swing.JLabel();
-        txAsuntoDiag = new javax.swing.JLabel();
-        panelTratamientos = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        txTratamiento = new javax.swing.JTextArea();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        txDiagnostico = new javax.swing.JTextArea();
-        lbtrat = new javax.swing.JLabel();
-        tbdesc = new javax.swing.JLabel();
-        chkMedicacion = new javax.swing.JCheckBox();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        listaMedicamentosBD = new javax.swing.JList<>();
-        txtFiltroMed = new javax.swing.JTextField();
-        lbFlt = new javax.swing.JLabel();
-        btnMedicamento = new javax.swing.JButton();
-        btnEliminarMed = new javax.swing.JButton();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        listaMedicamentos = new javax.swing.JList<>();
-        btnFinDiag = new javax.swing.JButton();
-        cbVetDiagnosticos = new javax.swing.JComboBox<>();
-        lbCitasVeterinario = new javax.swing.JLabel();
         dialogFichaAnimal = new javax.swing.JDialog();
         lbFotoPerfil = new javax.swing.JLabel();
         panelDatosFichaCli = new javax.swing.JPanel();
@@ -625,14 +625,15 @@ public class MainWindow extends javax.swing.JFrame {
         lbDiagDiagnostico = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
         txaDiagnostico = new javax.swing.JTextArea();
-        jLabel21 = new javax.swing.JLabel();
+        lbTipTratamiento = new javax.swing.JLabel();
         jScrollPane14 = new javax.swing.JScrollPane();
         txaTratamiento = new javax.swing.JTextArea();
         lbContacto = new javax.swing.JLabel();
         lbMedicacion = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        txaMedicacion = new javax.swing.JLabel();
+        txaNombre = new javax.swing.JLabel();
+        txaContacto = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         dialogConfiguracion = new javax.swing.JDialog();
         panelConfigDB = new javax.swing.JPanel();
         lbGestor = new javax.swing.JLabel();
@@ -649,7 +650,6 @@ public class MainWindow extends javax.swing.JFrame {
         checkDemo = new javax.swing.JCheckBox();
         lbLogo = new javax.swing.JLabel();
         pbLoading = new javax.swing.JProgressBar();
-        lbStatus = new javax.swing.JLabel();
         btnPlay = new javax.swing.JButton();
         btnConfig = new javax.swing.JButton();
 
@@ -1101,6 +1101,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnVerCli1.setText("Últimos Diagnosticos");
         btnVerCli1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnVerCli1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVerCli1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerCli1ActionPerformed(evt);
+            }
+        });
 
         btnCitaCli1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/calendario green.png"))); // NOI18N
         btnCitaCli1.setText("Crear Cita");
@@ -1856,6 +1861,266 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        panelDiagnosticos.setPreferredSize(new java.awt.Dimension(735, 680));
+
+        listaCitasVet.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listaCitasVet.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaCitasVetValueChanged(evt);
+            }
+        });
+        jScrollPane7.setViewportView(listaCitasVet);
+
+        panelDatosDiag.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
+
+        txhoraCitaDiag.setText("hora_Cita");
+
+        txTipoDiag.setText("Tipo_Animal");
+
+        txSexoDiag.setText("Sexo");
+
+        txNombreAniDiag.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txNombreAniDiag.setText("Nombre_Animal");
+
+        txRazaDiag.setText("Raza");
+
+        txFechaNacDiag.setText("Fecha_Nac");
+
+        txAsuntoDiag.setText("Asunto");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txSexoDiag)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(txNombreAniDiag)
+                        .addGap(39, 39, 39)
+                        .addComponent(txhoraCitaDiag))
+                    .addComponent(txTipoDiag)
+                    .addComponent(txRazaDiag)
+                    .addComponent(txFechaNacDiag)
+                    .addComponent(txAsuntoDiag))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txhoraCitaDiag)
+                    .addComponent(txNombreAniDiag))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txSexoDiag)
+                .addGap(11, 11, 11)
+                .addComponent(txTipoDiag)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txRazaDiag)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txFechaNacDiag)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txAsuntoDiag)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelDatosDiagLayout = new javax.swing.GroupLayout(panelDatosDiag);
+        panelDatosDiag.setLayout(panelDatosDiagLayout);
+        panelDatosDiagLayout.setHorizontalGroup(
+            panelDatosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosDiagLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelDatosDiagLayout.setVerticalGroup(
+            panelDatosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosDiagLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelTratamientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txTratamiento.setColumns(20);
+        txTratamiento.setRows(5);
+        jScrollPane8.setViewportView(txTratamiento);
+
+        txDiagnostico.setColumns(20);
+        txDiagnostico.setRows(5);
+        jScrollPane9.setViewportView(txDiagnostico);
+
+        lbtrat.setText("Tratamiento:");
+
+        tbdesc.setText("Diagnóstico:");
+
+        chkMedicacion.setText("Medicación");
+        chkMedicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMedicacionActionPerformed(evt);
+            }
+        });
+
+        listaMedicamentosBD.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane12.setViewportView(listaMedicamentosBD);
+
+        txtFiltroMed.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltroMedKeyReleased(evt);
+            }
+        });
+
+        lbFlt.setText("Medicamento:");
+
+        btnMedicamento.setText("Añadir");
+        btnMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMedicamentoActionPerformed(evt);
+            }
+        });
+
+        btnEliminarMed.setText("Eliminar");
+        btnEliminarMed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarMedActionPerformed(evt);
+            }
+        });
+
+        listaMedicamentos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane11.setViewportView(listaMedicamentos);
+
+        btnFinDiag.setText("Finalizar");
+        btnFinDiag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinDiagActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelTratamientosLayout = new javax.swing.GroupLayout(panelTratamientos);
+        panelTratamientos.setLayout(panelTratamientosLayout);
+        panelTratamientosLayout.setHorizontalGroup(
+            panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTratamientosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tbdesc)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelTratamientosLayout.createSequentialGroup()
+                        .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTratamientosLayout.createSequentialGroup()
+                                .addComponent(lbFlt)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFiltroMed))
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(chkMedicacion)
+                            .addComponent(btnMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarMed, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTratamientosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnFinDiag))
+                    .addComponent(lbtrat)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelTratamientosLayout.setVerticalGroup(
+            panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTratamientosLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tbdesc)
+                    .addComponent(lbtrat))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9))
+                .addGap(14, 14, 14)
+                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTratamientosLayout.createSequentialGroup()
+                        .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFiltroMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbFlt)
+                            .addComponent(chkMedicacion))
+                        .addGap(41, 41, 41)
+                        .addComponent(btnMedicamento)
+                        .addGap(7, 7, 7)
+                        .addComponent(btnEliminarMed)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTratamientosLayout.createSequentialGroup()
+                        .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelTratamientosLayout.createSequentialGroup()
+                                .addGap(0, 32, Short.MAX_VALUE)
+                                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnFinDiag, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(26, 26, 26))))
+        );
+
+        cbVetDiagnosticos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVetDiagnosticos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVetDiagnosticosActionPerformed(evt);
+            }
+        });
+
+        lbCitasVeterinario.setText("Citas para el veterinario:");
+
+        javax.swing.GroupLayout panelDiagnosticosLayout = new javax.swing.GroupLayout(panelDiagnosticos);
+        panelDiagnosticos.setLayout(panelDiagnosticosLayout);
+        panelDiagnosticosLayout.setHorizontalGroup(
+            panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDiagnosticosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelTratamientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelDiagnosticosLayout.createSequentialGroup()
+                        .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelDiagnosticosLayout.createSequentialGroup()
+                                .addComponent(lbCitasVeterinario)
+                                .addGap(23, 23, 23)
+                                .addComponent(cbVetDiagnosticos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelDatosDiag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelDiagnosticosLayout.setVerticalGroup(
+            panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDiagnosticosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDiagnosticosLayout.createSequentialGroup()
+                        .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbVetDiagnosticos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbCitasVeterinario))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane7))
+                    .addComponent(panelDatosDiag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelTratamientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         dialogEditClientes.setResizable(false);
         dialogEditClientes.setSize(new java.awt.Dimension(575, 720));
 
@@ -2569,266 +2834,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelDiagnosticos.setPreferredSize(new java.awt.Dimension(735, 680));
-
-        listaCitasVet.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listaCitasVet.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listaCitasVetValueChanged(evt);
-            }
-        });
-        jScrollPane7.setViewportView(listaCitasVet);
-
-        panelDatosDiag.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
-
-        txhoraCitaDiag.setText("hora_Cita");
-
-        txTipoDiag.setText("Tipo_Animal");
-
-        txSexoDiag.setText("Sexo");
-
-        txNombreAniDiag.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txNombreAniDiag.setText("Nombre_Animal");
-
-        txRazaDiag.setText("Raza");
-
-        txFechaNacDiag.setText("Fecha_Nac");
-
-        txAsuntoDiag.setText("Asunto");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txSexoDiag)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(txNombreAniDiag)
-                        .addGap(39, 39, 39)
-                        .addComponent(txhoraCitaDiag))
-                    .addComponent(txTipoDiag)
-                    .addComponent(txRazaDiag)
-                    .addComponent(txFechaNacDiag)
-                    .addComponent(txAsuntoDiag))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txhoraCitaDiag)
-                    .addComponent(txNombreAniDiag))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txSexoDiag)
-                .addGap(11, 11, 11)
-                .addComponent(txTipoDiag)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txRazaDiag)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txFechaNacDiag)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txAsuntoDiag)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout panelDatosDiagLayout = new javax.swing.GroupLayout(panelDatosDiag);
-        panelDatosDiag.setLayout(panelDatosDiagLayout);
-        panelDatosDiagLayout.setHorizontalGroup(
-            panelDatosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatosDiagLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelDatosDiagLayout.setVerticalGroup(
-            panelDatosDiagLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosDiagLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panelTratamientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txTratamiento.setColumns(20);
-        txTratamiento.setRows(5);
-        jScrollPane8.setViewportView(txTratamiento);
-
-        txDiagnostico.setColumns(20);
-        txDiagnostico.setRows(5);
-        jScrollPane9.setViewportView(txDiagnostico);
-
-        lbtrat.setText("Tratamiento:");
-
-        tbdesc.setText("Diagnóstico:");
-
-        chkMedicacion.setText("Medicación");
-        chkMedicacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkMedicacionActionPerformed(evt);
-            }
-        });
-
-        listaMedicamentosBD.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane12.setViewportView(listaMedicamentosBD);
-
-        txtFiltroMed.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtFiltroMedKeyReleased(evt);
-            }
-        });
-
-        lbFlt.setText("Medicamento:");
-
-        btnMedicamento.setText("Añadir");
-        btnMedicamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMedicamentoActionPerformed(evt);
-            }
-        });
-
-        btnEliminarMed.setText("Eliminar");
-        btnEliminarMed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarMedActionPerformed(evt);
-            }
-        });
-
-        listaMedicamentos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane11.setViewportView(listaMedicamentos);
-
-        btnFinDiag.setText("Finalizar");
-        btnFinDiag.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFinDiagActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelTratamientosLayout = new javax.swing.GroupLayout(panelTratamientos);
-        panelTratamientos.setLayout(panelTratamientosLayout);
-        panelTratamientosLayout.setHorizontalGroup(
-            panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTratamientosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tbdesc)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelTratamientosLayout.createSequentialGroup()
-                        .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTratamientosLayout.createSequentialGroup()
-                                .addComponent(lbFlt)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFiltroMed))
-                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(chkMedicacion)
-                            .addComponent(btnMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarMed, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelTratamientosLayout.createSequentialGroup()
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnFinDiag))
-                    .addComponent(lbtrat)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelTratamientosLayout.setVerticalGroup(
-            panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTratamientosLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tbdesc)
-                    .addComponent(lbtrat))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9))
-                .addGap(14, 14, 14)
-                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelTratamientosLayout.createSequentialGroup()
-                        .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFiltroMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbFlt)
-                            .addComponent(chkMedicacion))
-                        .addGap(41, 41, 41)
-                        .addComponent(btnMedicamento)
-                        .addGap(7, 7, 7)
-                        .addComponent(btnEliminarMed)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTratamientosLayout.createSequentialGroup()
-                        .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelTratamientosLayout.createSequentialGroup()
-                                .addGap(0, 32, Short.MAX_VALUE)
-                                .addGroup(panelTratamientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnFinDiag, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(26, 26, 26))))
-        );
-
-        cbVetDiagnosticos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbVetDiagnosticos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbVetDiagnosticosActionPerformed(evt);
-            }
-        });
-
-        lbCitasVeterinario.setText("Citas para el veterinario:");
-
-        javax.swing.GroupLayout panelDiagnosticosLayout = new javax.swing.GroupLayout(panelDiagnosticos);
-        panelDiagnosticos.setLayout(panelDiagnosticosLayout);
-        panelDiagnosticosLayout.setHorizontalGroup(
-            panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDiagnosticosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelTratamientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelDiagnosticosLayout.createSequentialGroup()
-                        .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelDiagnosticosLayout.createSequentialGroup()
-                                .addComponent(lbCitasVeterinario)
-                                .addGap(23, 23, 23)
-                                .addComponent(cbVetDiagnosticos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelDatosDiag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        panelDiagnosticosLayout.setVerticalGroup(
-            panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDiagnosticosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDiagnosticosLayout.createSequentialGroup()
-                        .addGroup(panelDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbVetDiagnosticos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbCitasVeterinario))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane7))
-                    .addComponent(panelDatosDiag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelTratamientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         dialogFichaAnimal.setMinimumSize(new java.awt.Dimension(532, 520));
         dialogFichaAnimal.setModal(true);
         dialogFichaAnimal.setResizable(false);
@@ -3250,7 +3255,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        comboBox5Ultimos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBox5Ultimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBox5UltimosActionPerformed(evt);
@@ -3260,18 +3264,20 @@ public class MainWindow extends javax.swing.JFrame {
         panelDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles"));
 
         lbDiagAnimal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbDiagAnimal.setText("Aminal:");
+        lbDiagAnimal.setText("Animal:");
 
         lbDiagDiagnostico.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbDiagDiagnostico.setText("Diagnósitico:");
 
+        txaDiagnostico.setEditable(false);
         txaDiagnostico.setColumns(20);
         txaDiagnostico.setRows(5);
         jScrollPane13.setViewportView(txaDiagnostico);
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel21.setText("Tratamiento:");
+        lbTipTratamiento.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbTipTratamiento.setText("Tratamiento:");
 
+        txaTratamiento.setEditable(false);
         txaTratamiento.setColumns(20);
         txaTratamiento.setRows(5);
         jScrollPane14.setViewportView(txaTratamiento);
@@ -3289,24 +3295,24 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(panelDetallesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane13)
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                     .addComponent(jScrollPane14)
                     .addGroup(panelDetallesLayout.createSequentialGroup()
                         .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbDiagDiagnostico)
-                            .addComponent(jLabel21)
+                            .addComponent(lbTipTratamiento)
                             .addGroup(panelDetallesLayout.createSequentialGroup()
                                 .addComponent(lbDiagAnimal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel25))
+                                .addComponent(txaNombre))
                             .addGroup(panelDetallesLayout.createSequentialGroup()
                                 .addComponent(lbMedicacion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel24))
+                                .addComponent(txaMedicacion))
                             .addGroup(panelDetallesLayout.createSequentialGroup()
                                 .addComponent(lbContacto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel26)))
+                                .addComponent(txaContacto)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -3316,25 +3322,27 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDiagAnimal)
-                    .addComponent(jLabel25))
+                    .addComponent(txaNombre))
                 .addGap(18, 18, 18)
                 .addComponent(lbDiagDiagnostico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel21)
+                .addComponent(lbTipTratamiento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbMedicacion)
-                    .addComponent(jLabel24))
+                    .addComponent(txaMedicacion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbContacto)
-                    .addComponent(jLabel26))
+                    .addComponent(txaContacto))
                 .addContainerGap())
         );
+
+        jLabel17.setText("Diagnóstico:");
 
         javax.swing.GroupLayout dialogUltimosDiagnosticosLayout = new javax.swing.GroupLayout(dialogUltimosDiagnosticos.getContentPane());
         dialogUltimosDiagnosticos.getContentPane().setLayout(dialogUltimosDiagnosticosLayout);
@@ -3343,17 +3351,23 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(dialogUltimosDiagnosticosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dialogUltimosDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(dialogUltimosDiagnosticosLayout.createSequentialGroup()
-                        .addComponent(comboBox5Ultimos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 295, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboBox5Ultimos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(dialogUltimosDiagnosticosLayout.createSequentialGroup()
+                        .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         dialogUltimosDiagnosticosLayout.setVerticalGroup(
             dialogUltimosDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogUltimosDiagnosticosLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(comboBox5Ultimos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(dialogUltimosDiagnosticosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBox5Ultimos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -3476,8 +3490,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/vet-logo.gif"))); // NOI18N
 
-        lbStatus.setText("  ");
-
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/playPeque.png"))); // NOI18N
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3508,9 +3520,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbStatus)
+                        .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -3518,15 +3528,15 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConfig)
-                    .addComponent(btnPlay)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbStatus)
-                            .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnConfig)
+                            .addComponent(btnPlay)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(pbLoading, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -3579,12 +3589,6 @@ public class MainWindow extends javax.swing.JFrame {
         dialogEditClientes.setLocationRelativeTo(frameClientes);
         dialogEditClientes.setVisible(true);
         dialogEditClientes.setModal(true);
-        cbTipoAni.removeAllItems();
-        cbRazaAni.removeAllItems();
-        
-        
-        
-        
         
     }//GEN-LAST:event_btnNuevoCliActionPerformed
 
@@ -3662,6 +3666,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void clearDialogCitas() {
         
         cbCitaDni.removeAllItems();
+        cbCitaDni.setEditable(true);
         cbCitaDni.setEnabled(true);
         txtCitaNombreFami.setText("         ");
         txtCitaTipo.setText("");
@@ -3669,6 +3674,7 @@ public class MainWindow extends javax.swing.JFrame {
         txtCitaMailFami.setText("");
         cbCitaNombreAni.removeAllItems();
         cbCitaNombreAni.setEnabled(true);
+        
         
         txtCitaAsunto.setText("");
         txtCitaRaza.setText("");
@@ -4646,7 +4652,7 @@ public class MainWindow extends javax.swing.JFrame {
         fechaInicio=cal.getTime();
         cal.add(Calendar.DATE, 7);
         fechaFin=cal.getTime();
-        modeloCitas.setRowCount(0);
+        //modeloCitas.setRowCount(0);
         cargarCitas();
         cbCitaFiltroSemana.setSelectedIndex(0);
 
@@ -4861,6 +4867,20 @@ public class MainWindow extends javax.swing.JFrame {
         clearDatosDiagnostico();
         modeloListaCitas.removeElement(cita);
         
+        
+        ////¿Que hago ahora con el diagnostico?
+        //lo cargamos en el comboUltimosDiagnosticos
+        
+        if(comboBox5Ultimos.getItemCount()<5)
+            comboBox5Ultimos.addItem(String.valueOf(diagnostico.getId()));
+        else
+        {
+            comboBox5Ultimos.removeItemAt(0);
+            comboBox5Ultimos.addItem(String.valueOf(diagnostico.getId()));
+        }
+            
+        
+        
     }//GEN-LAST:event_btnFinDiagActionPerformed
 
     private void chkMedicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMedicacionActionPerformed
@@ -4934,7 +4954,24 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFiltroMedKeyReleased
 
     private void comboBox5UltimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox5UltimosActionPerformed
-        // TODO add your handling code here:
+        
+        
+        C_Diagnostico diagnostico=Consultas.recuperarDiagnosticoPorId(Integer.parseInt(comboBox5Ultimos.getSelectedItem().toString()));
+        
+        txaNombre.setText(diagnostico.getAnimal().getNombre());
+        txaContacto.setText(diagnostico.getAnimal().getFamiliar().getTelefono());
+        txaTratamiento.setText(diagnostico.getTratamiento());
+        txaDiagnostico.setText(diagnostico.getDescripcion());
+        
+        Iterator medicamentos=diagnostico.getMedicamentos().iterator();
+        String salida="";
+        while(medicamentos.hasNext())
+        {
+            C_Medicamento m=(C_Medicamento)medicamentos.next();
+            salida+="   "+m.getNombre();
+        }
+        txaMedicacion.setText(salida);
+        
     }//GEN-LAST:event_comboBox5UltimosActionPerformed
 
     private void btnVerCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerCitaActionPerformed
@@ -5067,6 +5104,13 @@ public class MainWindow extends javax.swing.JFrame {
         cbGestor.setSelectedIndex(modo);
     }//GEN-LAST:event_btCancelarConfigActionPerformed
 
+    private void btnVerCli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerCli1ActionPerformed
+        
+        dialogUltimosDiagnosticos.setLocationRelativeTo(frameClientes);
+        dialogUltimosDiagnosticos.setVisible(true);
+        dialogUltimosDiagnosticos.setSize(500, 550);
+    }//GEN-LAST:event_btnVerCli1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -5194,12 +5238,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -5290,9 +5331,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lbResumenCita;
     private javax.swing.JLabel lbSemana;
     private javax.swing.JLabel lbSexo;
-    private javax.swing.JLabel lbStatus;
     private javax.swing.JLabel lbTel;
     private javax.swing.JLabel lbTelFam;
+    private javax.swing.JLabel lbTipTratamiento;
     private javax.swing.JLabel lbTipoAni;
     private javax.swing.JLabel lbTlfFami;
     private javax.swing.JLabel lbTlfFami5;
@@ -5384,7 +5425,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField txUsuario;
     private javax.swing.JLabel txVacunas;
     private javax.swing.JLabel txVet;
+    private javax.swing.JLabel txaContacto;
     private javax.swing.JTextArea txaDiagnostico;
+    private javax.swing.JLabel txaMedicacion;
+    private javax.swing.JLabel txaNombre;
     private javax.swing.JTextArea txaTratamiento;
     private javax.swing.JLabel txhoraCitaDiag;
     private static javax.swing.JLabel txmesc;
