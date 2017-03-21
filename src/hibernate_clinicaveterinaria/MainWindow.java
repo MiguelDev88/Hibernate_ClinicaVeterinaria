@@ -405,7 +405,7 @@ public class MainWindow extends javax.swing.JFrame {
         lbFechaFactura = new javax.swing.JLabel();
         txtFechaFactura = new javax.swing.JTextField();
         panelDatosFacturas = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel212 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -661,7 +661,7 @@ public class MainWindow extends javax.swing.JFrame {
         lbAño = new javax.swing.JLabel();
         lb16_17 = new javax.swing.JLabel();
         dialogPremium = new javax.swing.JDialog();
-        jLabel17 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -1477,7 +1477,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         txtFechaFactura.setText(" ");
 
-        jLabel2.setText("Total:");
+        jLabel212.setText("Total:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1504,7 +1504,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDatosFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosFacturasLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel212)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelDatosFacturasLayout.createSequentialGroup()
                         .addGroup(panelDatosFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1538,7 +1538,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabel212)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -3618,7 +3618,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/gold.png"))); // NOI18N
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/drawable/gold.png"))); // NOI18N
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -3667,7 +3667,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(dialogPremiumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPremiumLayout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -3675,7 +3675,7 @@ public class MainWindow extends javax.swing.JFrame {
             dialogPremiumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogPremiumLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel17)
+                .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -4505,7 +4505,7 @@ public class MainWindow extends javax.swing.JFrame {
         else
             Guardar.guardarCita(veterinario, idAnimal, fecha, asunto);
 
-        modeloCitas.setRowCount(0);
+        //modeloCitas.setRowCount(0);
         cargarCitas();
         
         dialogEditCitas.dispose();
@@ -5446,17 +5446,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel212;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

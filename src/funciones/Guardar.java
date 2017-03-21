@@ -53,6 +53,10 @@ public class Guardar {
         
     }
     
+    public static void guardarAnimalExist (C_Animal animal) {
+        
+    }
+    
     public static void guardarAnimal (C_Animal animal ){
         //maldito neodatis
         int id;
@@ -203,13 +207,35 @@ public class Guardar {
     }
     
     public static void guardarDiagnostico (C_Diagnostico diagnostico ){
-        ////////////////////////////////////FALTAAAAAAAAAAAAAAAAAAAAAA
-        Session sesion=HibernateUtil.getSession();
         
-        sesion.beginTransaction();
-        sesion.save(diagnostico);
-        sesion.getTransaction().commit();
-        sesion.close();
+        ObjectValues values;
+        int id;
+        
+        if(MainWindow.modo==0)
+        {
+            Session sesion=HibernateUtil.getSession();
+
+            sesion.beginTransaction();
+            sesion.save(diagnostico);
+            sesion.getTransaction().commit();
+            sesion.close();
+        }
+        else if(MainWindow.modo==1)
+        {
+            ODB odb=ODBFactory.open("datos.db"); 
+            values=odb.getValues(new ValuesCriteriaQuery(C_Diagnostico.class).max("id")).getFirst();
+            try{
+            id=Integer.valueOf(values.getByAlias("id").toString())+1;
+            }catch(Exception e)
+            {
+                id=1;
+            }
+            
+            diagnostico.setId(id);
+            odb.store(diagnostico);
+            odb.close();
+            System.out.println("diag guardado"+id);
+        }
     }
     
 }
