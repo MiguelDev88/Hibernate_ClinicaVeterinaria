@@ -53,12 +53,9 @@ public class Guardar {
         
     }
     
-    public static void guardarAnimalExist (C_Animal animal) {
-        
-    }
     
     public static void guardarAnimal (C_Animal animal ){
-        //maldito neodatis
+        
         int id;
         ObjectValues values;
         ODB odb=ODBFactory.open("datos.db"); 
@@ -97,7 +94,7 @@ public class Guardar {
     }
     
     public static void guardarMedicamento (C_Medicamento medicamento ){
-        //maldito neodatis
+        
         int id;
         ObjectValues values;
         ODB odb=ODBFactory.open("datos.db"); 

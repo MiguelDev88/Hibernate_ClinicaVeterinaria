@@ -24,7 +24,6 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Session;
 
 
 
@@ -72,6 +71,8 @@ public class MainWindow extends javax.swing.JFrame {
         
         initComponents();
         
+        /*
+        
         timer = new Timer(50, new ActionListener() {
             int counter = 10;
             public void actionPerformed(ActionEvent ae) {
@@ -87,6 +88,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         
+        */
         
         panelClientes.setVisible(true);
         panelCitas.setVisible(false);
@@ -4505,7 +4507,7 @@ public class MainWindow extends javax.swing.JFrame {
         else
             Guardar.guardarCita(veterinario, idAnimal, fecha, asunto);
 
-        //modeloCitas.setRowCount(0);
+        modeloCitas.setRowCount(0);
         cargarCitas();
         
         dialogEditCitas.dispose();
@@ -5163,6 +5165,9 @@ public class MainWindow extends javax.swing.JFrame {
         
         modo = cbGestor.getSelectedIndex();
         
+        //Launcher launcher = new Launcher(MainWindow.this,frameClientes, pbLoading);
+        
+        ///
         timer = new Timer(50, new ActionListener() {
             int counter = 10;
             public void actionPerformed(ActionEvent ae) {
@@ -5174,28 +5179,45 @@ public class MainWindow extends javax.swing.JFrame {
                     frameClientes.setSize(950, 750);
                     frameClientes.setLocationRelativeTo(null);
                     frameClientes.setVisible(true);
+                }
+                else if(pbLoading.getValue()==12)
+                {
+                    System.out.println("cargo todo");
+                    cargarModo();
+                    counter+=30;
                 } 
+                else if (pbLoading.getValue()==50)
+                {
+                    System.out.println("cargo demo");
+                    cargarDemo();
+                    counter+=20;
+                }
+                else if(pbLoading.getValue()==85)
+                {
+                    System.out.println("inicio datos");
+                    iniciarDatos();
+                }
+
             }
         });
+        timer.start();
+        ///
+
+    }//GEN-LAST:event_btnPlayActionPerformed
+
+    private void cargarModo(){
+        
         if(modo ==0)
         {
             CrearTablas.crearTablas();
             HibernateUtil.buildSessionFactory();
         }
-        
-        
-        if(demo)
-        {
-            try{
-                DatosDemo.cargarTodos();
-            }catch(Exception e){System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
-        }
+    }
+    
+    private void iniciarDatos () {
         
         cargarAnimales();
         cargarCitas();
-        
-        timer.start();
-        
         
         Calendar cal = Calendar.getInstance();
         fechaInicio=new Date();
@@ -5207,10 +5229,18 @@ public class MainWindow extends javax.swing.JFrame {
         cal.setTime(fechaInicio);
         
         cbCitaFiltroMes.setSelectedIndex(cal.get(Calendar.MONTH));
+    }
+    
+    private void cargarDemo () {
         
-        
-    }//GEN-LAST:event_btnPlayActionPerformed
-
+        if(demo)
+        {
+            try{
+                DatosDemo.cargarTodos();
+            }catch(Exception e){System.out.println(e.getMessage());System.out.println("MAL DATOS!!");}
+        }
+    }
+            
     private void cbGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGestorActionPerformed
         switch (cbGestor.getSelectedIndex()) {
             case 0:
